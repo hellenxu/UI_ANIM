@@ -1,0 +1,13 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="UI.ANIM.Base.Theme">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="UI.ANIM.Base.Theme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#009ad6</item>
+        <item name="colorPrimaryDark">#145b7d</item>
+        <item name="colorAccent">#90d7ec</item>
+    </style>
+</resources>

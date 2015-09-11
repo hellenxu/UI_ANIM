@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="mat_progress">
+        <attr name="bar_width" format="dimension"/>
+        <attr name="rim_width" format="dimension"/>
+        <attr name="bar_color" format="color"/>
+        <attr name="rim_color" format="color"/>
+        <attr name="spin_speed" format="float"/>
+        <attr name="radius" format="dimension"/>
+        <attr name="tick_size" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="calendar">
+        <attr name="cell_width" format="dimension"/>
+        <attr name="cell_height" format="dimension"/>
+        <attr name="cell_margin_left" format="dimension"/>
+        <attr name="cell_margin_top" format="dimension"/>
+        <attr name="cell_txt_size" format="float"/>
+        <attr name="cell_txt_color" format="color"/>
+    </declare-styleable>
+</resources>
