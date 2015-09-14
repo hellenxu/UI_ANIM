@@ -11,7 +11,7 @@ import com.six.ui_anim.calendar.Cell;
 /**
  * @author hzxuxiaolin
  * @date 2015/9/8
- * Copyright 2015 NetEase. All rights reserved.
+ * Copyright 2015 Six. All rights reserved.
  */
 
 public class CalendarViewActivity extends Activity implements CalendarView.OnCellTouchListener {

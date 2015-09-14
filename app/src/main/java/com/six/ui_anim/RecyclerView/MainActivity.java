@@ -23,7 +23,7 @@ import java.util.Random;
 /**
  * @author hzxuxiaolin
  * @date 2015/7/8
- * Copyright 2015 NetEase. All rights reserved.
+ * Copyright 2015 Six. All rights reserved.
  */
 
 public class MainActivity extends AppCompatActivity {

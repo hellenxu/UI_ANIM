@@ -13,7 +13,7 @@ import android.view.View;
 /**
  * @author hzxuxiaolin
  * @date 2015/7/8
- * Copyright 2015 NetEase. All rights reserved.
+ * Copyright 2015 Six. All rights reserved.
  */
 
 public class DividerItemDecoration extends RecyclerView.ItemDecoration {

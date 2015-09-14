@@ -13,7 +13,7 @@ import com.six.ui_anim.R;
 /**
  * @author hzxuxiaolin
  * @date 2015/7/10
- * Copyright 2015 NetEase. All rights reserved.
+ * Copyright 2015 Six. All rights reserved.
  */
 
 public class GridDividerDecoration extends RecyclerView.ItemDecoration {
