@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/it_home"
+            android:icon="@drawable/ic_launcher"
+            android:title="Home" />
+        <item
+            android:id="@+id/it_data"
+            android:icon="@drawable/ic_launcher"
+            android:title="Statistics" />
+
+        <item
+            android:id="@+id/it_about"
+            android:icon="@drawable/ic_launcher"
+            android:title="About us" />
+    </group>
+</menu>

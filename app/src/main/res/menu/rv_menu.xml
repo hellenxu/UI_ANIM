@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.six.practice.RecyclerView.MainActivity">
+    <item
+        android:id="@+id/item_add"
+        android:icon="@drawable/add_blue"
+        android:orderInCategory="100"
+        android:title="add"
+        app:showAsAction="ifRoom">
+    </item>
+
+    <item
+        android:id="@+id/item_delete"
+        android:icon="@drawable/delete"
+        android:orderInCategory="100"
+        android:title="delete"
+        app:showAsAction="ifRoom">
+    </item>
+</menu>
