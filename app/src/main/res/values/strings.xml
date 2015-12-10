@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">UI_ANIM</string>
-    <string name="finish">FINISH</string>
+	<string name="app_name">UI_ANIM</string>
+	<string name="finish">FINISH</string>
+	<string name="menu_settings">Settings</string>
 </resources>

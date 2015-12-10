@@ -1,4 +1,4 @@
-package com.six.ui_anim.recyclerView;
+package com.six.ui_anim.RecyclerView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,7 +12,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/7/9
  * Copyright 2015 Six. All rights reserved.
  */

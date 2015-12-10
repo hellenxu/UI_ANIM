@@ -1,4 +1,4 @@
-package com.six.ui_anim.recyclerView;
+package com.six.ui_anim.RecyclerView;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -11,7 +11,7 @@ import android.view.View;
 import com.six.ui_anim.R;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/7/10
  * Copyright 2015 Six. All rights reserved.
  */

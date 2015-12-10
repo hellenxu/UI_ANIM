@@ -1,4 +1,4 @@
-package com.six.ui_anim.recyclerView;
+package com.six.ui_anim.RecyclerView;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/7/8
  * Copyright 2015 Six. All rights reserved.
  */

@@ -2,13 +2,19 @@ package com.six.ui_anim.anim_3x;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.LinearInterpolator;
 
 /**
  * @author hellenxu
@@ -49,8 +55,10 @@ public class PointAnimView extends View {
     }
 
     private void startAnimation() {
-        Point startPoint = new Point(RADIUS, RADIUS);
-        Point endPoint = new Point(getWidth() - RADIUS, getHeight() - RADIUS);
+//        Point startPoint = new Point(RADIUS, RADIUS);
+//        Point endPoint = new Point(getWidth() - RADIUS, getHeight() - RADIUS);
+        Point startPoint = new Point(getWidth() / 2, RADIUS);
+        Point endPoint = new Point(getWidth() / 2, getHeight() - RADIUS);
         ValueAnimator anim = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
@@ -60,15 +68,22 @@ public class PointAnimView extends View {
             }
         });
 
-//        anim.setDuration(5000);
+//        anim.setInterpolator(new AccelerateInterpolator(2f));
+//        anim.setInterpolator(new BounceInterpolator());
+        anim.setInterpolator(new DecelerateAccelerateInterpolator());
+        anim.setDuration(3000);
+        anim.start();
 
-        ObjectAnimator objAnim = ObjectAnimator.ofObject(this, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
+//        ObjectAnimator objAnim = ObjectAnimator.ofObject(this, "color", new ColorEvaluator(), "#0000FF", "#FF0000");
 //        objAnim.setDuration(5000);
 
-        AnimatorSet animSet = new AnimatorSet();
-        animSet.playTogether(anim, objAnim);
-        animSet.setDuration(5000);
-        animSet.start();
+//        AnimatorSet animSet = new AnimatorSet();
+//        animSet.playTogether(anim, objAnim);
+//        animSet.setDuration(5000);
+//        animSet.start();
+
+        Log.d("PointAnimView", "cos1: " + Math.cos(Math.PI));
+        Log.d("PointAnimView", "cos2: " + Math.cos(2 * Math.PI));
     }
 
     public String getColor(){

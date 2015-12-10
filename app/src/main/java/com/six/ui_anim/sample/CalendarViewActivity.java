@@ -9,7 +9,7 @@ import com.six.ui_anim.calendar.CalendarView;
 import com.six.ui_anim.calendar.Cell;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/9/8
  * Copyright 2015 Six. All rights reserved.
  */

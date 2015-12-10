@@ -7,7 +7,7 @@ import android.graphics.Rect;
 import android.util.Log;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/9/6
  * Copyright 2015 com.six. All rights reserved.
  */

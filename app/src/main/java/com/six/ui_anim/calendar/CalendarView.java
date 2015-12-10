@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.MonthDisplayHelper;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -19,7 +20,7 @@ import java.util.Calendar;
 import java.util.Random;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/9/6
  * Copyright 2015 six.com. All rights reserved.
  */
@@ -47,19 +48,10 @@ public class CalendarView extends ImageView {
 
     private static final int DEFAULT_CELL_MARGIN_TOP = 0;
     private static final float DEFAULT_CELL_TXT_SIZE = 12.0F;
-    private static final int[] SELECTED_CELL_BG = {
-            R.drawable.x_selected_day_january,
-            R.drawable.x_selected_day_february,
-            R.drawable.x_selected_day_march,
-            R.drawable.x_selected_day_april,
-            R.drawable.x_selected_day_may,
-            R.drawable.x_selected_day_june,
-            R.drawable.x_selected_day_july,
-            R.drawable.x_selected_day_august,
-            R.drawable.x_selected_day_september,
-            R.drawable.x_selected_day_october,
-            R.drawable.x_selected_day_november,
-            R.drawable.x_selected_day_december};
+    private static final int[] SELECTED_CELL_BG = {R.drawable.tmall_selected_day_january, R.drawable.tmall_selected_day_february,
+            R.drawable.tmall_selected_day_march, R.drawable.tmall_selected_day_april, R.drawable.tmall_selected_day_may, R.drawable.tmall_selected_day_june,
+            R.drawable.tmall_selected_day_july, R.drawable.tmall_selected_day_august, R.drawable.tmall_selected_day_september, R.drawable.tmall_selected_day_october,
+            R.drawable.tmall_selected_day_november, R.drawable.tmall_selected_day_december};
 
     public CalendarView(Context context) {
         this(context, null);
@@ -93,10 +85,10 @@ public class CalendarView extends ImageView {
         Calendar currentDate = Calendar.getInstance();
         mHelper = new MonthDisplayHelper(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH));
 
-        setImageResource(R.drawable.x_brand_bg_no_brand);
-        mCalendarFrame = context.getResources().getDrawable(R.drawable.x_brand_calenday_bg);
+        setImageResource(R.drawable.tmall_brand_bg_no_brand);
+        mCalendarFrame = context.getResources().getDrawable(R.drawable.tmall_brand_calenday_bg);
         mSelectedCell = context.getResources().getDrawable(SELECTED_CELL_BG[mHelper.getMonth()]);
-        mSelectedCellNoBand = context.getResources().getDrawable(R.drawable.x_selected_day);
+        mSelectedCellNoBand = context.getResources().getDrawable(R.drawable.tmall_selected_day);
         setNoBrand(new Random().nextBoolean());
     }
 

@@ -11,7 +11,7 @@ import com.six.ui_anim.R;
 import com.six.ui_anim.progressWheel.ProgressWheel;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2015/9/1
  * Copyright 2015 six.com. All rights reserved.
  */
