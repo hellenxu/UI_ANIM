@@ -187,11 +187,6 @@ public class RichEditorView extends WebView {
         exec("javascript:RE.setBackgroundImage('url(data:image/png;base64," + base64 + ")');");
     }
 
-    @Override
-    public void setBackground(Drawable background) {
-
-    }
-
     private String convertHexColorString(int color){
         return String.format("#%06X", (0xFFFFFF & color));
     }
