@@ -11,9 +11,9 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2016/1/28
- * Copyright 2016 NetEase. All rights reserved.
+ * Copyright 2016 Six. All rights reserved.
  */
 public class Utils {
 

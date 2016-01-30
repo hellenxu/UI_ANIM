@@ -48,10 +48,10 @@ public class CalendarView extends ImageView {
 
     private static final int DEFAULT_CELL_MARGIN_TOP = 0;
     private static final float DEFAULT_CELL_TXT_SIZE = 12.0F;
-    private static final int[] SELECTED_CELL_BG = {R.drawable.tmall_selected_day_january, R.drawable.tmall_selected_day_february,
-            R.drawable.tmall_selected_day_march, R.drawable.tmall_selected_day_april, R.drawable.tmall_selected_day_may, R.drawable.tmall_selected_day_june,
-            R.drawable.tmall_selected_day_july, R.drawable.tmall_selected_day_august, R.drawable.tmall_selected_day_september, R.drawable.tmall_selected_day_october,
-            R.drawable.tmall_selected_day_november, R.drawable.tmall_selected_day_december};
+//    private static final int[] SELECTED_CELL_BG = {R.drawable.tmall_selected_day_january, R.drawable.tmall_selected_day_february,
+//            R.drawable.tmall_selected_day_march, R.drawable.tmall_selected_day_april, R.drawable.tmall_selected_day_may, R.drawable.tmall_selected_day_june,
+//            R.drawable.tmall_selected_day_july, R.drawable.tmall_selected_day_august, R.drawable.tmall_selected_day_september, R.drawable.tmall_selected_day_october,
+//            R.drawable.tmall_selected_day_november, R.drawable.tmall_selected_day_december};
 
     public CalendarView(Context context) {
         this(context, null);
@@ -85,10 +85,10 @@ public class CalendarView extends ImageView {
         Calendar currentDate = Calendar.getInstance();
         mHelper = new MonthDisplayHelper(currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH));
 
-        setImageResource(R.drawable.tmall_brand_bg_no_brand);
-        mCalendarFrame = context.getResources().getDrawable(R.drawable.tmall_brand_calenday_bg);
-        mSelectedCell = context.getResources().getDrawable(SELECTED_CELL_BG[mHelper.getMonth()]);
-        mSelectedCellNoBand = context.getResources().getDrawable(R.drawable.tmall_selected_day);
+//        setImageResource(R.drawable.tmall_brand_bg_no_brand);
+//        mCalendarFrame = context.getResources().getDrawable(R.drawable.tmall_brand_calenday_bg);
+//        mSelectedCell = context.getResources().getDrawable(SELECTED_CELL_BG[mHelper.getMonth()]);
+//        mSelectedCellNoBand = context.getResources().getDrawable(R.drawable.tmall_selected_day);
         setNoBrand(new Random().nextBoolean());
     }
 

@@ -10,8 +10,6 @@
 
 		<activity android:name=".sample.ProgressWheelActivity"/>
 
-		<activity android:name=".sample.CalendarViewActivity"/>
-
 		<activity android:name=".anim_3x.ValueAnimatorActivity"/>
 
 		<activity android:name=".sample.BounceScrollViewActivity">

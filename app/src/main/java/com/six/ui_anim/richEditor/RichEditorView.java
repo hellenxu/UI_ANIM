@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -19,9 +20,9 @@ import java.util.List;
 import java.util.Locale;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2016/1/28
- * Copyright 2016 NetEase. All rights reserved.
+ * Copyright 2016 Six. All rights reserved.
  */
 
 public class RichEditorView extends WebView {
@@ -105,7 +106,6 @@ public class RichEditorView extends WebView {
         }
     }
 
-    //TODO
     private void applyAttributes(Context context, AttributeSet attrs) {
         final int[] attrsArray = new int[]{android.R.attr.gravity};
         TypedArray ta = context.obtainStyledAttributes(attrs, attrsArray);
@@ -187,13 +187,111 @@ public class RichEditorView extends WebView {
         exec("javascript:RE.setBackgroundImage('url(data:image/png;base64," + base64 + ")');");
     }
 
+    @Override
+    public void setBackground(Drawable background){
+        Bitmap bitmap = Utils.toBitmap(background);
+        String base64 = Utils.toBase64(bitmap);
+        bitmap.recycle();
+
+        exec("javascript:RE.setBackgroundImage('url(data:image/png;base64," + base64 + ")');");
+    }
+
+    public void setBackground(String url) {
+        exec("javascript:RE.setBackgroundImage('url(" + url + ")');");
+    }
+
+    public void setEditorWidth(int width) {
+        exec("javascript:RE.setWidth(" + width + "px');");
+    }
+
+    public void setEditorHeight(int height) {
+        exec("javascript:RE.setHeight(" + height + "px');");
+    }
+
+    public void setPlaceHolder(String placeHolder) {
+        exec("javascript:RE.setPlaceholder('" + placeHolder + "');");
+    }
+
+    public void loadCSS(String cssFile){
+        String jsCSSImport = "(function() {" +
+                "   var head = document.getElementsByTagName(\"head\")[0];" +
+                "   var link = document.createElement(\"link\");" +
+                "   link.rel = \"stylesheet\";" +
+                "   link.type = \"text/css\";" +
+                "   link.href = \"" + cssFile + "\";" +
+                "   link.media = \"all\";" +
+                "   head.appendChild(link);" +
+                "}) ();";
+        exec("javascript:" + jsCSSImport + "");
+    }
+
+    public void undo(){
+        exec("javascript:RE.undo();");
+    }
+
+    public void redo(){
+        exec("javascript:RE.redo();");
+    }
+
+    public void setBold(){
+        exec("javascript:RE.setBold();");
+    }
+
+    public void setItalic(){
+        exec("javascript:RE.setItalic();");
+    }
+
+    public void setSubscript(){
+        exec("javascript:RE.setSubscript();");
+    }
+
+    public void setSuperscript(){
+        exec("javascript:RE.setSuperscript();");
+    }
+
+    public void setStrikeThrough(){
+        exec("javascript:RE.setStrikeThrough();");
+    }
+
+    public void setUnderline(){
+        exec("javascript:RE.setUnderline();");
+    }
+
+    public void setTextColor(int color){
+        exec("javascript:RE.prepareInset();");
+        String hex = convertHexColorString(color);
+        exec("javascript:RE.setTextColor('" + hex + "');");
+    }
+
+    public void setTextBackgroundColor(int color){
+        exec("javascript:RE.prepareInsert();");
+        String hex = convertHexColorString(color);
+        exec("javascript:RE.setTextBackgroundColor('" + hex + "');");
+    }
+
     private String convertHexColorString(int color){
         return String.format("#%06X", (0xFFFFFF & color));
     }
 
-    //TODO
     protected void exec(final String trigger) {
+        if(isReady){
+            load(trigger);
+        } else {
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    exec(trigger);
+                }
+            }, 100);
+        }
+    }
 
+    private void load(String trigger) {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            evaluateJavascript(trigger, null);
+        } else {
+            loadUrl(trigger);
+        }
     }
 
     //TODO

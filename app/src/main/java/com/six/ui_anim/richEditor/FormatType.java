@@ -1,9 +1,9 @@
 package com.six.ui_anim.richEditor;
 
 /**
- * @author hzxuxiaolin
+ * @author hellenxu
  * @date 2016/1/28
- * Copyright 2016 NetEase. All rights reserved.
+ * Copyright 2016 Six. All rights reserved.
  */
 public enum FormatType {
     BOLD,
