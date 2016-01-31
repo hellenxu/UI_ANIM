@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +160,7 @@ public class RichEditorView extends WebView {
         exec("javascript:RE.setBaseTextColor('" + hex + "');");
     }
 
-    public void setEditorFontSize(int px){
+    public void setEditorFontSize(int px) {
         exec("javascript:RE.setBaseFontSize('" + px + "px');");
     }
 
@@ -174,7 +175,7 @@ public class RichEditorView extends WebView {
         setPadding(start, top, end, bottom);
     }
 
-    public void setEditorBackgroundColor(int color){
+    public void setEditorBackgroundColor(int color) {
         setBackgroundColor(color);
     }
 
@@ -188,7 +189,7 @@ public class RichEditorView extends WebView {
     }
 
     @Override
-    public void setBackground(Drawable background){
+    public void setBackground(Drawable background) {
         Bitmap bitmap = Utils.toBitmap(background);
         String base64 = Utils.toBase64(bitmap);
         bitmap.recycle();
@@ -212,7 +213,7 @@ public class RichEditorView extends WebView {
         exec("javascript:RE.setPlaceholder('" + placeHolder + "');");
     }
 
-    public void loadCSS(String cssFile){
+    public void loadCSS(String cssFile) {
         String jsCSSImport = "(function() {" +
                 "   var head = document.getElementsByTagName(\"head\")[0];" +
                 "   var link = document.createElement(\"link\");" +
@@ -225,56 +226,120 @@ public class RichEditorView extends WebView {
         exec("javascript:" + jsCSSImport + "");
     }
 
-    public void undo(){
+    public void undo() {
         exec("javascript:RE.undo();");
     }
 
-    public void redo(){
+    public void redo() {
         exec("javascript:RE.redo();");
     }
 
-    public void setBold(){
+    public void setBold() {
         exec("javascript:RE.setBold();");
     }
 
-    public void setItalic(){
+    public void setItalic() {
         exec("javascript:RE.setItalic();");
     }
 
-    public void setSubscript(){
+    public void setSubscript() {
         exec("javascript:RE.setSubscript();");
     }
 
-    public void setSuperscript(){
+    public void setSuperscript() {
         exec("javascript:RE.setSuperscript();");
     }
 
-    public void setStrikeThrough(){
+    public void setStrikeThrough() {
         exec("javascript:RE.setStrikeThrough();");
     }
 
-    public void setUnderline(){
+    public void setUnderline() {
         exec("javascript:RE.setUnderline();");
     }
 
-    public void setTextColor(int color){
+    public void setTextColor(int color) {
         exec("javascript:RE.prepareInset();");
         String hex = convertHexColorString(color);
         exec("javascript:RE.setTextColor('" + hex + "');");
     }
 
-    public void setTextBackgroundColor(int color){
+    public void setTextBackgroundColor(int color) {
         exec("javascript:RE.prepareInsert();");
         String hex = convertHexColorString(color);
         exec("javascript:RE.setTextBackgroundColor('" + hex + "');");
     }
 
-    private String convertHexColorString(int color){
+    public void removeFormat() {
+        exec("javascript:RE.removeFormat();");
+    }
+
+    public void setHeading(int heading) {
+        exec("javascript:RE.setHeading('" + heading + "');");
+    }
+
+    public void stIndent() {
+        exec("javascript:RE.setIndent();");
+    }
+
+    public void setOutdent() {
+        exec("javascript:RE.setOutdent();");
+    }
+
+    public void setAlignLeft() {
+        exec("javascript:RE.setJustifyLeft();");
+    }
+
+    public void setAlignCenter() {
+        exec("javascript:RE.setJustifyCenter();");
+    }
+
+    public void setAlignRight() {
+        exec("javascript:RE.setJustifyRight();");
+    }
+
+    public void setBlockquote() {
+        exec("javascript:RE.setBlockquote();");
+    }
+
+    public void setBullets() {
+        exec("javascript:RE.setBullets();");
+    }
+
+    public void setNumbers() {
+        exec("javascript:RE.setNumbers();");
+    }
+
+    public void insertImage(String url, String alt) {
+        exec("javascript:RE.prepareInsert();");
+        exec("javascript:RE.insertImage('" + url + "', '" + alt + "');");
+    }
+
+    public void insertLink(String href, String title) {
+        exec("javascript:RE.prepareInsert();");
+        exec("javascript:RE.insertLink('" + href + "', '" + title + "');");
+    }
+
+    public void insertTodo() {
+        exec("javascript:RE.prepareInsert();");
+        exec("javascript:RE.setTodo('" + Utils.getCurrentTime() + "');");
+    }
+
+    public void focusEditor() {
+        requestFocus();
+        exec("javascript:RE.focus();");
+    }
+
+    public void clearFocusEditor() {
+        exec("javascript:RE.blurFocus();");
+    }
+
+    private String convertHexColorString(int color) {
         return String.format("#%06X", (0xFFFFFF & color));
     }
 
     protected void exec(final String trigger) {
-        if(isReady){
+        if (isReady) {
             load(trigger);
         } else {
             postDelayed(new Runnable() {
@@ -287,20 +352,41 @@ public class RichEditorView extends WebView {
     }
 
     private void load(String trigger) {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             evaluateJavascript(trigger, null);
         } else {
             loadUrl(trigger);
         }
     }
 
-    //TODO
     protected class EditorWebViewClient extends WebViewClient {
 
         @Override
         public void onPageFinished(WebView view, String url) {
-            super.onPageFinished(view, url);
+            isReady = url.equalsIgnoreCase(SETUP_HTML);
+            if (mLoadListener != null) {
+                mLoadListener.onAfterInitialLoad(isReady);
+            }
+        }
 
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            String decode;
+            try {
+                decode = URLDecoder.decode(url, "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                return false;
+            }
+
+            if (TextUtils.indexOf(url, CALLBACK_SCHEME) == 0) {
+                callback(decode);
+                return true;
+            } else if (TextUtils.indexOf(url, STATE_SCHEME) == 0) {
+                stateCheck(decode);
+                return true;
+            }
+
+            return super.shouldOverrideUrlLoading(view, url);
         }
     }
 }
