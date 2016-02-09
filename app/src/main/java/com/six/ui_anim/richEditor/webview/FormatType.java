@@ -1,4 +1,4 @@
-package com.six.ui_anim.richEditor;
+package com.six.ui_anim.richEditor.webview;
 
 /**
  * @author hellenxu

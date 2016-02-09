@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.six.ui_anim.R;
-import com.six.ui_anim.richEditor.RichEditorView;
+import com.six.ui_anim.richEditor.webview.RichEditorView;
 
 /**
  * @author hellenxu

@@ -1,4 +1,4 @@
-package com.six.ui_anim.richEditor;
+package com.six.ui_anim.richEditor.webview;
 
 import android.content.Context;
 import android.graphics.Bitmap;

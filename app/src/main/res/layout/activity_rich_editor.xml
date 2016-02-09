@@ -218,7 +218,7 @@
 		</LinearLayout>
 	</HorizontalScrollView>
 
-	<com.six.ui_anim.richEditor.RichEditorView
+	<com.six.ui_anim.richEditor.webview.RichEditorView
 		android:id="@+id/editor"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

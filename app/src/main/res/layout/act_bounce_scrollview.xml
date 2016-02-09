@@ -3,7 +3,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-	<com.six.ui_anim.BounceScrollView
+	<com.six.ui_anim.bounceScrollView.BounceScrollView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@drawable/coversation_bg"
@@ -124,5 +124,5 @@
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
-	</com.six.ui_anim.BounceScrollView>
+	</com.six.ui_anim.bounceScrollView.BounceScrollView>
 </LinearLayout>
