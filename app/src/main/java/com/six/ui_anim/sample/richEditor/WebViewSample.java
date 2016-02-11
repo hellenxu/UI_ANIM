@@ -1,4 +1,4 @@
-package com.six.ui_anim.sample;
+package com.six.ui_anim.sample.richEditor;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,14 +14,14 @@ import com.six.ui_anim.richEditor.webview.RichEditorView;
  * @date 2016/2/1
  * Copyright 2016 Six. All rights reserved.
  */
-public class RichEditorSample extends AppCompatActivity {
+public class WebViewSample extends AppCompatActivity {
     private RichEditorView  mEditor;
     private TextView mPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rich_editor);
+        setContentView(R.layout.act_re_webview);
         initView();
     }
 

@@ -20,8 +20,8 @@
     </declare-styleable>
 
     <declare-styleable name="RichText">
-        <attr name="bulletColor" format="reference |color"/>
-        <attr name="bulletRadius" format="reference |dimension"/>
-        <attr name="bulletGapWidth" format="reference |dimension"/>
+        <attr name="bulletColor" format="color"/>
+        <attr name="bulletRadius" format="dimension"/>
+        <attr name="bulletGapWidth" format="dimension"/>
     </declare-styleable>
 </resources>

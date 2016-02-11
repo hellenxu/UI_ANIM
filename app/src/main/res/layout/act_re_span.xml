@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+	<HorizontalScrollView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@android:color/black">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal">
+
+			<ImageButton
+				android:id="@+id/format_bullet"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/ic_format_bullet"/>
+			<ImageButton
+				android:id="@+id/format_underline"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/underline"/>
+		</LinearLayout>
+	</HorizontalScrollView>
+
+	<com.six.ui_anim.richEditor.span.RichText
+		android:id="@+id/editor"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"/>
+</LinearLayout>

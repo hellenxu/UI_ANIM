@@ -1,25 +1,27 @@
 <manifest
-	package="com.six.ui_anim"
-	xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.six.ui_anim">
 
-	<application
-		android:allowBackup="true"
-		android:icon="@drawable/ic_launcher"
-		android:label="@string/app_name"
-		android:theme="@style/AppTheme">
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
 
-		<activity android:name=".sample.ProgressWheelActivity"/>
+        <activity android:name="com.six.ui_anim.sample.ProgressWheelActivity" />
 
-		<activity android:name=".anim_3x.ValueAnimatorActivity"/>
+        <activity android:name="com.six.ui_anim.anim_3x.ValueAnimatorActivity" />
 
-		<activity android:name=".sample.BounceScrollViewActivity"/>
+        <activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity" />
 
-		<activity android:name=".sample.RichEditorSample">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-				<category android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
-		</activity>
-	</application>
+        <activity android:name="com.six.ui_anim.sample.richEditor.WebViewSample" />
+
+        <activity android:name="com.six.ui_anim.sample.richEditor.SpanSample">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
 
 </manifest>
