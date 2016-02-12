@@ -8,6 +8,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.BulletSpan;
+import android.text.style.URLSpan;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
@@ -186,6 +187,38 @@ public class RichText extends EditText implements TextWatcher {
         return true;
     }
 
+    public void link(String link){
+        link(link, getSelectionStart(), getSelectionEnd());
+    }
+
+    public void link(String link, int start, int end){
+        if(link != null && !TextUtils.isEmpty(link.trim())){
+            linkValid(link, start, end);
+        } else {
+            linkInvalid(start, end);
+        }
+    }
+
+    protected void linkValid(String link, int start, int end) {
+        if(start >= end){
+            return;
+        }
+
+        linkInvalid(start, end);
+        getEditableText().setSpan(new RichURLSpan(link, linkColor, linkUnderline), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    protected void linkInvalid(int start, int end){
+        if(start >= end){
+            return;
+        }
+
+        URLSpan[] spans = getEditableText().getSpans(start, end, URLSpan.class);
+        for(URLSpan span : spans){
+            getEditableText().removeSpan(span);
+        }
+    }
+
     protected boolean containBullet(int index){
         String[] lines = TextUtils.split(getEditableText().toString(), "\n");
         if(index < 0 || index >= lines.length){
@@ -214,6 +247,14 @@ public class RichText extends EditText implements TextWatcher {
             spanEnd = 0 < spanEnd && spanEnd < editable.length() && editable.charAt(spanEnd) == '\n' ? spanEnd - 1 : spanEnd;
             editable.removeSpan(span);
             editable.setSpan(new RichBulletSpan(bulletColor, bulletRadius, bulletGapWidth), spanStart, spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+        URLSpan[] urlSpans = editable.getSpans(start, end, URLSpan.class);
+        for(URLSpan span : urlSpans){
+            int spanStart = editable.getSpanStart(span);
+            int spanEnd = editable.getSpanEnd(span);
+            editable.removeSpan(span);
+            editable.setSpan(new RichURLSpan(span.getURL(), linkColor, linkUnderline), spanStart, spanEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
     }
 

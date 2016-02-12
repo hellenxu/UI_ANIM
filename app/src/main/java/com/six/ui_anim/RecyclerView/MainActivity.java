@@ -1,4 +1,4 @@
-package com.six.ui_anim.RecyclerView;
+package com.six.ui_anim.recyclerView;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
