@@ -13,36 +13,37 @@ import com.six.ui_anim.richEditor.span.RichText;
  * Created by xxl on 16/2/11.
  */
 
-public class SpanSample extends AppCompatActivity {
+public class SpanSample extends AppCompatActivity implements View.OnClickListener{
+    private static final String TAG = SpanSample.class.getSimpleName();
     private RichText rtEditor;
+    private ImageButton imgBtnBullet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_re_span);
         init();
-        setupBullet();
     }
 
     private void init(){
         rtEditor = (RichText) findViewById(R.id.editor);
+        imgBtnBullet = (ImageButton) findViewById(R.id.format_bullet);
+        imgBtnBullet.setOnClickListener(this);
     }
 
-    private void setupBullet(){
-        ImageButton bullet = (ImageButton) findViewById(R.id.format_bullet);
-        bullet.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.format_bullet:
+                showToast("bullet");
                 rtEditor.bullet(!rtEditor.contains(RichText.FORMAT_BULLET));
-            }
-        });
+                break;
+            default:
+                break;
+        }
+    }
 
-        bullet.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toast.makeText(SpanSample.this, "bullet: long click", Toast.LENGTH_SHORT).show();
-                return true;
-            }
-        });
+    private void showToast(String msg){
+        Toast.makeText(SpanSample.this, msg, Toast.LENGTH_SHORT).show();
     }
 }

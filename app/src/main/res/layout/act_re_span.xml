@@ -1,18 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+	<com.six.ui_anim.richEditor.span.RichText
+		android:id="@+id/editor"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"/>
 
 	<HorizontalScrollView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
 		android:background="@android:color/black">
 
 		<LinearLayout
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:orientation="horizontal">
+			android:orientation="horizontal"
+			android:paddingLeft="20dp"
+			android:paddingRight="20dp">
+
+			<ImageButton
+				android:id="@+id/format_bold"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/bold"/>
+
+			<ImageButton
+				android:id="@+id/format_italic"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/italic"/>
+
+			<ImageButton
+				android:id="@+id/format_underline"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/underline"/>
+
+			<ImageButton
+				android:id="@+id/format_strike_through"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/strikethrough"/>
 
 			<ImageButton
 				android:id="@+id/format_bullet"
@@ -21,19 +60,31 @@
 				android:background="@null"
 				android:contentDescription="@null"
 				android:src="@drawable/ic_format_bullet"/>
+
 			<ImageButton
-				android:id="@+id/format_underline"
+				android:id="@+id/format_block_quote"
 				android:layout_width="48dp"
 				android:layout_height="48dp"
 				android:background="@null"
 				android:contentDescription="@null"
-				android:src="@drawable/underline"/>
+				android:src="@drawable/blockquote"/>
+
+			<ImageButton
+				android:id="@+id/format_linker"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/insert_link"/>
+
+			<ImageButton
+				android:id="@+id/format_img"
+				android:layout_width="48dp"
+				android:layout_height="48dp"
+				android:background="@null"
+				android:contentDescription="@null"
+				android:src="@drawable/insert_image"/>
 		</LinearLayout>
 	</HorizontalScrollView>
 
-	<com.six.ui_anim.richEditor.span.RichText
-		android:id="@+id/editor"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:gravity="center"/>
-</LinearLayout>
+</RelativeLayout>
