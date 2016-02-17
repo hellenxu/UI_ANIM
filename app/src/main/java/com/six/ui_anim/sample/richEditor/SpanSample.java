@@ -18,6 +18,7 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
     private RichText rtEditor;
     private ImageButton imgBtnBullet;
     private ImageButton imgBtnBold;
+    private ImageButton imgBtnItalic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +31,10 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
         rtEditor = (RichText) findViewById(R.id.editor);
         imgBtnBullet = (ImageButton) findViewById(R.id.format_bullet);
         imgBtnBold = (ImageButton) findViewById(R.id.format_bold);
+        imgBtnItalic = (ImageButton) findViewById(R.id.format_italic);
         imgBtnBullet.setOnClickListener(this);
         imgBtnBold.setOnClickListener(this);
+        imgBtnItalic.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +45,9 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.format_bold:
                 rtEditor.bold(!rtEditor.contains(RichText.FORMAT_BOLD));
+                break;
+            case R.id.format_italic:
+                rtEditor.italic(!rtEditor.contains(RichText.FORMAT_ITALIC));
                 break;
             default:
                 break;

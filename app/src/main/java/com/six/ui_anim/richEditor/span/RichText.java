@@ -322,6 +322,18 @@ public class RichText extends EditText implements TextWatcher {
 
     //end of setting up bold style
 
+
+    //start setting up italic style
+    public void italic(boolean valid){
+        if(valid){
+            styleValid(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
+        }else {
+            styleInvalid(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
+        }
+    }
+
+
+    //end of setting up italic style
     public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
     }
