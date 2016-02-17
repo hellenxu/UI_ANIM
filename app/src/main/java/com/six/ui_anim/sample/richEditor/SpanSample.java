@@ -35,7 +35,6 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.format_bullet:
-                showToast("bullet");
                 rtEditor.bullet(!rtEditor.contains(RichText.FORMAT_BULLET));
                 break;
             default:

@@ -55,6 +55,7 @@ public class RichText extends EditText implements TextWatcher {
 
     public RichText(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init(attrs);
     }
 
     private void init(AttributeSet attrs) {
@@ -64,7 +65,7 @@ public class RichText extends EditText implements TextWatcher {
         bulletGapWidth = array.getDimensionPixelSize(R.styleable.RichText_bulletGapWidth, 0);
         array.recycle();
 
-        if(historyEnable && historySize <= 0){
+        if (historyEnable && historySize <= 0) {
             throw new IllegalArgumentException("historySize must > 0");
         }
     }
@@ -83,7 +84,7 @@ public class RichText extends EditText implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-        if(!historyEnable || isHistoryWorking){
+        if (!historyEnable || isHistoryWorking) {
             return;
         }
 
@@ -92,14 +93,14 @@ public class RichText extends EditText implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        if(!historyEnable || isHistoryWorking){
+        if (!historyEnable || isHistoryWorking) {
             return;
         }
         inputLast = new SpannableStringBuilder(s);
-        if(s != null && s.toString().equals(inputBefore.toString())){
+        if (s != null && s.toString().equals(inputBefore.toString())) {
             return;
         }
-        if(historyList.size() >= historySize){
+        if (historyList.size() >= historySize) {
             historyList.remove(0);
         }
 
@@ -109,7 +110,7 @@ public class RichText extends EditText implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
-    //do nothing
+        //do nothing
     }
 
     public void bullet(boolean valid) {
@@ -152,34 +153,63 @@ public class RichText extends EditText implements TextWatcher {
     protected void bulletInvalid() {
         String[] lines = TextUtils.split(getEditableText().toString(), "\n");
 
-        for(int i = 0; i < lines.length; i ++){
-
-        }
-    }
-
-    protected boolean containBullet(){
-        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
-        List<Integer> list = new ArrayList<>();
-
-        for(int i = 0; i < lines.length; i ++){
-            int lineStart = 0;
-            for(int j = 0; j < i; j ++){
-                lineStart = lineStart + lines[j].length() + 1;
-            }
-            int lineEnd = lineStart + lines[i].length();
-            if(lineStart >= lineEnd){
+        for (int i = 0; i < lines.length; i++) {
+            if (!containBullet(i)) {
                 continue;
             }
 
-            if(lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd){
+            int lineStart = 0;
+            for (int j = 0; j < i; j++) {
+                lineStart = lineStart + lines[j].length() + 1;
+            }
+
+            int lineEnd = lineStart + lines[i].length();
+            if (lineStart >= lineEnd) {
+                continue;
+            }
+
+            int bulletStart = 0;
+            int bulletEnd = 0;
+            if (lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd) {
+                bulletStart = lineStart;
+                bulletEnd = lineEnd;
+            } else if (getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()) {
+                bulletStart = lineStart;
+                bulletEnd = lineEnd;
+            }
+
+            if (bulletStart < bulletEnd) {
+                BulletSpan[] spans = getEditableText().getSpans(bulletStart, bulletEnd, BulletSpan.class);
+                for (BulletSpan span : spans) {
+                    getEditableText().removeSpan(span);
+                }
+            }
+        }
+    }
+
+    protected boolean containBullet() {
+        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < lines.length; i++) {
+            int lineStart = 0;
+            for (int j = 0; j < i; j++) {
+                lineStart = lineStart + lines[j].length() + 1;
+            }
+            int lineEnd = lineStart + lines[i].length();
+            if (lineStart >= lineEnd) {
+                continue;
+            }
+
+            if (lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd) {
                 list.add(i);
-            } else if(getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()){
+            } else if (getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()) {
                 list.add(i);
             }
         }
 
-        for(Integer i : list){
-            if(!containBullet(i)){
+        for (Integer i : list) {
+            if (!containBullet(i)) {
                 return false;
             }
         }
@@ -187,12 +217,12 @@ public class RichText extends EditText implements TextWatcher {
         return true;
     }
 
-    public void link(String link){
+    public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
     }
 
-    public void link(String link, int start, int end){
-        if(link != null && !TextUtils.isEmpty(link.trim())){
+    public void link(String link, int start, int end) {
+        if (link != null && !TextUtils.isEmpty(link.trim())) {
             linkValid(link, start, end);
         } else {
             linkInvalid(start, end);
@@ -200,7 +230,7 @@ public class RichText extends EditText implements TextWatcher {
     }
 
     protected void linkValid(String link, int start, int end) {
-        if(start >= end){
+        if (start >= end) {
             return;
         }
 
@@ -208,30 +238,30 @@ public class RichText extends EditText implements TextWatcher {
         getEditableText().setSpan(new RichURLSpan(link, linkColor, linkUnderline), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 
-    protected void linkInvalid(int start, int end){
-        if(start >= end){
+    protected void linkInvalid(int start, int end) {
+        if (start >= end) {
             return;
         }
 
         URLSpan[] spans = getEditableText().getSpans(start, end, URLSpan.class);
-        for(URLSpan span : spans){
+        for (URLSpan span : spans) {
             getEditableText().removeSpan(span);
         }
     }
 
-    protected boolean containBullet(int index){
+    protected boolean containBullet(int index) {
         String[] lines = TextUtils.split(getEditableText().toString(), "\n");
-        if(index < 0 || index >= lines.length){
+        if (index < 0 || index >= lines.length) {
             return false;
         }
 
         int start = 0;
-        for(int i = 0; i < index; i ++){
+        for (int i = 0; i < index; i++) {
             start = start + lines[i].length() + 1;
         }
 
         int end = start + lines[index].length();
-        if(start >= end){
+        if (start >= end) {
             return false;
         }
 
@@ -250,7 +280,7 @@ public class RichText extends EditText implements TextWatcher {
         }
 
         URLSpan[] urlSpans = editable.getSpans(start, end, URLSpan.class);
-        for(URLSpan span : urlSpans){
+        for (URLSpan span : urlSpans) {
             int spanStart = editable.getSpanStart(span);
             int spanEnd = editable.getSpanEnd(span);
             editable.removeSpan(span);
@@ -258,8 +288,8 @@ public class RichText extends EditText implements TextWatcher {
         }
     }
 
-    public boolean contains(int format){
-        switch (format){
+    public boolean contains(int format) {
+        switch (format) {
             case FORMAT_BULLET:
                 return containBullet();
             default:
