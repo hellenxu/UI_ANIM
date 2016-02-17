@@ -2,14 +2,17 @@ package com.six.ui_anim.richEditor.span;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.BulletSpan;
+import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.widget.EditText;
 
 import com.six.ui_anim.R;
@@ -113,6 +116,7 @@ public class RichText extends EditText implements TextWatcher {
         //do nothing
     }
 
+    // the beginning of setting up Bullet
     public void bullet(boolean valid) {
         if (valid) {
             bulletValid();
@@ -216,6 +220,107 @@ public class RichText extends EditText implements TextWatcher {
 
         return true;
     }
+    //end of setting up bullet.
+
+    //start setting up bold style
+    public void bold(boolean valid) {
+        if (valid) {
+            styleValid(Typeface.BOLD, getSelectionStart(), getSelectionEnd());
+        } else {
+            styleInvalid(Typeface.BOLD, getSelectionStart(), getSelectionEnd());
+        }
+    }
+
+    protected void styleValid(int style, int start, int end) {
+        switch (style) {
+            case Typeface.NORMAL:
+            case Typeface.BOLD:
+            case Typeface.ITALIC:
+            case Typeface.BOLD_ITALIC:
+                if (start >= end) {
+                    return;
+                }
+                getEditableText().setSpan(new StyleSpan(style), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                break;
+            default:
+                Log.d("styleValid", "invalid");
+                break;
+        }
+    }
+
+    protected void styleInvalid(int style, int start, int end) {
+        switch (style) {
+            case Typeface.NORMAL:
+            case Typeface.BOLD:
+            case Typeface.ITALIC:
+            case Typeface.BOLD_ITALIC:
+                if (start >= end) {
+                    return;
+                }
+                StyleSpan[] spans = getEditableText().getSpans(start, end, StyleSpan.class);
+                List<RichPart> list = new ArrayList<>();
+                for (StyleSpan span : spans) {
+                    if (span.getStyle() == style) {
+                        list.add(new RichPart(getEditableText().getSpanStart(span), getEditableText().getSpanEnd(span)));
+                        getEditableText().removeSpan(span);
+                    }
+                }
+
+                for (RichPart part : list) {
+                    if (part.isValid()) {
+                        if (part.start < start) {
+                            styleValid(style, part.start, start);
+                        }
+
+                        if (part.end > end) {
+                            styleValid(style, end, part.end);
+                        }
+                    }
+                }
+                break;
+            default:
+                Log.d("styleInValid", "invalid");
+                break;
+        }
+    }
+
+    protected boolean containStyle(int style, int start, int end) {
+        switch (style) {
+            case Typeface.NORMAL:
+            case Typeface.BOLD:
+            case Typeface.ITALIC:
+            case Typeface.BOLD_ITALIC:
+                if (start > end) {
+                    return false;
+                }
+
+                if (start == end) {
+                    if (start - 1 < 0 || start + 1 > getEditableText().length()) {
+                        return false;
+                    } else {
+                        StyleSpan[] before = getEditableText().getSpans(start - 1, start, StyleSpan.class);
+                        StyleSpan[] after = getEditableText().getSpans(start, start + 1, StyleSpan.class);
+                        return before.length > 0 && after.length > 0 && before[0].getStyle() == style && after[0].getStyle() == style;
+                    }
+                } else {
+                    StringBuilder builder = new StringBuilder();
+                    for (int i = start; i < end; i++) {
+                        StyleSpan[] spans = getEditableText().getSpans(i, i + 1, StyleSpan.class);
+                        for (StyleSpan span : spans) {
+                            if (span.getStyle() == style) {
+                                builder.append(getEditableText().subSequence(i, i + 1).toString());
+                                break;
+                            }
+                        }
+                    }
+                    return getEditableText().subSequence(start, end).toString().equals(builder.toString());
+                }
+            default:
+                return false;
+        }
+    }
+
+    //end of setting up bold style
 
     public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
@@ -292,6 +397,8 @@ public class RichText extends EditText implements TextWatcher {
         switch (format) {
             case FORMAT_BULLET:
                 return containBullet();
+            case FORMAT_BOLD:
+                return containStyle(Typeface.BOLD, getSelectionStart(), getSelectionEnd());
             default:
                 return false;
         }

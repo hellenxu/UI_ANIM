@@ -17,6 +17,7 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
     private static final String TAG = SpanSample.class.getSimpleName();
     private RichText rtEditor;
     private ImageButton imgBtnBullet;
+    private ImageButton imgBtnBold;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,9 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
     private void init(){
         rtEditor = (RichText) findViewById(R.id.editor);
         imgBtnBullet = (ImageButton) findViewById(R.id.format_bullet);
+        imgBtnBold = (ImageButton) findViewById(R.id.format_bold);
         imgBtnBullet.setOnClickListener(this);
+        imgBtnBold.setOnClickListener(this);
     }
 
     @Override
@@ -36,6 +39,9 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()){
             case R.id.format_bullet:
                 rtEditor.bullet(!rtEditor.contains(RichText.FORMAT_BULLET));
+                break;
+            case R.id.format_bold:
+                rtEditor.bold(!rtEditor.contains(RichText.FORMAT_BOLD));
                 break;
             default:
                 break;
