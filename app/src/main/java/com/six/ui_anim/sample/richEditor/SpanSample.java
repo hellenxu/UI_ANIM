@@ -20,6 +20,7 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
     private ImageButton imgBtnBold;
     private ImageButton imgBtnItalic;
     private ImageButton imgBtnUnderline;
+    private ImageButton imgBtnStrikeThrough;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +35,12 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
         imgBtnBold = (ImageButton) findViewById(R.id.format_bold);
         imgBtnItalic = (ImageButton) findViewById(R.id.format_italic);
         imgBtnUnderline = (ImageButton) findViewById(R.id.format_underline);
+        imgBtnStrikeThrough = (ImageButton) findViewById(R.id.format_strike_through);
         imgBtnBullet.setOnClickListener(this);
         imgBtnBold.setOnClickListener(this);
         imgBtnItalic.setOnClickListener(this);
         imgBtnUnderline.setOnClickListener(this);
+        imgBtnStrikeThrough.setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +57,9 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.format_underline:
                 rtEditor.underline(!rtEditor.contains(RichText.FORMAT_UNDERLINED));
+                break;
+            case R.id.format_strike_through:
+                rtEditor.strikeThrough(!rtEditor.contains(RichText.FORMAT_STRIKETHROUGH));
                 break;
             default:
                 break;

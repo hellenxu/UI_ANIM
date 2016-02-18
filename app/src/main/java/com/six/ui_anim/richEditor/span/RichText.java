@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.BulletSpan;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.style.UnderlineSpan;
@@ -402,6 +403,76 @@ public class RichText extends EditText implements TextWatcher {
 
     //end of setting up underline style
 
+    //start setting up strike through style
+    public void strikeThrough(boolean valid) {
+        if (valid) {
+            strikeThroughValid(getSelectionStart(), getSelectionEnd());
+        } else {
+            strikeThroughInvalid(getSelectionStart(), getSelectionEnd());
+        }
+    }
+
+    protected void strikeThroughValid(int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        getEditableText().setSpan(new StrikethroughSpan(), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    protected void strikeThroughInvalid(int start, int end) {
+        if (start >= end) {
+            return;
+        }
+
+        StrikethroughSpan[] spans = getEditableText().getSpans(start, end, StrikethroughSpan.class);
+        List<RichPart> list = new ArrayList<>();
+
+        for (StrikethroughSpan span : spans) {
+            list.add(new RichPart(getEditableText().getSpanStart(span), getEditableText().getSpanEnd(span)));
+            getEditableText().removeSpan(span);
+        }
+
+        for (RichPart part : list) {
+            if (part.isValid()) {
+                if (part.start < start) {
+                    strikeThroughValid(part.start, start);
+                }
+
+                if (part.end > end) {
+                    strikeThroughValid(end, part.end);
+                }
+            }
+        }
+    }
+
+    protected boolean containStrikeThrough(int start, int end) {
+        if (start > end) {
+            return false;
+        }
+
+        if (start == end) {
+            if (start - 1 < 0 || start + 1 > getEditableText().length()) {
+                return false;
+            } else {
+                StrikethroughSpan[] before = getEditableText().getSpans(start - 1, start, StrikethroughSpan.class);
+                StrikethroughSpan[] after = getEditableText().getSpans(start, start + 1, StrikethroughSpan.class);
+                return before.length > 0 && after.length > 0;
+            }
+        } else {
+            StringBuilder builder = new StringBuilder();
+
+            for(int i = start; i < end; i ++){
+                if(getEditableText().getSpans(i, i + 1, StrikethroughSpan.class).length > 0){
+                    builder.append(getEditableText().subSequence(i, i + 1).toString());
+                }
+            }
+
+            return getEditableText().subSequence(start, end).toString().equals(builder.toString());
+        }
+    }
+
+    //end of setting up strike through style
+
     public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
     }
@@ -483,6 +554,8 @@ public class RichText extends EditText implements TextWatcher {
                 return containStyle(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
             case FORMAT_UNDERLINED:
                 return containUnderline(getSelectionStart(), getSelectionEnd());
+            case FORMAT_STRIKETHROUGH:
+                return containStrikeThrough(getSelectionStart(), getSelectionEnd());
             default:
                 return false;
         }
