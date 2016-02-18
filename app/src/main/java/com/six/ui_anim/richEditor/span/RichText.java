@@ -411,6 +411,8 @@ public class RichText extends EditText implements TextWatcher {
                 return containBullet();
             case FORMAT_BOLD:
                 return containStyle(Typeface.BOLD, getSelectionStart(), getSelectionEnd());
+            case FORMAT_ITALIC:
+                return containStyle(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
             default:
                 return false;
         }
