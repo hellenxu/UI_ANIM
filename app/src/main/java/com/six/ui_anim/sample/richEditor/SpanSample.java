@@ -13,12 +13,13 @@ import com.six.ui_anim.richEditor.span.RichText;
  * Created by xxl on 16/2/11.
  */
 
-public class SpanSample extends AppCompatActivity implements View.OnClickListener{
+public class SpanSample extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = SpanSample.class.getSimpleName();
     private RichText rtEditor;
     private ImageButton imgBtnBullet;
     private ImageButton imgBtnBold;
     private ImageButton imgBtnItalic;
+    private ImageButton imgBtnUnderline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +28,21 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
         init();
     }
 
-    private void init(){
+    private void init() {
         rtEditor = (RichText) findViewById(R.id.editor);
         imgBtnBullet = (ImageButton) findViewById(R.id.format_bullet);
         imgBtnBold = (ImageButton) findViewById(R.id.format_bold);
         imgBtnItalic = (ImageButton) findViewById(R.id.format_italic);
+        imgBtnUnderline = (ImageButton) findViewById(R.id.format_underline);
         imgBtnBullet.setOnClickListener(this);
         imgBtnBold.setOnClickListener(this);
         imgBtnItalic.setOnClickListener(this);
+        imgBtnUnderline.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.format_bullet:
                 rtEditor.bullet(!rtEditor.contains(RichText.FORMAT_BULLET));
                 break;
@@ -49,12 +52,15 @@ public class SpanSample extends AppCompatActivity implements View.OnClickListene
             case R.id.format_italic:
                 rtEditor.italic(!rtEditor.contains(RichText.FORMAT_ITALIC));
                 break;
+            case R.id.format_underline:
+                rtEditor.underline(!rtEditor.contains(RichText.FORMAT_UNDERLINED));
+                break;
             default:
                 break;
         }
     }
 
-    private void showToast(String msg){
+    private void showToast(String msg) {
         Toast.makeText(SpanSample.this, msg, Toast.LENGTH_SHORT).show();
     }
 }

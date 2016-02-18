@@ -11,6 +11,7 @@ import android.text.TextWatcher;
 import android.text.style.BulletSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
+import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
@@ -324,16 +325,83 @@ public class RichText extends EditText implements TextWatcher {
 
 
     //start setting up italic style
-    public void italic(boolean valid){
-        if(valid){
+    public void italic(boolean valid) {
+        if (valid) {
             styleValid(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
-        }else {
+        } else {
             styleInvalid(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
         }
     }
-
-
     //end of setting up italic style
+
+    //start setting up underline style
+    public void underline(boolean valid) {
+        if (valid) {
+            underlineValid(getSelectionStart(), getSelectionEnd());
+        } else {
+            underlineInvalid(getSelectionStart(), getSelectionEnd());
+        }
+    }
+
+    protected void underlineValid(int start, int end) {
+        if (start >= end) {
+            return;
+        }
+        getEditableText().setSpan(new UnderlineSpan(), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    protected void underlineInvalid(int start, int end) {
+        if (start >= end) {
+            return;
+        }
+
+        UnderlineSpan[] spans = getEditableText().getSpans(start, end, UnderlineSpan.class);
+        List<RichPart> list = new ArrayList<>();
+
+        for (UnderlineSpan span : spans) {
+            list.add(new RichPart(getEditableText().getSpanStart(span), getEditableText().getSpanEnd(span)));
+            getEditableText().removeSpan(span);
+        }
+
+        for (RichPart part : list) {
+            if (part.isValid()) {
+                if (part.start < start) {
+                    underlineValid(part.start, start);
+                }
+
+                if (part.end > end) {
+                    underlineValid(end, part.end);
+                }
+            }
+        }
+    }
+
+    protected boolean containUnderline(int start, int end) {
+        if (start > end) {
+            return false;
+        }
+
+        if (start == end) {
+            if (start - 1 < 0 || start + 1 > getEditableText().length()) {
+                return false;
+            } else {
+                UnderlineSpan[] before = getEditableText().getSpans(start - 1, start, UnderlineSpan.class);
+                UnderlineSpan[] after = getEditableText().getSpans(start, start + 1, UnderlineSpan.class);
+                return before.length > 0 && after.length > 0;
+            }
+        } else {
+            StringBuilder builder = new StringBuilder();
+            for (int i = start; i < end; i++) {
+                if (getEditableText().getSpans(i, i + 1, UnderlineSpan.class).length > 0) {
+                    builder.append(getEditableText().subSequence(i, i + 1).toString());
+                }
+            }
+            return getEditableText().subSequence(start, end).toString().equals(builder.toString());
+        }
+    }
+
+    //end of setting up underline style
+
     public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
     }
@@ -413,6 +481,8 @@ public class RichText extends EditText implements TextWatcher {
                 return containStyle(Typeface.BOLD, getSelectionStart(), getSelectionEnd());
             case FORMAT_ITALIC:
                 return containStyle(Typeface.ITALIC, getSelectionStart(), getSelectionEnd());
+            case FORMAT_UNDERLINED:
+                return containUnderline(getSelectionStart(), getSelectionEnd());
             default:
                 return false;
         }
