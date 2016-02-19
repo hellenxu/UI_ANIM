@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.BulletSpan;
+import android.text.style.QuoteSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
@@ -31,8 +32,8 @@ public class RichText extends EditText implements TextWatcher {
     private int bulletColor;
     private int bulletRadius;
     private int bulletGapWidth;
-    private boolean historyEnable = true;
-    private int historySize = 100;
+    private boolean historyEnable;
+    private int historySize;
     private int linkColor = 0;
     private boolean linkUnderline = true;
     private int quoteColor = 0;
@@ -53,6 +54,8 @@ public class RichText extends EditText implements TextWatcher {
     public static final int FORMAT_BULLET = 0X05;
     public static final int FORMAT_QUOTE = 0X06;
     public static final int FORMAT_LINK = 0X07;
+    public static final int HISTORY_SIZE = 100;
+    public static final boolean HISTORY_ENABLE = true;
 
     public RichText(Context context) {
         this(context, null);
@@ -65,9 +68,15 @@ public class RichText extends EditText implements TextWatcher {
 
     private void init(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs, R.styleable.RichText);
+        historyEnable = array.getBoolean(R.styleable.RichText_historyEnable, HISTORY_ENABLE);
+        historySize = array.getInteger(R.styleable.RichText_historySize, HISTORY_SIZE);
         bulletColor = array.getColor(R.styleable.RichText_bulletColor, 0);
         bulletRadius = array.getDimensionPixelSize(R.styleable.RichText_bulletRadius, 0);
         bulletGapWidth = array.getDimensionPixelSize(R.styleable.RichText_bulletGapWidth, 0);
+        quoteColor = array.getColor(R.styleable.RichText_quoteColor, 0);
+        quoteGapWidth = array.getDimensionPixelSize(R.styleable.RichText_quoteGapWidth, 0);
+        quoteStripeWidth = array.getDimensionPixelSize(R.styleable.RichText_quoteStripeWidth, 0);
+
         array.recycle();
 
         if (historyEnable && historySize <= 0) {
@@ -461,8 +470,8 @@ public class RichText extends EditText implements TextWatcher {
         } else {
             StringBuilder builder = new StringBuilder();
 
-            for(int i = start; i < end; i ++){
-                if(getEditableText().getSpans(i, i + 1, StrikethroughSpan.class).length > 0){
+            for (int i = start; i < end; i++) {
+                if (getEditableText().getSpans(i, i + 1, StrikethroughSpan.class).length > 0) {
                     builder.append(getEditableText().subSequence(i, i + 1).toString());
                 }
             }
@@ -472,6 +481,144 @@ public class RichText extends EditText implements TextWatcher {
     }
 
     //end of setting up strike through style
+
+    //start setting up quote style
+    public void quote(boolean valid) {
+        if (valid) {
+            quoteValid();
+        } else {
+            quoteInvalid();
+        }
+    }
+
+    protected void quoteValid() {
+        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
+
+        for (int i = 0; i < lines.length; i++) {
+            if (containQuote(i)) {
+                continue;
+            }
+
+            int lineStart = 0;
+            for (int j = 0; j < i; j++) {
+                lineStart = lineStart + lines[j].length() + 1;
+            }
+
+            int lineEnd = lineStart + lines[i].length();
+            if (lineStart >= lineEnd) {
+                continue;
+            }
+
+            int quoteStart = 0;
+            int quoteEnd = 0;
+            if (lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd) {
+                quoteStart = lineStart;
+                quoteEnd = lineEnd;
+            } else if (getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()) {
+                quoteStart = lineStart;
+                quoteEnd = lineEnd;
+            }
+
+            if (quoteStart < quoteEnd) {
+                getEditableText().setSpan(new RichQuoteSpan(quoteColor, quoteStripeWidth, quoteGapWidth), quoteStart, quoteEnd, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+    }
+
+    protected void quoteInvalid() {
+        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
+
+        for (int i = 0; i < lines.length; i++) {
+            if (!containQuote(i)) {
+                continue;
+            }
+
+            int lineStart = 0;
+            for (int j = 0; j < i; j++) {
+                lineStart = lineStart + lines[j].length() + 1;
+            }
+
+            int lineEnd = lineStart + lines[i].length();
+            if (lineStart >= lineEnd) {
+                continue;
+            }
+
+            int quoteStart = 0;
+            int quoteEnd = 0;
+            if (lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd) {
+                quoteStart = lineStart;
+                quoteEnd = lineEnd;
+            } else if (getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()) {
+                quoteStart = lineStart;
+                quoteEnd = lineEnd;
+            }
+
+            if (quoteStart < quoteEnd) {
+                QuoteSpan[] spans = getEditableText().getSpans(quoteStart, quoteEnd, QuoteSpan.class);
+                for (QuoteSpan span : spans) {
+                    getEditableText().removeSpan(span);
+                }
+            }
+        }
+    }
+
+    protected boolean containQuote() {
+        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < lines.length; i++) {
+            int lineStart = 0;
+            for (int j = 0; j < i; j++) {
+                lineStart = lineStart + lines[j].length() + 1;
+            }
+
+            int lineEnd = lineStart + lines[i].length();
+            if (lineStart >= lineEnd) {
+                continue;
+            }
+
+            if (lineStart <= getSelectionStart() && getSelectionEnd() <= lineEnd) {
+                list.add(i);
+            } else if (getSelectionStart() <= lineStart && lineEnd <= getSelectionEnd()) {
+                list.add(i);
+            }
+        }
+
+        for (Integer i : list) {
+            if (!containQuote(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * check quoting style according to a give index
+     *
+     * @param index
+     * @return
+     */
+    protected boolean containQuote(int index) {
+        String[] lines = TextUtils.split(getEditableText().toString(), "\n");
+        if (index < 0 || index >= lines.length) {
+            return false;
+        }
+
+        int start = 0;
+        for (int i = 0; i < index; i++) {
+            start = start + lines[i].length() + 1;
+        }
+
+        int end = start + lines[index].length();
+        if (start >= end) {
+            return false;
+        }
+
+        QuoteSpan[] spans = getEditableText().getSpans(start, end, QuoteSpan.class);
+        return spans.length > 0;
+    }
+
+    //end of setting up quote style
 
     public void link(String link) {
         link(link, getSelectionStart(), getSelectionEnd());
@@ -556,6 +703,8 @@ public class RichText extends EditText implements TextWatcher {
                 return containUnderline(getSelectionStart(), getSelectionEnd());
             case FORMAT_STRIKETHROUGH:
                 return containStrikeThrough(getSelectionStart(), getSelectionEnd());
+            case FORMAT_QUOTE:
+                return containQuote();
             default:
                 return false;
         }
