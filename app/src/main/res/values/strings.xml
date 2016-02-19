@@ -2,4 +2,11 @@
 	<string name="app_name">UI_ANIM</string>
 	<string name="finish">FINISH</string>
 	<string name="menu_settings">Settings</string>
+
+	<!--Dialog-->
+	<string name="dialog_title">Insert link</string>
+	<string name="dialog_edit_hint">http(s)://</string>
+	<string name="dialog_button_ok">OK</string>
+	<string name="dialog_button_cancel">Cancel</string>
+
 </resources>
