@@ -1,5 +1,4 @@
-<manifest
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.six.ui_anim">
 
     <application
@@ -16,7 +15,9 @@
 
         <activity android:name="com.six.ui_anim.sample.richEditor.WebViewSample" />
 
-        <activity android:name="com.six.ui_anim.sample.richEditor.SpanSample">
+        <activity android:name="com.six.ui_anim.sample.richEditor.SpanSample" />
+
+        <activity android:name="com.six.ui_anim.sample.scrolling.ScrollingSample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
