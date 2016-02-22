@@ -26,26 +26,30 @@ public class SixDraggingView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    //method 1: layout(int left, int top, int right, int bottom)
+    /**
+     * method 1: layout(int left, int top, int right, int bottom)
+     * method 2: offsetLeftAndRight(int offsetX) && offsetTopAndBottom(int offsetY)
+     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-//                lastX = (int) event.getX();
-//                lastY = (int) event.getY();
-                lastX = (int) event.getRawX();
-                lastY = (int) event.getRawY();
+                lastX = (int) event.getX();
+                lastY = (int) event.getY();
+//                lastX = (int) event.getRawX();
+//                lastY = (int) event.getRawY();
                 break;
             case MotionEvent.ACTION_MOVE:
-//                int offsetX = (int) (event.getX() - lastX);
-//                int offsetY = (int) (event.getY() - lastY);
-                int offsetX = (int) (event.getRawX() - lastX);
-                int offsetY = (int) (event.getRawY() - lastY);
-                layout(getLeft() + offsetX, getTop() + offsetY, getRight() + offsetX, getBottom() + offsetY);
-
-                lastX = (int) event.getRawX();
-                lastY = (int) event.getRawY();
+                int offsetX = (int) (event.getX() - lastX);
+                int offsetY = (int) (event.getY() - lastY);
+//                int offsetX = (int) (event.getRawX() - lastX);
+//                int offsetY = (int) (event.getRawY() - lastY);
+//                layout(getLeft() + offsetX, getTop() + offsetY, getRight() + offsetX, getBottom() + offsetY);
+                offsetLeftAndRight(offsetX);
+                offsetTopAndBottom(offsetY);
+//                lastX = (int) event.getRawX();
+//                lastY = (int) event.getRawY();
                 break;
             case MotionEvent.ACTION_UP:
                 break;
