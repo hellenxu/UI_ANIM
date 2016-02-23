@@ -9,4 +9,7 @@
 	<string name="dialog_button_ok">OK</string>
 	<string name="dialog_button_cancel">Cancel</string>
 
+	<string name="menu_undo">undo</string>
+	<string name="menu_redo">redo</string>
+
 </resources>
