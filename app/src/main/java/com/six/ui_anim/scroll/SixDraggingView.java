@@ -88,6 +88,9 @@ public class SixDraggingView extends View {
                 mScroller.startScroll(viewGroup.getScrollX(), viewGroup.getScrollY(), -viewGroup.getScrollX(), -viewGroup.getScrollY());
                 invalidate();//call invalidate() here to make sure bouncing effect is visible since onDraw will be called after invalidate().
                 break;
+            default:
+                Log.d(TAG, "default value");
+                break;
         }
         return true;
     }
