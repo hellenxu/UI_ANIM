@@ -5,4 +5,6 @@
 	<dimen name="bullet_gap_width">8dp</dimen>
 	<dimen name="quote_stripe_width">8dp</dimen>
 	<dimen name="quote_gap_width">4dp</dimen>
+
+	<dimen name="rect_radius">6dp</dimen>
 </resources>
