@@ -12,4 +12,13 @@
 	<string name="menu_undo">undo</string>
 	<string name="menu_redo">redo</string>
 
+	<!-- CreditCardView -->
+	<string name="card_num_hint">XXXX XXXX XXXX XXXX</string>
+	<string name="card_holder">CARD HOLDER</string>
+	<string name="expiry">EXPIRY</string>
+	<string name="next">NEXT</string>
+	<string name="previous">PREVIOUS</string>
+	<string name="done">DONE</string>
+	<string name="card_holder_name_sample">JOHN MATTHEW</string>
+	<string name="expiry_sample">MM/YY</string>
 </resources>

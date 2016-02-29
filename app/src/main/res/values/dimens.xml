@@ -7,4 +7,7 @@
 	<dimen name="quote_gap_width">4dp</dimen>
 
 	<dimen name="rect_radius">6dp</dimen>
+
+	<!-- CreditCardView -->
+	<dimen name="margin_small">8dp</dimen>
 </resources>

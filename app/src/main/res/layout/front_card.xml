@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/front_card_container"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="300dp"
+                android:layout_height="180dp">
+	<TextView android:id="@+id/tv_front_card_num"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_centerInParent="true"
+	          android:hint="@string/card_num_hint"
+	          android:shadowColor="@color/text_shadow"
+	          android:shadowDx="1.1"
+	          android:shadowDy="1.1"
+	          android:shadowRadius="2"
+	          android:textColorHint="@color/semi_white"
+	          android:textSize="@dimen/text_size_normal"/>
+
+	<RelativeLayout android:layout_width="match_parent"
+	                android:layout_height="wrap_content"
+	                android:layout_marginLeft="18dp"
+	                android:layout_marginTop="120dp">
+		<TextView android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:text="@string/card_holder"
+		          android:textColor="@android:color/darker_gray"
+		          android:textSize="9sp"/>
+
+		<TextView android:id="@+id/tv_card_holder"
+		          android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_marginTop="16dp"
+		          android:gravity="center_vertical"
+		          android:hint="@string/card_holder_name_sample"
+		          android:maxWidth="150dp"
+		          android:minWidth="150dp"
+		          android:textColor="@android:color/white"
+		          android:textColorHint="@color/semi_white"/>
+
+		<TextView android:id="@+id/tv_expiry_title"
+		          android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_marginStart="160dp"
+		          android:text="@string/expiry"
+		          android:textColor="@android:color/darker_gray"
+		          android:textSize="9sp"/>
+
+		<TextView android:id="@+id/tv_expire_date"
+		          android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_alignStart="@id/tv_expiry_title"
+		          android:layout_marginTop="16dp"
+		          android:gravity="center_vertical"
+		          android:hint="@string/expiry_sample"
+		          android:textColor="@android:color/white"
+		          android:textColorHint="@color/semi_white"/>
+	</RelativeLayout>
+
+</RelativeLayout>
