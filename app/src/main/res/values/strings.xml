@@ -19,6 +19,6 @@
 	<string name="next">NEXT</string>
 	<string name="previous">PREVIOUS</string>
 	<string name="done">DONE</string>
-	<string name="card_holder_name_sample">JOHN MATTHEW</string>
+	<string name="card_holder_sample">JOHN MATTHEW</string>
 	<string name="expiry_sample">MM/YY</string>
 </resources>

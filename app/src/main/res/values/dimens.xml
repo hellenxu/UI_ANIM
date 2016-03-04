@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="item_insets">5dp</dimen>
+	<dimen name="item_insets">5dp</dimen>
 	<dimen name="bullet_radius">2dp</dimen>
 	<dimen name="bullet_gap_width">8dp</dimen>
 	<dimen name="quote_stripe_width">8dp</dimen>
@@ -9,5 +9,13 @@
 	<dimen name="rect_radius">6dp</dimen>
 
 	<!-- CreditCardView -->
+	<dimen name="default_card_width">300dp</dimen>
+	<dimen name="default_card_height">180dp</dimen>
 	<dimen name="margin_small">8dp</dimen>
+	<dimen name="text_size_normal">19sp</dimen>
+	<dimen name="text_size_small">9sp</dimen>
+	<dimen name="logo_center_width">75dp</dimen>
+	<dimen name="logo_center_height">75dp</dimen>
+	<dimen name="logo_right_width">48dp</dimen>
+	<dimen name="logo_right_height">48dp</dimen>
 </resources>

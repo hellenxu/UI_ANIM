@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/rlay_front_container"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="@dimen/default_card_width"
+                android:layout_height="@dimen/default_card_height"
+                tools:background="@drawable/bg_card_default">
+
+	<TextView android:id="@+id/tv_card_num"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_centerInParent="true"
+	          android:hint="@string/card_num_hint"
+	          android:textColorHint="@android:color/white"
+	          android:textSize="@dimen/text_size_normal"/>
+
+	<TextView android:id="@+id/tv_card_holder"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_below="@id/tv_card_num"
+	          android:layout_marginStart="18dp"
+	          android:layout_marginTop="35dp"
+	          android:hint="@string/card_holder_sample"
+	          android:maxWidth="150dp"
+	          android:minWidth="150dp"
+	          android:textColor="@android:color/white"
+	          android:textColorHint="@color/semi_white"/>
+
+	<TextView android:id="@+id/tv_card_expiry"
+	          android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignBottom="@id/tv_card_holder"
+	          android:layout_marginStart="180dp"
+	          android:hint="@string/expiry_sample"
+	          android:textColor="@android:color/white"
+	          android:textColorHint="@color/semi_white"/>
+
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignStart="@id/tv_card_holder"
+	          android:layout_below="@id/tv_card_num"
+	          android:layout_marginTop="20dp"
+	          android:hint="@string/card_holder"
+	          android:textColorHint="@android:color/white"
+	          android:textSize="@dimen/text_size_small"/>
+
+	<TextView android:layout_width="wrap_content"
+	          android:layout_height="wrap_content"
+	          android:layout_alignStart="@id/tv_card_expiry"
+	          android:layout_below="@id/tv_card_num"
+	          android:layout_marginTop="20dp"
+	          android:hint="@string/expiry"
+	          android:textColorHint="@android:color/white"
+	          android:textSize="@dimen/text_size_small"/>
+
+	<ImageView android:id="@+id/iv_center_logo"
+	           android:layout_width="75dp"
+	           android:layout_height="75dp"
+	           android:layout_centerInParent="true"
+	           android:contentDescription="@null"
+	           android:scaleType="centerCrop"/>
+
+	<ImageView android:id="@+id/iv_right_logo"
+	           android:layout_width="48dp"
+	           android:layout_height="48dp"
+	           android:layout_alignParentEnd="true"
+	           android:layout_marginEnd="16dp"
+	           android:layout_marginTop="16dp"
+	           android:contentDescription="@null"
+	           android:scaleType="centerCrop"/>
+
+</RelativeLayout>

@@ -12,12 +12,12 @@
 	</style>
 
 	<!-- CreditCardView -->
-	<declare-styleable name="creditcard">
-		<attr name="cvv" format="integer"/>
-		<attr name="card_holder_name" format="string"/>
-		<attr name="card_expiration" format="string"/>
-		<attr name="card_number" format="string"/>
-		<attr name="card_side" format="enum">
+	<declare-styleable name="SixCC">
+		<attr name="card_cvv" format="integer"/>
+		<attr name="card_holder" format="string"/>
+		<attr name="card_expiry" format="string"/>
+		<attr name="number" format="string"/>
+		<attr name="side" format="enum">
 			<enum name="front" value="1"/>
 			<enum name="back" value="0"/>
 		</attr>
