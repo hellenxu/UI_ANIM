@@ -1,4 +1,4 @@
-package com.six.ui_anim.anim_3x;
+package com.six.sixua.anim_3x;
 
 /**
  * @author hellenxu

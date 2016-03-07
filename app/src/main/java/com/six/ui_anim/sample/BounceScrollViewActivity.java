@@ -18,7 +18,8 @@ public class BounceScrollViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.act_bounce_scrollview);
+//        setContentView(R.layout.act_bounce_scrollview);
+        setContentView(R.layout.act_bounce_sv);
     }
 
     @Override

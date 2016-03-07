@@ -1,1 +1,1 @@
-include ':app', ':creditcard'
+include ':app', ':creditcard', ':sixua'

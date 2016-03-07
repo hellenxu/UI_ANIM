@@ -58,6 +58,7 @@ public class BounceScrollView extends ScrollView {
                     isCount = false;//第一次touch的标志位
                 }
                 break;
+
             case MotionEvent.ACTION_MOVE:
                 final float preY = y;
                 float nowY = ev.getY();
@@ -105,7 +106,7 @@ public class BounceScrollView extends ScrollView {
     private boolean isNeedMove(){
         int offset = inner.getMeasuredHeight() - getHeight();//
         int scrollY = getScrollY();
-        //当scrollY == 0: scrollView拖到顶部；
+        //1)当scrollY == 0: scrollView拖到顶部；2)scrollY == offset：在y轴上的偏移量和在y轴上scroll的偏移量相等。
         return scrollY == 0 || scrollY == offset;
     }
 }

@@ -1,18 +1,12 @@
-package com.six.ui_anim.anim_3x;
+package com.six.sixua.anim_3x;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
-import android.animation.FloatEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ViewPropertyAnimator;
 import android.widget.TextView;
 
-import com.six.ui_anim.R;
+import com.six.sixua.R;
+
 
 /**
  * @author hellenxu
