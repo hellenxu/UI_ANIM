@@ -24,9 +24,9 @@
 
 		<activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
 
-		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
+		<activity android:name=".sample.recyclerview.MainActivity"/>
 
-		<activity android:name=".sample.recyclerview.MainActivity">
+		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>

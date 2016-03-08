@@ -7,8 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import com.six.sixua.progress.SixProgressWheel;
 import com.six.ui_anim.R;
-import com.six.ui_anim.progressWheel.ProgressWheel;
 
 /**
  * @author hellenxu
@@ -19,12 +19,13 @@ import com.six.ui_anim.progressWheel.ProgressWheel;
 public class ProgressWheelActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private Button btnFinish;
-    private ProgressWheel mProgressWheel;
+    private SixProgressWheel mProgressWheel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_prog_wheel);
+//        setContentView(R.layout.act_prog_wheel);
+        setContentView(R.layout.act_wheel);
         init();
     }
 
@@ -35,13 +36,13 @@ public class ProgressWheelActivity extends AppCompatActivity {
         mToolbar.setTitle("ProgressWheel Demo");
         setSupportActionBar(mToolbar);
 
-        mProgressWheel = (ProgressWheel) findViewById(R.id.progress);
+        mProgressWheel = (SixProgressWheel)findViewById(R.id.progress);
 
         btnFinish = (Button) findViewById(R.id.btn_finish);
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mProgressWheel.setLoadingFinishedTag(true);
+//                mProgressWheel.setLoadingFinishedTag(true);
             }
         });
     }
