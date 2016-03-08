@@ -1,4 +1,4 @@
-package com.six.ui_anim.recyclerView;
+package com.six.ui_anim.sample.recyclerview;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.six.ui_anim.R;
+import com.six.ui_anim.recyclerView.GridDividerDecoration;
 
 import java.util.ArrayList;
 import java.util.List;

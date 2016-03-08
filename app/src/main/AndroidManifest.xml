@@ -7,8 +7,6 @@
 		android:label="@string/app_name"
 		android:theme="@style/AppTheme">
 
-		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
-
 		<activity android:name="com.six.ui_anim.sample.richEditor.WebViewSample"/>
 
 		<activity android:name="com.six.ui_anim.sample.richEditor.SpanSample"/>
@@ -23,7 +21,12 @@
 		<activity android:name="com.six.ui_anim.sample.CreditCardSample"/>
 
 		<activity android:name="com.six.ui_anim.sample.SixCreditCardSample"/>
-		<activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity">
+
+		<activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
+
+		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
+
+		<activity android:name=".sample.recyclerview.MainActivity">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>

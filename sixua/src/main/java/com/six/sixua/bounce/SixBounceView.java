@@ -80,7 +80,7 @@ public class SixBounceView extends ScrollView {
 
     /**
      * two situations to check whether scrolling is finished:
-     * 1) scrollY == 0: no scrolling; 2) scrollY == offsetY: scrolling is done.
+     * 1) scrollY == 0: no scrolling; 2) scrollY == offsetY: scrolling is going.
      */
     private boolean isMove() {
         int scrollY = getScrollY();

@@ -1,4 +1,4 @@
-package com.six.ui_anim.scroll;
+package com.six.sixua.scroll;
 
 import android.content.Context;
 import android.graphics.Canvas;
