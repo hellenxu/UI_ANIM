@@ -8,4 +8,14 @@
 		<attr name="six_radius" format="dimension"/>
 		<attr name="spinning_speed" format="integer"/>
 	</declare-styleable>
+
+	<declare-styleable name="SixClock">
+		<attr name="circle_radius" format="dimension"/>
+		<attr name="min_radius" format="dimension"/>
+		<attr name="hour_radius" format="dimension"/>
+		<attr name="scale_width" format="dimension"/>
+		<attr name="circle_width" format="dimension"/>
+		<attr name="hour_width" format="dimension"/>
+		<attr name="min_width" format="dimension"/>
+	</declare-styleable>
 </resources>
