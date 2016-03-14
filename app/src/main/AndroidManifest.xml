@@ -13,7 +13,6 @@
 
 		<activity android:name="com.six.ui_anim.sample.scrolling.ScrollingSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
 
 		<activity android:name="com.cooltechworks.creditcarddesign.CardEditActivity"
 		          android:screenOrientation="portrait"/>
@@ -28,7 +27,11 @@
 
 		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
 
-		<activity android:name="com.six.ui_anim.sample.clock.ClockSample">
+		<activity android:name="com.six.ui_anim.sample.clock.ClockSample"/>
+
+		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
+
+		<activity android:name="com.six.ui_anim.sample.colors.ColorMatrixSample">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
