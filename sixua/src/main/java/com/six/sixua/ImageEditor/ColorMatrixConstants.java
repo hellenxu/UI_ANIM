@@ -1,4 +1,4 @@
-package com.six.ui_anim.sample.colors;
+package com.six.sixua.ImageEditor;
 
 /**
  * @author hellenxu
@@ -6,6 +6,16 @@ package com.six.ui_anim.sample.colors;
  * Copyright 2016 Six. All rights reserved.
  */
 public interface ColorMatrixConstants {
+    int EFFECT_GREY = 0;
+
+    int EFFECT_REVERSE = 1;
+
+    int EFFECT_OLD_DAYS = 2;
+
+    int EFFECT_NO_COLOR = 3;
+
+    int EFFECT_HIGH_SAT = 4;
+
     float[] greyMatrix =
             {0.33f, 0.59f, 0.11f, 0, 0,
                     0.33f, 0.59f, 0.11f, 0, 0,
