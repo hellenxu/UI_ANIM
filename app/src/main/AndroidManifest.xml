@@ -29,9 +29,9 @@
 
 		<activity android:name="com.six.ui_anim.sample.clock.ClockSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
+		<activity android:name="com.six.ui_anim.sample.colors.ColorMatrixSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.colors.ColorMatrixSample">
+		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
