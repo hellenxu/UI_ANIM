@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<level-list xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:drawable="@drawable/wifi_signal_full" android:maxLevel="0"/>
-	<item android:drawable="@drawable/wifi_signal_good" android:maxLevel="1"/>
-	<item android:drawable="@drawable/wifi_signal_ok" android:maxLevel="2"/>
-</level-list>
