@@ -7,19 +7,19 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.six.sixua.recyclerview.RVAdapter;
+import com.six.sixua.recyclerview.RvItemCallback;
+import com.six.sixua.recyclerview.RvItemClickListener;
 import com.six.ui_anim.R;
 import com.six.sixua.recyclerview.GridDividerDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @author hellenxu
@@ -57,17 +57,26 @@ public class MainActivity extends AppCompatActivity {
             ab.setDisplayHomeAsUpEnabled(true);
         }
 
-        mAdapter = new RVAdapter();
+        mAdapter = new RVAdapter(this, mData);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_data);
+        mRecyclerView.setAdapter(mAdapter);
 //        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.HORIZONTAL));
+//        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
+//        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addItemDecoration(new GridDividerDecoration(this));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.addOnItemTouchListener(new RvItemClickListener(mRecyclerView) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder vh) {
+                Toast.makeText(mRecyclerView.getContext(), "pos: " + vh.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RvItemCallback(mAdapter));
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }
 
@@ -88,51 +97,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVHolder> {
-        private int[] heights = new int[mData.size()];
-
-        public RVAdapter() {
-            Random rd = new Random();
-            for (int i = 0; i < mData.size(); i++) {
-                heights[i] = rd.nextInt(300) + 100;
-            }
-        }
-
-        @Override
-        public RVHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            return new RVHolder(LayoutInflater.from(MainActivity.this).inflate(R.layout.rv_item, viewGroup, false));
-        }
-
-        @Override
-        public void onBindViewHolder(RVHolder rvHolder, int i) {
-            rvHolder.tvItem.setText(mData.get(i));
-            rvHolder.tvItem.setHeight(heights[i]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return mData != null ? mData.size() : 0;
-        }
-
-        public void addData(int position) {
-            mData.add(position, "item " + position);
-            notifyItemInserted(position);
-        }
-
-        public void removeData(int position) {
-            mData.remove(position);
-            notifyItemRemoved(position);
-        }
-
-        public class RVHolder extends RecyclerView.ViewHolder {
-            TextView tvItem;
-
-            public RVHolder(View itemView) {
-                super(itemView);
-                tvItem = (TextView) itemView.findViewById(R.id.tv_item);
-            }
-        }
     }
 }
