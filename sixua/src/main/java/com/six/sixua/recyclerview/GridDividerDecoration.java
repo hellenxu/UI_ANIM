@@ -1,4 +1,4 @@
-package com.six.ui_anim.recyclerView;
+package com.six.sixua.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -8,7 +8,8 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.six.ui_anim.R;
+import com.six.sixua.R;
+
 
 /**
  * @author hellenxu

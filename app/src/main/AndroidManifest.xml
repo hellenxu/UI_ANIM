@@ -19,7 +19,12 @@
 
 		<activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
 
-		<activity android:name=".sample.recyclerview.MainActivity"/>
+		<activity android:name=".sample.recyclerview.MainActivity">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
+		</activity>
 
 		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
 
@@ -29,10 +34,10 @@
 
 		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
 		<activity android:name="com.six.ui_anim.sample.svg.SVGAnimationActivity">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN"/>
-				<category android:name="android.intent.category.LAUNCHER"/>
-			</intent-filter>
+			<!--<intent-filter>-->
+				<!--<action android:name="android.intent.action.MAIN"/>-->
+				<!--<category android:name="android.intent.category.LAUNCHER"/>-->
+			<!--</intent-filter>-->
 		</activity>
 	</application>
 

@@ -15,7 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.six.ui_anim.R;
-import com.six.ui_anim.recyclerView.GridDividerDecoration;
+import com.six.sixua.recyclerview.GridDividerDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,8 +52,10 @@ public class MainActivity extends AppCompatActivity {
         mToolBar = (Toolbar) findViewById(R.id.tl_top);
         setSupportActionBar(mToolBar);
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_launcher);
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setHomeAsUpIndicator(R.drawable.ic_launcher);
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         mAdapter = new RVAdapter();
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_data);
