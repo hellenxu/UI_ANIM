@@ -1,12 +1,11 @@
 package com.six.ui_anim.sample.recyclerview;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,11 +26,10 @@ import java.util.List;
  * Copyright 2015 Six. All rights reserved.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
     private RecyclerView mRecyclerView;
     private List<String> mData;
     private RVAdapter mAdapter;
-    private Toolbar mToolBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,14 +47,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mToolBar = (Toolbar) findViewById(R.id.tl_top);
-        setSupportActionBar(mToolBar);
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setHomeAsUpIndicator(R.drawable.ic_launcher);
-            ab.setDisplayHomeAsUpEnabled(true);
-        }
-
         mAdapter = new RVAdapter(this, mData);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_data);
         mRecyclerView.setAdapter(mAdapter);
@@ -78,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RvItemCallback(mAdapter));
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        linearSnapHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
