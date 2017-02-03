@@ -3,6 +3,7 @@ package com.six.ui_anim.sample.recyclerview;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -11,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.six.sixua.recyclerview.LeftAlignSnapHelper;
 import com.six.sixua.recyclerview.RVAdapter;
 import com.six.sixua.recyclerview.RvItemCallback;
 import com.six.sixua.recyclerview.RvItemClickListener;
@@ -50,10 +52,10 @@ public class MainActivity extends Activity {
         mAdapter = new RVAdapter(this, mData);
         mRecyclerView = (RecyclerView) findViewById(R.id.rv_data);
         mRecyclerView.setAdapter(mAdapter);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 //        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 //        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
+//        mRecyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.HORIZONTAL));
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.addItemDecoration(new GridDividerDecoration(this));
@@ -68,8 +70,10 @@ public class MainActivity extends Activity {
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RvItemCallback(mAdapter));
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
-        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
-        linearSnapHelper.attachToRecyclerView(mRecyclerView);
+//        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+//        linearSnapHelper.attachToRecyclerView(mRecyclerView);
+        LeftAlignSnapHelper leftSnapHelper =  new LeftAlignSnapHelper();
+        leftSnapHelper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
