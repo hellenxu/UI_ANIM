@@ -1,4 +1,4 @@
-package com.six.sixua.recyclerview;
+package com.six.sixua.supportlib.recyclerview;
 
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;

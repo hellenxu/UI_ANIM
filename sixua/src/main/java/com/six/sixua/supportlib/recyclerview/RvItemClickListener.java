@@ -1,4 +1,4 @@
-package com.six.sixua.recyclerview;
+package com.six.sixua.supportlib.recyclerview;
 
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.widget.RecyclerView;

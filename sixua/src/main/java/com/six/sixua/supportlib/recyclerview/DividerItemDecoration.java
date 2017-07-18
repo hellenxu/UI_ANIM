@@ -1,4 +1,4 @@
-package com.six.sixua.recyclerview;
+package com.six.sixua.supportlib.recyclerview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
