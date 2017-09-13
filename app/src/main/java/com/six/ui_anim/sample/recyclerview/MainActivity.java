@@ -2,22 +2,19 @@ package com.six.ui_anim.sample.recyclerview;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSnapHelper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.six.sixua.recyclerview.LeftAlignSnapHelper;
-import com.six.sixua.recyclerview.RVAdapter;
-import com.six.sixua.recyclerview.RvItemCallback;
-import com.six.sixua.recyclerview.RvItemClickListener;
+import com.six.sixua.supportlib.recyclerview.GridDividerDecoration;
+import com.six.sixua.supportlib.recyclerview.LeftAlignSnapHelper;
+import com.six.sixua.supportlib.recyclerview.RVAdapter;
+import com.six.sixua.supportlib.recyclerview.RvItemCallback;
+import com.six.sixua.supportlib.recyclerview.RvItemClickListener;
 import com.six.ui_anim.R;
-import com.six.sixua.recyclerview.GridDividerDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +56,7 @@ public class MainActivity extends Activity {
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
 //        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mRecyclerView.addItemDecoration(new GridDividerDecoration(this));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addOnItemTouchListener(new RvItemClickListener(mRecyclerView) {
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh) {

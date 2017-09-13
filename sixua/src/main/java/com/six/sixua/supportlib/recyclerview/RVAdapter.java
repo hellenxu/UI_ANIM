@@ -1,4 +1,4 @@
-package com.six.sixua.recyclerview;
+package com.six.sixua.supportlib.recyclerview;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -37,6 +37,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.RVHolder> {
     @Override
     public void onBindViewHolder(RVHolder rvHolder, int i) {
         rvHolder.tvItem.setText(mData.get(i));
+        //to set waterfall effect
 //            rvHolder.tvItem.setHeight(heights[i]);
     }
 
