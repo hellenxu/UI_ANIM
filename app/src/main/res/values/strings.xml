@@ -21,4 +21,7 @@
 	<string name="done">DONE</string>
 	<string name="card_holder_sample">JOHN MATTHEW</string>
 	<string name="expiry_sample">MM/YY</string>
+
+	<string name="method1_dialog">Method1: Dialog</string>
+	<string name="method2_decor">Method2: Decor</string>
 </resources>
