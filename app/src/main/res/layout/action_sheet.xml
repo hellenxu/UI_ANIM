@@ -5,14 +5,14 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               tools:context=".action_sheet.ActionSheetDialog">
-    <TextView
+    <TextView android:text="@string/dialog_title" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/blue_200"/>
-    <TextView
+    <TextView android:text="@string/menu_settings" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/blue_200"/>
-    <TextView
+    <TextView android:text="@string/dialog_button_cancel" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
 </LinearLayout>
