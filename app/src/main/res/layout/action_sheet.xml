@@ -4,6 +4,7 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
+              android:background="@android:color/white"
               tools:context=".action_sheet.ActionSheetDialog">
     <TextView android:text="@string/dialog_title" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
