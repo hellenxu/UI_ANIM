@@ -3,17 +3,19 @@
               xmlns:tools="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="@android:color/white"
+              android:layout_height="match_parent"
+              android:gravity="bottom"
+              android:background="#80bebebe"
               tools:context=".action_sheet.ActionSheetDialog">
-    <TextView android:text="@string/dialog_title" android:gravity="center"
+
+    <TextView android:background="@android:color/white" android:text="@string/dialog_title" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/blue_200"/>
-    <TextView android:text="@string/menu_settings" android:gravity="center"
+    <TextView android:background="@android:color/white" android:text="@string/menu_settings" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
     <View android:layout_width="match_parent" android:layout_height="1dp"
           android:background="@color/blue_200"/>
-    <TextView android:text="@string/dialog_button_cancel" android:gravity="center"
+    <TextView android:background="@android:color/white" android:text="@string/dialog_button_cancel" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>
 </LinearLayout>

@@ -67,7 +67,7 @@ public class ActionSheetDialog extends Activity implements View.OnClickListener 
         contentView = (FrameLayout) subView.findViewById(android.R.id.content);
 
         actionSheet = LayoutInflater.from(this).inflate(R.layout.action_sheet, null, false);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -1, Gravity.BOTTOM);
         actionSheet.setLayoutParams(params);
         actionSheet.setAnimation(AnimationUtils.loadAnimation(this, R.anim.action_sheet_enter));
 
