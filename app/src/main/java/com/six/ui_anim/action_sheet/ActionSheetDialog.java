@@ -9,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.six.ui_anim.R;
 
@@ -22,9 +22,9 @@ import com.six.ui_anim.R;
  */
 
 public class ActionSheetDialog extends Activity implements View.OnClickListener {
-    private FrameLayout decorView;
+    private FrameLayout contentView;
     private View actionSheet;
-    private boolean isRemoveActionSheet;
+    private boolean isBackPressed = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,28 +62,29 @@ public class ActionSheetDialog extends Activity implements View.OnClickListener 
     }
 
     private void useDecorView() {
-        decorView = (FrameLayout) getWindow().getDecorView();
-        int navBarHeight = decorView.getChildAt(1).getHeight();
-        actionSheet = LayoutInflater.from(this).inflate(R.layout.action_sheet, null, false);
-        isRemoveActionSheet = false;
+        FrameLayout decorView = (FrameLayout) getWindow().getDecorView();
+        LinearLayout subView = (LinearLayout) decorView.getChildAt(0);
+        contentView = (FrameLayout) subView.findViewById(android.R.id.content);
 
+        actionSheet = LayoutInflater.from(this).inflate(R.layout.action_sheet, null, false);
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM);
-        params.setMargins(0, 0, 0, navBarHeight);
         actionSheet.setLayoutParams(params);
         actionSheet.setAnimation(AnimationUtils.loadAnimation(this, R.anim.action_sheet_enter));
-        decorView.addView(actionSheet, decorView.getChildCount());
+
+        contentView.addView(actionSheet);
+        isBackPressed = false;
     }
 
     @Override
     public void onBackPressed() {
-        if(decorView != null) {
+        if(contentView != null) {
             actionSheet.setAnimation(AnimationUtils.loadAnimation(this, R.anim.action_sheet_exit));
-            decorView.removeView(actionSheet);
+            contentView.removeView(actionSheet);
         }
 
-        if(isRemoveActionSheet) {
+        if(isBackPressed) {
             super.onBackPressed();
         }
-        isRemoveActionSheet = true;
+        isBackPressed = true;
     }
 }
