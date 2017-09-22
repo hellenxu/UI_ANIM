@@ -1,20 +1,22 @@
 <manifest package="com.six.ui_anim"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<application
-		android:allowBackup="true"
-		android:icon="@drawable/ic_launcher"
-		android:label="@string/app_name"
-		android:theme="@style/AppTheme">
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
 
-		<activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
-
-        <activity android:name=".action_sheet.ActionSheetDialog">
+        <activity android:name=".tmp.HexViewDemo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
+
+        <activity android:name=".action_sheet.ActionSheetDialog"/>
 
         <activity android:name="com.six.ui_anim.sample.richEditor.WebViewSample"/>
 
@@ -24,17 +26,17 @@
 
         <activity android:name="com.six.ui_anim.sample.BounceScrollViewActivity"/>
 
-        <activity android:name=".sample.recyclerview.MainActivity" />
+        <activity android:name=".sample.recyclerview.MainActivity"/>
 
-		<activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
+        <activity android:name="com.six.ui_anim.sample.ProgressWheelActivity"/>
 
-		<activity android:name="com.six.ui_anim.sample.clock.ClockSample"/>
+        <activity android:name="com.six.ui_anim.sample.clock.ClockSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.colors.ColorMatrixSample"/>
+        <activity android:name="com.six.ui_anim.sample.colors.ColorMatrixSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
+        <activity android:name="com.six.ui_anim.sample.canvas.CanvasSample"/>
 
-		<activity android:name="com.six.ui_anim.sample.svg.SVGAnimationActivity"/>
-	</application>
+        <activity android:name="com.six.ui_anim.sample.svg.SVGAnimationActivity"/>
+    </application>
 
 </manifest>

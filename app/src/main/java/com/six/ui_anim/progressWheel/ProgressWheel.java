@@ -81,7 +81,7 @@ public class ProgressWheel extends View {
         TypedArray ta = ctx.getResources().obtainAttributes(attrs, R.styleable.mat_progress);
 
         mBarWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ta.getDimension(R.styleable.mat_progress_bar_width, DEFAULT_BAR_WIDTH), metrics);
-        mWheelRadius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ta.getDimension(R.styleable.mat_progress_radius, DEFAULT_RADIUS), metrics);
+        mWheelRadius = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ta.getDimension(R.styleable.mat_progress_mat_radius, DEFAULT_RADIUS), metrics);
         mRimWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ta.getDimension(R.styleable.mat_progress_rim_width, DEFAULT_RIM_WIDTH), metrics);
         mTickSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, ta.getDimension(R.styleable.mat_progress_tick_size, DEFAULT_TICK_SIZE), metrics);
         mBarColor = ta.getColor(R.styleable.mat_progress_bar_color, DEFAULT_BAR_COLOR);

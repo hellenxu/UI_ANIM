@@ -6,7 +6,7 @@
 		<attr name="bar_color" format="color"/>
 		<attr name="rim_color" format="color"/>
 		<attr name="spin_speed" format="float"/>
-		<attr name="radius" format="dimension"/>
+		<attr name="mat_radius" format="dimension"/>
 		<attr name="tick_size" format="dimension"/>
 	</declare-styleable>
 
@@ -40,5 +40,13 @@
 			<enum name="front" value="1"/>
 			<enum name="back" value="0"/>
 		</attr>
+	</declare-styleable>
+
+	<declare-styleable name="Polygon">
+		<attr name="radius" format="dimension|reference" />
+		<attr name="outerWidth" format="dimension|reference" />
+		<attr name="outerColor" format="color|reference" />
+		<attr name="innerColor" format="color|reference" />
+		<attr name="isHasStroke" format="boolean|reference" />
 	</declare-styleable>
 </resources>
