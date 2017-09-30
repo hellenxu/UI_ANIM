@@ -1,4 +1,4 @@
-package com.six.sixua.supportlib.recyclerview;
+package com.six.sixua.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;

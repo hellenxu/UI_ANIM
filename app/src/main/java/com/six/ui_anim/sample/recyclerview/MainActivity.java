@@ -9,11 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.six.sixua.supportlib.recyclerview.GridDividerDecoration;
-import com.six.sixua.supportlib.recyclerview.LeftAlignSnapHelper;
-import com.six.sixua.supportlib.recyclerview.RVAdapter;
-import com.six.sixua.supportlib.recyclerview.RvItemCallback;
-import com.six.sixua.supportlib.recyclerview.RvItemClickListener;
+import com.six.sixua.recyclerview.GridDividerDecoration;
+import com.six.sixua.recyclerview.LeftAlignSnapHelper;
+import com.six.sixua.recyclerview.RVAdapter;
+import com.six.sixua.recyclerview.RvItemCallback;
+import com.six.sixua.recyclerview.RvItemClickListener;
 import com.six.ui_anim.R;
 
 import java.util.ArrayList;
