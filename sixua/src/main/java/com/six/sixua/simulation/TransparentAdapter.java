@@ -49,14 +49,10 @@ public class TransparentAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        switch (position % TYPE_INTERVAL) {
-            case ITEM_CONTENT:
-                default:
-                ((ContentViewHolder)holder).tvContent.setText(data.get(position));
-                break;
-            case ITEM_AD:
-                System.out.println("xxl: Item_Ad = " + position);
-                break;
+        if(position % TYPE_INTERVAL == ITEM_AD) {
+            ((ContentViewHolder)holder).tvContent.setText(data.get(position));
+        } else {
+            System.out.println("xxl: Item_Ad = " + position);
         }
     }
 
