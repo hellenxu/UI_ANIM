@@ -3,7 +3,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <com.six.sixua.anim_3x.PointAnimView
+    <com.six.ui.anim_3x.PointAnimView
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

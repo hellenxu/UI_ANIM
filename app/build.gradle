@@ -22,5 +22,4 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:design:24.2.1'
-    compile project(':sixua')
 }

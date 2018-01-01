@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-	<com.six.sixua.bounce.SixBounceView
+	<com.six.ui.bounce.SixBounceView
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:background="@drawable/coversation_bg"
@@ -124,5 +124,5 @@
 				</LinearLayout>
 			</LinearLayout>
 		</LinearLayout>
-	</com.six.sixua.bounce.SixBounceView>
+	</com.six.ui.bounce.SixBounceView>
 </LinearLayout>

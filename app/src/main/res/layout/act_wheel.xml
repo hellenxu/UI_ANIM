@@ -27,7 +27,7 @@
 			android:layout_margin="20dp"
 			android:text="@string/finish"/>
 
-		<com.six.sixua.progress.SixProgressWheel
+		<com.six.ui.progressWheel.SixProgressWheel
 			android:id="@+id/progress"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"

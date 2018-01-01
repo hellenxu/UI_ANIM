@@ -14,7 +14,8 @@
 		app:layout_scrollFlags="enterAlways|scroll"
 		app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-	<com.six.sixua.clock.SixClock android:layout_width="200dp"
+	<com.six.ui.clock.SixClock
+        android:layout_width="200dp"
 	                              android:layout_height="200dp"
 	                              android:layout_centerInParent="true"/>
 </RelativeLayout>

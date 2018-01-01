@@ -17,4 +17,6 @@
 	<dimen name="logo_center_height">75dp</dimen>
 	<dimen name="logo_right_width">48dp</dimen>
 	<dimen name="logo_right_height">48dp</dimen>
+
+	<dimen name="item_insets">5dp</dimen>
 </resources>

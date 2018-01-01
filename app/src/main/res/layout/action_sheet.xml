@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:gravity="bottom"
               android:background="#80bebebe"
-              tools:context=".action_sheet.ActionSheetDialog">
+              tools:context="com.six.ui.action_sheet.ActionSheetDialog">
 
     <TextView android:background="@android:color/white" android:text="@string/dialog_title" android:gravity="center"
         android:layout_width="match_parent" android:layout_height="60dp"/>

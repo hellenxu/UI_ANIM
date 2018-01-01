@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.six.sixua.scroll.SixDraggingView
+    <com.six.ui.scroll.SixDraggingView
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:background="@android:color/holo_blue_light" />
