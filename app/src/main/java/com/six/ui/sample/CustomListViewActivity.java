@@ -8,7 +8,7 @@ import android.widget.ListView;
 
 import com.six.ui.customlistview.GridListViewAdapter;
 import com.six.ui.customlistview.Product;
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.Window;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
+
 
 /**
  * @author hellenxu

@@ -8,7 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 
 /**

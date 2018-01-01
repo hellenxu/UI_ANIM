@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.six.ui.R;
 import com.six.ui.calendar.CalendarView;
-import com.six.ui_anim.R;
 import com.six.ui.calendar.Cell;
 
 /**

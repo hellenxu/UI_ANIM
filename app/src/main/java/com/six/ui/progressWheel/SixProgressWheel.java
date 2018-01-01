@@ -9,7 +9,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 
 /**

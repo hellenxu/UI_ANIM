@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.six.ui.progressWheel.SixProgressWheel;
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 /**
  * @author hellenxu

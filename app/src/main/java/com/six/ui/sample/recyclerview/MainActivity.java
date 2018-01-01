@@ -14,7 +14,7 @@ import com.six.ui.recyclerview.LeftAlignSnapHelper;
 import com.six.ui.recyclerview.RVAdapter;
 import com.six.ui.recyclerview.RvItemCallback;
 import com.six.ui.recyclerview.RvItemClickListener;
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 /**
  * @author hellenxu

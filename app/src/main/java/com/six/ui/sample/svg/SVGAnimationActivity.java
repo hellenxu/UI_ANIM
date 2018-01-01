@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 /**
  * @author hellenxu

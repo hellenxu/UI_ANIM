@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.ViewPropertyAnimator;
 import android.widget.TextView;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 
 /**

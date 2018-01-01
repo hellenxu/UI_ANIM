@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.EditText;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

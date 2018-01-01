@@ -1,4 +1,4 @@
-<manifest package="com.six.ui_anim"
+<manifest package="com.six.ui"
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 import java.util.ArrayList;
 import java.util.List;

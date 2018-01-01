@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 import com.six.ui.richEditor.webview.RichEditorView;
 
 /**

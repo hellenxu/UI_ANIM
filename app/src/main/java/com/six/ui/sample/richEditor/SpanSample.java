@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 import com.six.ui.richEditor.span.RichText;
 
 /**

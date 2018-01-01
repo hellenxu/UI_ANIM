@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 /**
  * @author hellenxu

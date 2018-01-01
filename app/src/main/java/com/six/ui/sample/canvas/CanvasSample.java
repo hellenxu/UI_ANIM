@@ -3,7 +3,8 @@ package com.six.ui.sample.canvas;
 import android.app.Activity;
 import android.os.Bundle;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
+
 
 /**
  * @author hellenxu

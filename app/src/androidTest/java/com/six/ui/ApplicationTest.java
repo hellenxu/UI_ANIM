@@ -1,4 +1,4 @@
-package com.six.ui_anim;
+package com.six.ui;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

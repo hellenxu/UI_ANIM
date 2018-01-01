@@ -5,7 +5,7 @@ android {
     buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "com.six.ui_anim"
+        applicationId "com.six.ui"
         minSdkVersion 21
         targetSdkVersion 24
         versionCode 1

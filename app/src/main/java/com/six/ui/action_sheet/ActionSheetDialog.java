@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 /**
  * @author hellenxu

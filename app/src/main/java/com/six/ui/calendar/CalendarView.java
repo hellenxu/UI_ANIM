@@ -13,7 +13,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
-import com.six.ui_anim.R;
+import com.six.ui.R;
 
 import java.util.Calendar;
 import java.util.Random;
