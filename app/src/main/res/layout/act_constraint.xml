@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="match_parent">
+    <!--goneMargin example-->
     <Button android:layout_width="wrap_content" android:layout_height="50dp"
         android:text="Button A" android:id="@+id/btn_a" android:layout_marginTop="10dp"
         android:layout_marginStart="10dp" app:layout_constraintLeft_toLeftOf="parent"
@@ -11,4 +12,21 @@
         android:text="Button B" android:id="@+id/btn_b"
         android:layout_marginTop="10dp" android:layout_marginStart="30dp" app:layout_goneMarginStart="220dp"
         app:layout_constraintLeft_toRightOf="@id/btn_a" app:layout_constraintTop_toTopOf="parent"/>
+
+    <!--center vertical and horizontal-->
+    <Button
+        android:text="@string/card_holder_sample" android:id="@+id/btn_holder"
+        android:layout_width="wrap_content" android:layout_height="50dp"
+        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"/>
+    <Button
+        android:text="Button C------" android:id="@+id/btn_c"
+        android:layout_width="wrap_content" android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_holder" app:layout_constraintLeft_toLeftOf="@id/btn_holder"
+        app:layout_constraintRight_toRightOf="@id/btn_holder" android:layout_marginTop="10dp" />
+    <Button
+        android:layout_width="wrap_content" android:layout_height="50dp" android:text="Button D"
+        app:layout_constraintTop_toBottomOf="@id/btn_c" android:layout_marginTop="10dp"
+        app:layout_constraintLeft_toLeftOf="@id/btn_c" app:layout_constraintRight_toRightOf="@id/btn_c"
+        app:layout_constraintHorizontal_bias="1"/>
 </android.support.constraint.ConstraintLayout>
