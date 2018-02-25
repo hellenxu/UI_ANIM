@@ -28,5 +28,54 @@
         android:layout_width="wrap_content" android:layout_height="50dp" android:text="Button D"
         app:layout_constraintTop_toBottomOf="@id/btn_c" android:layout_marginTop="10dp"
         app:layout_constraintLeft_toLeftOf="@id/btn_c" app:layout_constraintRight_toRightOf="@id/btn_c"
-        app:layout_constraintHorizontal_bias="1"/>
+        app:layout_constraintHorizontal_bias="1" android:id="@+id/btn_d"/>
+
+    <!--size sample-->
+    <Button
+        android:text="minWidth=200dp" android:id="@+id/btn_size_a"
+        android:layout_width="wrap_content" android:layout_height="50dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_a" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_min="300dp" app:layout_constrainedWidth="true"/>
+    <TextView
+        android:text="English" android:id="@+id/tv_en" android:layout_marginTop="20dp"
+        android:layout_width="0dp" android:layout_height="wrap_content" android:background="@color/green_color"
+        app:layout_constraintTop_toBottomOf="@id/btn_size_a" app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintWidth_default="percent" app:layout_constraintWidth_percent="0.33"/>
+    <TextView
+        android:text="Spanish" android:id="@+id/tv_spanish" android:layout_marginTop="20dp"
+        android:layout_width="0dp" android:layout_height="wrap_content" android:background="@color/pink_color"
+        app:layout_constraintTop_toBottomOf="@id/btn_size_a" app:layout_constraintLeft_toRightOf="@id/tv_en"
+        app:layout_constraintWidth_default="percent" app:layout_constraintWidth_percent="0.33"/>
+    <TextView
+        android:text="Chinese" android:id="@+id/tv_cn" android:layout_marginTop="20dp"
+        android:layout_width="0dp" android:layout_height="wrap_content" android:background="@color/blue_200"
+        app:layout_constraintTop_toBottomOf="@id/btn_size_a" app:layout_constraintLeft_toRightOf="@id/tv_spanish"
+        app:layout_constraintWidth_default="percent" app:layout_constraintWidth_percent="0.34"/>
+
+    <!--dimension ratio-->
+    <TextView
+        android:text="Dimension Ratio" android:background="@color/blue_500"
+        android:layout_width="110dp" android:layout_height="0dp" android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_en" app:layout_constraintDimensionRatio="16:9"/>
+
+    <!--chain-->
+    <TextView
+        android:id="@+id/tv_a" android:text="AAA" app:layout_constraintTop_toBottomOf="@id/btn_d"
+        android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@color/blue_200"
+        app:layout_constraintLeft_toLeftOf="parent" android:layout_marginTop="20dp" app:layout_constraintRight_toLeftOf="@+id/tv_b"
+        app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintHorizontal_bias="0.3"/>
+
+    <TextView
+        android:id="@+id/tv_b" android:text="BBB" app:layout_constraintTop_toBottomOf="@id/btn_d"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:background="@color/blue_200" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_a" app:layout_constraintRight_toLeftOf="@+id/tv_c" />
+
+    <TextView
+        android:id="@+id/tv_c" android:text="CCC" app:layout_constraintTop_toBottomOf="@id/btn_d"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:background="@color/blue_200" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/tv_b" app:layout_constraintRight_toRightOf="parent" />
+
 </android.support.constraint.ConstraintLayout>
