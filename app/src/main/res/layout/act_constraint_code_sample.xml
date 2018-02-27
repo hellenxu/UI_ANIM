@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:id="@+id/ctlay"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <Button
         android:id="@+id/btn_a" android:text="Button_A"
@@ -22,19 +22,19 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_apply" android:text="Apply"
+        android:id="@+id/btn_apply" android:text="Apply" android:onClick="applyConstraintSet"
         app:layout_constraintStart_toStartOf="parent" app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_center" android:layout_marginBottom="30dp"
         android:layout_width="wrap_content" android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_center" android:text="Center"
+        android:id="@+id/btn_center" android:text="Center" android:onClick="center"
         app:layout_constraintStart_toEndOf="@id/btn_apply" app:layout_constraintEnd_toStartOf="@+id/btn_reset"
         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="30dp"
         android:layout_width="wrap_content" android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/btn_reset" android:text="Reset"
+        android:id="@+id/btn_reset" android:text="Reset" android:onClick="reset"
         app:layout_constraintStart_toEndOf="@id/btn_center" app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="30dp"
         android:layout_width="wrap_content" android:layout_height="wrap_content" />

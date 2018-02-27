@@ -1,5 +1,5 @@
-<manifest package="com.six.ui"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.six.ui">
 
     <application
         android:allowBackup="true"
@@ -7,36 +7,39 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.six.ui.recyclerview.transAds.TransparentAdActivity">
+        <activity android:name=".constraintlayout.ConstraintSample">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity android:name="com.six.ui.recyclerview.transAds.TransparentAdActivity" />
+
         <activity android:name="com.six.ui.sample.CustomListViewActivity" />
 
-        <activity android:name="com.six.ui.sample.BounceScrollViewActivity"/>
+        <activity android:name="com.six.ui.sample.BounceScrollViewActivity" />
 
-        <activity android:name="com.six.ui.action_sheet.ActionSheetDialog"/>
+        <activity android:name="com.six.ui.action_sheet.ActionSheetDialog" />
 
-        <activity android:name="com.six.ui.sample.richEditor.WebViewSample"/>
+        <activity android:name="com.six.ui.sample.richEditor.WebViewSample" />
 
-        <activity android:name="com.six.ui.sample.richEditor.SpanSample"/>
+        <activity android:name="com.six.ui.sample.richEditor.SpanSample" />
 
-        <activity android:name="com.six.ui.sample.scrolling.ScrollingSample"/>
+        <activity android:name="com.six.ui.sample.scrolling.ScrollingSample" />
 
-        <activity android:name="com.six.ui.sample.recyclerview.MainActivity"/>
+        <activity android:name="com.six.ui.sample.recyclerview.MainActivity" />
 
-        <activity android:name="com.six.ui.sample.ProgressWheelActivity"/>
+        <activity android:name="com.six.ui.sample.ProgressWheelActivity" />
 
-        <activity android:name="com.six.ui.sample.clock.ClockSample"/>
+        <activity android:name="com.six.ui.sample.clock.ClockSample" />
 
-        <activity android:name="com.six.ui.sample.colors.ColorMatrixSample"/>
+        <activity android:name="com.six.ui.sample.colors.ColorMatrixSample" />
 
-        <activity android:name="com.six.ui.sample.canvas.CanvasSample"/>
+        <activity android:name="com.six.ui.sample.canvas.CanvasSample" />
 
-        <activity android:name="com.six.ui.sample.svg.SVGAnimationActivity"/>
+        <activity android:name="com.six.ui.sample.svg.SVGAnimationActivity" />
+
     </application>
 
 </manifest>

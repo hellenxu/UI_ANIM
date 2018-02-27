@@ -3,6 +3,10 @@ package com.six.ui.constraintlayout;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.transition.TransitionManager;
+import android.view.View;
 
 import com.six.ui.R;
 
@@ -12,10 +16,49 @@ import com.six.ui.R;
  */
 
 public class ConstraintSample extends Activity {
+    private ConstraintSet applySet = new ConstraintSet();
+    private ConstraintSet centerSet = new ConstraintSet();
+    private ConstraintSet resetSet = new ConstraintSet();
+    private ConstraintLayout ctlay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_constraint_code_sample);
+        ctlay = (ConstraintLayout) findViewById(R.id.ctlay);
+        applySet.clone(ctlay); //clone is used to copy the original constraint set
+        centerSet.clone(ctlay);
+        resetSet.clone(ctlay);
+    }
+
+    public void applyConstraintSet(View view) {
+        TransitionManager.beginDelayedTransition(ctlay);
+        applySet.setMargin(R.id.btn_a, ConstraintSet.START, 20);
+        applySet.applyTo(ctlay);
+    }
+
+    public void center(View view) {
+        TransitionManager.beginDelayedTransition(ctlay);
+
+        centerSet.constrainWidth(R.id.btn_a, 600);
+        centerSet.constrainWidth(R.id.btn_b, 600);
+        centerSet.constrainWidth(R.id.btn_c, 600);
+
+        // use with ConstraintSet.START and ConstraintSet.END
+        centerSet.centerHorizontallyRtl(R.id.btn_a, R.id.ctlay);
+        centerSet.centerHorizontallyRtl(R.id.btn_b, R.id.ctlay);
+        centerSet.centerHorizontallyRtl(R.id.btn_c, R.id.ctlay);
+
+        // use with ConstraintSet.LEFT and ConstraintSet.RIGHT
+//        centerSet.centerHorizontally(R.id.btn_a, R.id.ctlay);
+//        centerSet.centerHorizontally(R.id.btn_b, R.id.ctlay);
+//        centerSet.centerHorizontally(R.id.btn_c, R.id.ctlay);
+
+        centerSet.applyTo(ctlay);
+    }
+
+    public void reset(View view) {
+        TransitionManager.beginDelayedTransition(ctlay);
+        resetSet.applyTo(ctlay);
     }
 }
