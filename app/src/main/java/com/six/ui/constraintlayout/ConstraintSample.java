@@ -20,7 +20,8 @@ public class ConstraintSample extends Activity {
     private ConstraintSet applySet = new ConstraintSet();
     private ConstraintSet centerSet = new ConstraintSet();
     private ConstraintSet resetSet = new ConstraintSet();
-    private ConstraintSet childSet = new ConstraintSet();
+    private ConstraintSet buttonASet = new ConstraintSet();
+    private ConstraintSet buttonBSet = new ConstraintSet();
     private ConstraintLayout ctlay;
 
     @Override
@@ -67,17 +68,31 @@ public class ConstraintSample extends Activity {
     public void onClickButtonA(View view) {
         TransitionManager.beginDelayedTransition(ctlay);
 
-        childSet.setVisibility(R.id.btn_b, ConstraintSet.GONE);
-        childSet.setVisibility(R.id.btn_c, ConstraintSet.GONE);
+        buttonASet.setVisibility(R.id.btn_b, ConstraintSet.GONE);
+        buttonASet.setVisibility(R.id.btn_c, ConstraintSet.GONE);
 
         Button btnApply = (Button) findViewById(R.id.btn_apply);
-        childSet.clear(R.id.btn_a);
-        childSet.connect(R.id.btn_a, ConstraintSet.START, R.id.ctlay, ConstraintSet.START, 0);
-        childSet.connect(R.id.btn_a, ConstraintSet.END, R.id.ctlay, ConstraintSet.END, 0);
-        childSet.connect(R.id.btn_a, ConstraintSet.TOP, R.id.ctlay, ConstraintSet.TOP, 0);
-//        childSet.connect(R.id.btn_a, ConstraintSet.BOTTOM, R.id.ctlay, ConstraintSet.BOTTOM, 0);
-        childSet.constrainHeight(R.id.btn_a, (int) btnApply.getY());
-        childSet.constrainWidth(R.id.btn_a, ctlay.getMeasuredWidth());
-        childSet.applyTo(ctlay);
+//        buttonASet.clear(R.id.btn_a);
+        buttonASet.connect(R.id.btn_a, ConstraintSet.START, R.id.ctlay, ConstraintSet.START, 0);
+        buttonASet.connect(R.id.btn_a, ConstraintSet.END, R.id.ctlay, ConstraintSet.END, 0);
+        buttonASet.connect(R.id.btn_a, ConstraintSet.TOP, R.id.ctlay, ConstraintSet.TOP, 0);
+//        buttonASet.connect(R.id.btn_a, ConstraintSet.BOTTOM, R.id.ctlay, ConstraintSet.BOTTOM, 0);
+        buttonASet.constrainHeight(R.id.btn_a, (int) btnApply.getY());
+        buttonASet.constrainWidth(R.id.btn_a, ctlay.getMeasuredWidth());
+        buttonASet.applyTo(ctlay);
+    }
+
+    public void onClickButtonB(View view) {
+        TransitionManager.beginDelayedTransition(ctlay);
+
+        buttonBSet.createHorizontalChain(ConstraintSet.PARENT_ID, ConstraintSet.LEFT,
+                ConstraintSet.PARENT_ID, ConstraintSet.RIGHT, new int[]{R.id.btn_a,
+                R.id.btn_b, R.id.btn_c}, null, ConstraintSet.CHAIN_SPREAD);
+
+//        buttonBSet.createHorizontalChainRtl(ConstraintSet.PARENT_ID, ConstraintSet.START,
+//                ConstraintSet.PARENT_ID, ConstraintSet.END, new int[]{R.id.btn_a,
+//                        R.id.btn_b, R.id.btn_c}, null, ConstraintSet.CHAIN_SPREAD);
+
+        buttonBSet.applyTo(ctlay);
     }
 }
