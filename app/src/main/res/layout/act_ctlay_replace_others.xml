@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+     <!--LinearLayout weight=1： solution one -->
+
+    <TextView
+        android:id="@+id/tvLangEng" app:layout_constraintWidth_default="percent"
+        android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.33" android:text="English" app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@color/blue_700"/>
+
+    <TextView
+        android:id="@+id/tvDivider1" app:layout_constraintWidth_default="percent"
+        android:layout_width="0dp" android:layout_height="1dp" android:background="#0000"
+        app:layout_constraintWidth_percent="0.005" app:layout_constraintLeft_toRightOf="@id/tvLangEng"/>
+
+    <TextView
+        android:id="@+id/tvLangJap" app:layout_constraintWidth_default="percent"
+        android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.33" app:layout_constraintLeft_toRightOf="@id/tvDivider1"
+        android:text="Japanese" android:background="@color/pink_color"/>
+
+    <TextView
+        android:id="@+id/tvDivider2" app:layout_constraintWidth_default="percent"
+        android:layout_width="0dp" android:layout_height="1dp" android:background="#0000"
+        app:layout_constraintWidth_percent="0.005" app:layout_constraintLeft_toRightOf="@id/tvLangJap"/>
+
+    <TextView
+        android:id="@+id/tvLangCn" app:layout_constraintWidth_default="percent"
+        android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintWidth_percent="0.33" app:layout_constraintLeft_toRightOf="@id/tvDivider2"
+        android:text="Chinese" android:background="@color/brown_color"/>
+
+    <!--LinearLayout weight=1： solution two -->
+
+    <TextView
+        android:id="@+id/tvLangEng1" android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLangEng" android:layout_marginTop="20dp"
+        android:background="@color/blue_700" android:text="English"
+        app:layout_constraintLeft_toLeftOf="parent" app:layout_constraintRight_toLeftOf="@+id/tvDivider3"
+        app:layout_constraintHorizontal_chainStyle="packed" app:layout_constraintHorizontal_weight="1"/>
+
+    <TextView
+        android:id="@+id/tvDivider3" android:layout_width="1dp" android:layout_height="1dp" android:background="#0000"
+        app:layout_constraintTop_toBottomOf="@id/tvLangEng" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/tvLangEng1" app:layout_constraintRight_toLeftOf="@+id/tvLangJap1" />
+
+    <TextView
+        android:id="@+id/tvLangJap1" android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLangEng" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/tvDivider3" app:layout_constraintRight_toLeftOf="@+id/tvDivider4"
+        app:layout_constraintHorizontal_weight="1"
+        android:text="Japanese" android:background="@color/pink_color"/>
+
+    <TextView
+        android:id="@+id/tvDivider4" android:layout_width="1dp" android:layout_height="1dp" android:background="#0000"
+        app:layout_constraintTop_toBottomOf="@id/tvLangEng" android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/tvLangJap1" app:layout_constraintRight_toLeftOf="@+id/tvLangCn1" />
+
+    <TextView
+        android:id="@+id/tvLangCn1" android:layout_width="0dp" android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tvLangEng" android:layout_marginTop="20dp"
+        android:text="Chinese" android:background="@color/brown_color" app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintLeft_toRightOf="@id/tvDivider4" app:layout_constraintRight_toRightOf="parent"/>
+
+</android.support.constraint.ConstraintLayout>
