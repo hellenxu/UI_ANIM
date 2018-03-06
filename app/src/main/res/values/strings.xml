@@ -28,4 +28,21 @@
 	<string name="account_online">online</string>
 
 	<string name="content">erewrowuo4382420482wrowuo4382420482 \n wo4u32o840wrowuo43824204822384 \n 20480284wourownro;equw24uo</string>
+	
+	<string name="long_text">The rules of English grammar require that in most cases a noun, or more generally a noun phrase, must be "completed" with a determiner to clarify what the referent of the noun phrase is.[1] The most common determiners are the articles the and a(n), which specify the presence or absence of definiteness of the noun. Other possible determiners include words like this, my, each and many – see English determiners. There are also cases where no determiner is required, as in the sentence John likes fast cars.
+
+The definite article the is used when the referent of the noun phrase is assumed to be unique or known from the context. For example, in the sentence The boy with glasses was looking at the moon, it is assumed that in the context the reference can only be to one boy and one moon. However, the definite article is not used:
+
+with generic nouns (plural or uncountable): cars have accelerators, happiness is contagious, referring to cars in general and happiness in general (compare the happiness I felt yesterday, specifying particular happiness);
+with many proper names: John, France, London, etc.
+The indefinite article a (before a consonant sound) or an (before a vowel sound) is used only with singular, countable nouns. It indicates that the referent of the noun phrase is one unspecified member of a class. For example, the sentence An ugly man was smoking a pipe does not refer to any specifically known ugly man or pipe.
+When referring to a particular date, the definite article the is typically used[2].
+He was born on the 10th of May.
+However, when referring to a day of the week, the indefinite article is used.He was born on a Thursday.
+        No article is used with plural or uncountable nouns when the referent is indefinite (just as in the generic definite case described above). However, in such situations, the determiner some is often added (or any in negative contexts and in many questions). For example:
+        There are apples in the kitchen or There are some apples in the kitchen;
+We do not have information or We do not have any information;
+Would you like tea? or Would you like some tea? and Would you like any tea? or Would you like some good tea?
+Additionally, articles are not normally used:</string>
+    <string name="terms_and_acknowledge">Terms and Acknowledge</string>
 </resources>
