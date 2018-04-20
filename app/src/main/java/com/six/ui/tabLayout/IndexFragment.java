@@ -24,6 +24,19 @@ public class IndexFragment extends Fragment {
         TextView titleTextView = new TextView(getActivity());
         titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
         titleTextView.setText(R.string.txt_index);
+        System.out.println("xxl-onCreateView");
         return titleTextView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("xxl-onStart");
+        showDialog();
+    }
+
+    private void showDialog() {
+        SurveyDialog dialog = new SurveyDialog();
+        dialog.show(getFragmentManager(), "SurveyDialog");
     }
 }
