@@ -45,4 +45,8 @@ We do not have information or We do not have any information;
 Would you like tea? or Would you like some tea? and Would you like any tea? or Would you like some good tea?
 Additionally, articles are not normally used:</string>
     <string name="terms_and_acknowledge">Terms and Acknowledge</string>
+    <string name="txt_index">Index</string>
+	<string name="txt_travel">Travel</string>
+	<string name="txt_offers">Offers</string>
+	<string name="txt_details">Details</string>
 </resources>
