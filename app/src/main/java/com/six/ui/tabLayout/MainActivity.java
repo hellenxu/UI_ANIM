@@ -13,7 +13,7 @@ import com.six.ui.R;
  * Created by Heavens on 2018-04-19.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Main.View{
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,5 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        MainActivityPresenter presenter = new MainActivityPresenter();
+        presenter.setView(this);
+        presenter.checkSurveyStatus();
+    }
+
+    @Override
+    public void showSurveyDialog() {
+        SurveyDialog dialog = new SurveyDialog(getSupportFragmentManager());
+        dialog.showTwoButtonDialog();
     }
 }

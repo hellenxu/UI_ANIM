@@ -49,4 +49,5 @@ Additionally, articles are not normally used:</string>
 	<string name="txt_travel">Travel</string>
 	<string name="txt_offers">Offers</string>
 	<string name="txt_details">Details</string>
+    <string name="txt_launch_dialog">launch dialog</string>
 </resources>
