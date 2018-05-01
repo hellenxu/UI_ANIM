@@ -1,7 +1,6 @@
 package com.six.ui.tabLayout;
 
 import android.app.Dialog;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;

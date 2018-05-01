@@ -8,6 +8,7 @@ package com.six.ui.tabLayout;
 public interface Main {
     interface View{
         void showSurveyDialog();
+        void setTitle(String title);
     }
 
     interface Presenter {
