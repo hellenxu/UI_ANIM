@@ -4,6 +4,8 @@ package com.six.ui.tabLayout;
 import com.six.ui.BuildConfig;
 import com.six.ui.MyApplication;
 
+import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -48,6 +50,12 @@ public class MainActivityPresenterTest {
         presenter.piaoLin();
         verify(view).setTitle(TITLE);
         verify(presenter).lookAtLin();
+    }
+
+    @Test
+    public void checkEmpty() {
+        boolean result = presenter.checkEmpty("eere");
+        Assert.assertFalse(result);
     }
 
 }

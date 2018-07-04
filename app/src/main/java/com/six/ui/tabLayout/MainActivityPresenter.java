@@ -1,5 +1,7 @@
 package com.six.ui.tabLayout;
 
+import android.text.TextUtils;
+
 import com.six.ui.R;
 
 
@@ -38,5 +40,9 @@ public class MainActivityPresenter implements Main.Presenter {
 
     public void lookAtLin(){
 
+    }
+
+    public boolean checkEmpty(String content) {
+        return TextUtils.isEmpty(content);
     }
 }

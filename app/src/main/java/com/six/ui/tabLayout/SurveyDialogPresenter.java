@@ -1,6 +1,5 @@
 package com.six.ui.tabLayout;
 
-import java.util.Random;
 
 /**
  * @CopyRight six.ca
