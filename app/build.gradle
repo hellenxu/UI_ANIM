@@ -26,6 +26,7 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.android.support:design:26.1.0'
+    implementation 'ca.six.util:Permisssion6:1.0.1'
 
     //google map services
     implementation 'com.google.android.gms:play-services-maps:15.0.1'

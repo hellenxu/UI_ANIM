@@ -1,6 +1,5 @@
 <resources>
-
-	<string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyA1_QpjkS3Ppn3hzs3Um6XMFO8SDSwWbTY</string>
+	<string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">Your Key</string>
 
 	<string name="app_name">UI_ANIM</string>
 	<string name="finish">FINISH</string>
@@ -53,4 +52,7 @@ Additionally, articles are not normally used:</string>
 	<string name="txt_offers">Offers</string>
 	<string name="txt_details">Details</string>
     <string name="txt_launch_dialog">launch dialog</string>
+    <string name="loc_old_toronto">43.6434476,-79.3831327</string>
+	<string name="loc_m">43.6077226,-79.6005062</string>
+	<string name="loc_cal">51.0522336,-114.05637</string>
 </resources>
