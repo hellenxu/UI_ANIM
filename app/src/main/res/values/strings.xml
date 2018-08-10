@@ -1,4 +1,7 @@
 <resources>
+
+	<string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">AIzaSyA1_QpjkS3Ppn3hzs3Um6XMFO8SDSwWbTY</string>
+
 	<string name="app_name">UI_ANIM</string>
 	<string name="finish">FINISH</string>
 	<string name="menu_settings">Settings</string>
