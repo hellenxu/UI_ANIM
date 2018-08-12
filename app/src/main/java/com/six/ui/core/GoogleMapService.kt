@@ -15,4 +15,11 @@ interface GoogleMapService {
     @GET("place/findplacefromtext/json")
 //    fun searchPlaces(@QueryMap params: HashMap<String, String>): Observable<SearchPlaceResponse>
     fun searchPlaces(@QueryMap params: HashMap<String, String>): Call<SearchPlaceResponse>
+
+    @GET("place/details/json")
+    fun getPlaceInfo(@QueryMap params: HashMap<String, String>): Call<PlaceInfoResponse>
+
+    @GET("place/nearbysearch/json")
+    fun searchNearby(@QueryMap params: HashMap<String, String>): Call<NearbyResponse>
+
 }

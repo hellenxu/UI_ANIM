@@ -16,8 +16,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.six.ui.R
-import com.six.ui.core.GoogleMapService
-import com.six.ui.core.SearchPlaceResponse
+import com.six.ui.core.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -76,40 +75,103 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
             }
         }
 
-        //TODO make network request and move camera
         val retrofit = Retrofit.Builder()
                 .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val service = retrofit.create(GoogleMapService::class.java)
 
+//        val options = HashMap<String, String>()
+//        options.put("input", "TELUS Store")
+//        options.put("inputtype", "textquery")
+//        options.put("fields", "name,place_id")
+//        options.put("locationbias", "circle:5000@${currentLatLng.latitude}, ${currentLatLng.longitude}")
+//        options.put("key", getString(R.string.google_maps_key))
+//        val searchCall = service.searchPlaces(options)
+
+//        searchCall.enqueue(object : Callback<SearchPlaceResponse> {
+//            override fun onResponse(call: Call<SearchPlaceResponse>?, response: Response<SearchPlaceResponse>?) {
+//                println("xxl: ${response?.body()?.status}")
+//                for(item in response?.body()?.candidates!!) {
+//                    println("xxl: ${item.place_id}")
+//
+//                    //get place info
+//                    val params= HashMap<String, String>()
+//                    params.put("placeid", item.place_id)
+//                    params.put("key", getString(R.string.google_maps_key))
+//
+//                    val placeCall = service.getPlaceInfo(params)
+//                    placeCall.enqueue(object: Callback<PlaceInfoResponse>{
+//                        override fun onFailure(call: Call<PlaceInfoResponse>?, t: Throwable?) {
+//                            println("xxl-PlaceInfo-onFailure")
+//                        }
+//
+//                        override fun onResponse(call: Call<PlaceInfoResponse>?, response: Response<PlaceInfoResponse>?) {
+//                            println("xxl-PlaceInfo-onResponse")
+//                            val location = response?.body()?.result?.geometry?.location
+//                            if (location != null){
+//                                currentLatLng = LatLng(location.lat, location.lng)
+//
+//                                with(map) {
+//                                    moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
+//                                    addMarker(MarkerOptions().position(currentLatLng))
+//                                }
+//                            }
+//                        }
+//
+//                    })
+//                }
+//            }
+
         val options = HashMap<String, String>()
-        options.put("input", "TELUS Store")
-        options.put("inputtype", "textquery")
-        options.put("fields", "name,place_id")
-        options.put("locationbias", "circle:5000@43.7225984,-79.7309027")
+        options.put("name", "TELUS Store")
+        options.put("rankby", "distance")
+        options.put("location", "${currentLatLng.latitude}, ${currentLatLng.longitude}")
         options.put("key", getString(R.string.google_maps_key))
 
-        val searchCall = service.searchPlaces(options)
-        searchCall.enqueue(object : Callback<SearchPlaceResponse> {
-            override fun onResponse(call: Call<SearchPlaceResponse>?, response: Response<SearchPlaceResponse>?) {
+        val searchCall = service.searchNearby(options)
+
+        searchCall.enqueue(object : Callback<NearbyResponse> {
+            override fun onResponse(call: Call<NearbyResponse>?, response: Response<NearbyResponse>?) {
                 println("xxl: ${response?.body()?.status}")
-                for(item in response?.body()?.candidates!!) {
-                    println("xxl: ${item}")
+                val results = response?.body()?.results
+                if (results != null) {
+                    val target = results[0]
+
+                    println("xxl: ${target.place_id}")
+
+                    //get place info
+                    val params = HashMap<String, String>()
+                    params.put("placeid", target.place_id)
+                    params.put("key", getString(R.string.google_maps_key))
+
+                    val placeCall = service.getPlaceInfo(params)
+                    placeCall.enqueue(object : Callback<PlaceInfoResponse> {
+                        override fun onFailure(call: Call<PlaceInfoResponse>?, t: Throwable?) {
+                            println("xxl-PlaceInfo-onFailure")
+                        }
+
+                        override fun onResponse(call: Call<PlaceInfoResponse>?, response: Response<PlaceInfoResponse>?) {
+                            println("xxl-PlaceInfo-onResponse")
+                            val location = response?.body()?.result?.geometry?.location
+                            if (location != null) {
+                                currentLatLng = LatLng(location.lat, location.lng)
+
+                                with(map) {
+                                    moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
+                                    addMarker(MarkerOptions().position(currentLatLng))
+                                }
+                            }
+                        }
+
+                    })
                 }
             }
 
-            override fun onFailure(call: Call<SearchPlaceResponse>?, t: Throwable?) {
-                println("xxl-onFailure")
+            override fun onFailure(call: Call<NearbyResponse>?, t: Throwable?) {
+                println("xxl-SearchPlace-onFailure")
             }
         })
-
-
-        with(map) {
-            moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
-
-//            addMarker(MarkerOptions().position(currentLatLng)) //TODO set closest telus store position
-        }
     }
 
     override fun userDenyPermission() {
