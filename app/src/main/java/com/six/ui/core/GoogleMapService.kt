@@ -19,7 +19,13 @@ interface GoogleMapService {
     @GET("place/details/json")
     fun getPlaceInfo(@QueryMap params: HashMap<String, String>): Call<PlaceInfoResponse>
 
+    @GET("place/details/json")
+    fun getPlaceInfoRx(@QueryMap params: HashMap<String, String>): Observable<PlaceInfoResponse>
+
+
     @GET("place/nearbysearch/json")
     fun searchNearby(@QueryMap params: HashMap<String, String>): Call<NearbyResponse>
 
+    @GET("place/nearbysearch/json")
+    fun searchNearbyRx(@QueryMap params: HashMap<String, String>): Observable<NearbyResponse>
 }

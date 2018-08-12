@@ -17,10 +17,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.six.ui.R
 import com.six.ui.core.*
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -75,53 +80,92 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
             }
         }
 
+//        searchPlaces()
+
+//        searchNearby()
+
+        searchNearbyRx()
+
+    }
+
+    private fun searchNearbyRx(){
+        val retrofit = Retrofit.Builder()
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync())
+                .build()
+        val service = retrofit.create(GoogleMapService::class.java)
+
+        //prepare params
+        val options = HashMap<String, String>()
+        options.put("name", "TELUS Store")
+        options.put("rankby", "distance")
+        options.put("location", "${currentLatLng.latitude}, ${currentLatLng.longitude}")
+        options.put("key", getString(R.string.google_maps_key))
+
+        val observable = service.searchNearbyRx(options)
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<NearbyResponse> {
+                    override fun onComplete() {
+                        println("xxl-nearby-onComplete")
+                    }
+
+                    override fun onSubscribe(d: Disposable) {
+                        println("xxl-nearby-onSubscribe")
+                    }
+
+                    override fun onNext(nearbyResponse: NearbyResponse) {
+                        val target = nearbyResponse.results[0]
+                        println("xxl: ${target.place_id}")
+
+                        //get place info
+                        val params = HashMap<String, String>()
+                        params.put("placeid", target.place_id)
+                        params.put("key", getString(R.string.google_maps_key))
+
+                        val placeObservable = service.getPlaceInfoRx(params)
+                        placeObservable.subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(object : Observer<PlaceInfoResponse> {
+                                    override fun onComplete() {
+                                        println("xxl-placeInfo-onComplete")
+                                    }
+
+                                    override fun onSubscribe(d: Disposable) {
+                                        println("xxl-placeInfo-onSubscribe")
+                                    }
+
+                                    override fun onNext(response: PlaceInfoResponse) {
+                                        val location = response.result.geometry.location
+                                        currentLatLng = LatLng(location.lat, location.lng)
+
+                                        with(map) {
+                                            moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
+                                            addMarker(MarkerOptions().position(currentLatLng))
+                                        }
+                                    }
+
+                                    override fun onError(e: Throwable) {
+                                        println("xxl-placeInfo-onError")                                    }
+
+                                })
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        println("xxl-nearby-onError")
+                    }
+
+                })
+    }
+
+    private fun searchNearby() {
         val retrofit = Retrofit.Builder()
                 .baseUrl(getString(R.string.base_url))
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
         val service = retrofit.create(GoogleMapService::class.java)
-
-//        val options = HashMap<String, String>()
-//        options.put("input", "TELUS Store")
-//        options.put("inputtype", "textquery")
-//        options.put("fields", "name,place_id")
-//        options.put("locationbias", "circle:5000@${currentLatLng.latitude}, ${currentLatLng.longitude}")
-//        options.put("key", getString(R.string.google_maps_key))
-//        val searchCall = service.searchPlaces(options)
-
-//        searchCall.enqueue(object : Callback<SearchPlaceResponse> {
-//            override fun onResponse(call: Call<SearchPlaceResponse>?, response: Response<SearchPlaceResponse>?) {
-//                println("xxl: ${response?.body()?.status}")
-//                for(item in response?.body()?.candidates!!) {
-//                    println("xxl: ${item.place_id}")
-//
-//                    //get place info
-//                    val params= HashMap<String, String>()
-//                    params.put("placeid", item.place_id)
-//                    params.put("key", getString(R.string.google_maps_key))
-//
-//                    val placeCall = service.getPlaceInfo(params)
-//                    placeCall.enqueue(object: Callback<PlaceInfoResponse>{
-//                        override fun onFailure(call: Call<PlaceInfoResponse>?, t: Throwable?) {
-//                            println("xxl-PlaceInfo-onFailure")
-//                        }
-//
-//                        override fun onResponse(call: Call<PlaceInfoResponse>?, response: Response<PlaceInfoResponse>?) {
-//                            println("xxl-PlaceInfo-onResponse")
-//                            val location = response?.body()?.result?.geometry?.location
-//                            if (location != null){
-//                                currentLatLng = LatLng(location.lat, location.lng)
-//
-//                                with(map) {
-//                                    moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
-//                                    addMarker(MarkerOptions().position(currentLatLng))
-//                                }
-//                            }
-//                        }
-//
-//                    })
-//                }
-//            }
 
         val options = HashMap<String, String>()
         options.put("name", "TELUS Store")
@@ -169,7 +213,62 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
             }
 
             override fun onFailure(call: Call<NearbyResponse>?, t: Throwable?) {
+                println("xxl-Nearby-onFailure")
+            }
+        })
+    }
+
+
+    private fun searchPlaces() {
+        val retrofit = Retrofit.Builder()
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(GoogleMapService::class.java)
+        val options = HashMap<String, String>()
+        options.put("input", "TELUS Store")
+        options.put("inputtype", "textquery")
+        options.put("fields", "name,place_id")
+        options.put("locationbias", "circle:5000@${currentLatLng.latitude}, ${currentLatLng.longitude}")
+        options.put("key", getString(R.string.google_maps_key))
+        val searchCall = service.searchPlaces(options)
+
+        searchCall.enqueue(object : Callback<SearchPlaceResponse> {
+            override fun onFailure(call: Call<SearchPlaceResponse>?, t: Throwable?) {
                 println("xxl-SearchPlace-onFailure")
+            }
+
+            override fun onResponse(call: Call<SearchPlaceResponse>?, response: Response<SearchPlaceResponse>?) {
+                println("xxl: ${response?.body()?.status}")
+                for (item in response?.body()?.candidates!!) {
+                    println("xxl: ${item.place_id}")
+
+                    //get place info
+                    val params = HashMap<String, String>()
+                    params.put("placeid", item.place_id)
+                    params.put("key", getString(R.string.google_maps_key))
+
+                    val placeCall = service.getPlaceInfo(params)
+                    placeCall.enqueue(object : Callback<PlaceInfoResponse> {
+                        override fun onFailure(call: Call<PlaceInfoResponse>?, t: Throwable?) {
+                            println("xxl-PlaceInfo-onFailure")
+                        }
+
+                        override fun onResponse(call: Call<PlaceInfoResponse>?, response: Response<PlaceInfoResponse>?) {
+                            println("xxl-PlaceInfo-onResponse")
+                            val location = response?.body()?.result?.geometry?.location
+                            if (location != null) {
+                                currentLatLng = LatLng(location.lat, location.lng)
+
+                                with(map) {
+                                    moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
+                                    addMarker(MarkerOptions().position(currentLatLng))
+                                }
+                            }
+                        }
+
+                    })
+                }
             }
         })
     }
