@@ -55,4 +55,6 @@ Additionally, articles are not normally used:</string>
     <string name="loc_old_toronto">43.6434476,-79.3831327</string>
 	<string name="loc_m">43.6077226,-79.6005062</string>
 	<string name="loc_cal">51.0522336,-114.05637</string>
+
+	<string name="base_url">https://maps.googleapis.com/maps/api/</string>
 </resources>

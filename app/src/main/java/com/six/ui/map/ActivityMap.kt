@@ -16,6 +16,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.six.ui.R
+import com.six.ui.core.GoogleMapService
+import com.six.ui.core.SearchPlaceResponse
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 /**
  * @CopyRight six.ca
@@ -68,6 +75,35 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
                 }
             }
         }
+
+        //TODO make network request and move camera
+        val retrofit = Retrofit.Builder()
+                .baseUrl(getString(R.string.base_url))
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+        val service = retrofit.create(GoogleMapService::class.java)
+
+        val options = HashMap<String, String>()
+        options.put("input", "TELUS Store")
+        options.put("inputtype", "textquery")
+        options.put("fields", "name,place_id")
+        options.put("locationbias", "circle:5000@43.7225984,-79.7309027")
+        options.put("key", getString(R.string.google_maps_key))
+
+        val searchCall = service.searchPlaces(options)
+        searchCall.enqueue(object : Callback<SearchPlaceResponse> {
+            override fun onResponse(call: Call<SearchPlaceResponse>?, response: Response<SearchPlaceResponse>?) {
+                println("xxl: ${response?.body()?.status}")
+                for(item in response?.body()?.candidates!!) {
+                    println("xxl: ${item}")
+                }
+            }
+
+            override fun onFailure(call: Call<SearchPlaceResponse>?, t: Throwable?) {
+                println("xxl-onFailure")
+            }
+        })
+
 
         with(map) {
             moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
