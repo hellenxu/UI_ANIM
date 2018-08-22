@@ -2,7 +2,9 @@ package com.six.ui.map
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.location.Location
+import android.net.Uri
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
@@ -16,6 +18,8 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptor
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.six.ui.R
@@ -146,7 +150,19 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
 
                                         with(map) {
                                             moveCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, ZOOM_LEVEL))
-                                            addMarker(MarkerOptions().position(currentLatLng))
+                                            addMarker(MarkerOptions().position(currentLatLng).
+                                                    icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_marker)))
+                                            setOnMapClickListener {
+                                                println("xxl-loc: ${it.latitude}, ${it.longitude}")
+
+                                                val gmmIntentUri =
+                                                        Uri.parse("geo:${currentLatLng.latitude},${currentLatLng.longitude}?q=${response.result.formatted_address}")
+                                                val gmmIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                                                gmmIntent.setPackage("com.google.android.apps.maps")
+                                                if(gmmIntent.resolveActivity(packageManager) != null) {
+                                                    startActivity(gmmIntent)
+                                                }
+                                            }
                                         }
                                     }
 
