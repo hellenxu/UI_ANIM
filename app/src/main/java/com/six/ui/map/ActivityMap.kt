@@ -18,12 +18,11 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.six.ui.R
-import com.six.ui.core.*
+import com.six.ui.data.*
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -155,8 +154,18 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
                                             setOnMapClickListener {
                                                 println("xxl-loc: ${it.latitude}, ${it.longitude}")
 
+//                                                val gmmIntentUri =
+//                                                        Uri.parse("geo:${currentLatLng.latitude},${currentLatLng.longitude}?q=${response.result.formatted_address}")
+
+//                                                val gmmIntentUri =
+//                                                        Uri.parse("google.navigation:q=${response.result.formatted_address}")
+
+//                                                val gmmIntentUri =
+//                                                        Uri.parse("http://plus.codes/${response.result.plus_code.global_code}")
+
                                                 val gmmIntentUri =
-                                                        Uri.parse("geo:${currentLatLng.latitude},${currentLatLng.longitude}?q=${response.result.formatted_address}")
+                                                        Uri.parse("geo:0,0?q=${currentLatLng.latitude}, ${currentLatLng.longitude}(${response.result.formatted_address})")
+
                                                 val gmmIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
                                                 gmmIntent.setPackage("com.google.android.apps.maps")
                                                 if(gmmIntent.resolveActivity(packageManager) != null) {

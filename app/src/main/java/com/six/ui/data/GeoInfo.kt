@@ -1,4 +1,4 @@
-package com.six.ui.core
+package com.six.ui.data
 
 /**
  * @CopyRight six.ca

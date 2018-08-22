@@ -1,4 +1,4 @@
-package com.six.ui.core
+package com.six.ui.data
 
 import io.reactivex.Observable
 import retrofit2.Call
