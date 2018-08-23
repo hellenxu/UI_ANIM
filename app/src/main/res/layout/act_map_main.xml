@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1"/>
+        app:layout_constraintGuide_percent="0.05"/>
 
     <TextView
         android:text="@string/google_map_in_fragment"

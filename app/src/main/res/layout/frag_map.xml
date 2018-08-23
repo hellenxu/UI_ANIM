@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mapContainer"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" />
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75"/>
+
+    <FrameLayout
+        android:id="@+id/fagMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/separator"/>
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/separator"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbLocT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_old_toronto" />
+
+        <RadioButton
+            android:id="@+id/rbLocM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_m" />
+
+        <RadioButton
+            android:id="@+id/rbLocC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_cal" />
+    </RadioGroup>
+
+</android.support.constraint.ConstraintLayout>
