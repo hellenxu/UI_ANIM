@@ -1,14 +1,11 @@
 package com.six.ui.map
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -55,7 +52,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, View.OnClickListener {
             mapFragment!!.getMapAsync(this)
         }
 
-        childFragmentManager.beginTransaction().replace(R.id.fagMap, mapFragment).commit()
+        childFragmentManager.beginTransaction().add(R.id.fagMap, mapFragment).commit()
 
         return itemView
     }
@@ -71,8 +68,6 @@ class MapFragment: Fragment(), OnMapReadyCallback, View.OnClickListener {
         map = googleMap
         map.uiSettings.isMapToolbarEnabled = false
         map.uiSettings.setAllGesturesEnabled(false)
-//        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(43.6434476,-79.3831327), 15f))
-//        map.addMarker(MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.blue_marker)).position(LatLng(43.6434476,-79.3831327)))
     }
 
     private fun onCheckBoxClick(view: View) {

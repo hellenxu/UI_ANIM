@@ -11,15 +11,10 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.75"/>
 
-    <FrameLayout
-        android:id="@+id/fagMap"
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:padding="2dp"
-        android:clipChildren="true"
-        android:clipToPadding="true"
-        android:background="@drawable/red_rectangle"
-        android:foreground="@drawable/red_rectangle"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/separator"/>
 
     <RadioGroup
