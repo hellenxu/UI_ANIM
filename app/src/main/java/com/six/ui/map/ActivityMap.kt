@@ -6,14 +6,14 @@ import android.content.Intent
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
+import android.os.Looper
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.RadioButton
 import android.widget.Toast
 import ca.six.util.IAfterDo
 import ca.six.util.Permission6
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -42,6 +42,9 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
     private lateinit var map: GoogleMap
     private var currentLatLng: LatLng = LatLng(0.0, 0.0)
     private lateinit var fusedLocClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+
     val YORK = LatLng(43.6434476,-79.3831327)
     val RATHBURN = LatLng(43.6077226,-79.6005062)
     val CAL = LatLng(51.0522336,-114.05637)
@@ -55,6 +58,21 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
         mapFragment.getMapAsync(this)
 
         fusedLocClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationRequest = LocationRequest()
+        locationRequest.setInterval(60000)
+                .setFastestInterval(5000)
+                .priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(result: LocationResult) {
+                val locationList = result.locations
+                if(locationList.size > 0) {
+                    val location = locationList.get(locationList.size - 1)
+                    println("xxl-latest-location: ${location.latitude}, ${location.longitude}")
+                }
+            }
+        }
     }
 
 
@@ -324,12 +342,17 @@ class ActivityMap : AppCompatActivity(), OnMapReadyCallback, IAfterDo{
         map.isMyLocationEnabled = false
         map.uiSettings.setAllGesturesEnabled(false)
 
+        fusedLocClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper())
+
         fusedLocClient.lastLocation
                 .addOnSuccessListener { location: Location? ->
                     if(location != null) {
                         println("xxl-currentLoc=(${location.latitude}, ${location.longitude})")
                     }
                 }
+
+
+
     }
 
 }
