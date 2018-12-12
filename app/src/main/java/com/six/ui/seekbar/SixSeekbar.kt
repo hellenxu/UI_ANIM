@@ -5,10 +5,13 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.RectF
 import android.graphics.drawable.Animatable
 import android.util.AttributeSet
+import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
+import android.widget.Toast
 
 /**
  * @CopyRight six.ca
@@ -20,6 +23,7 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
     private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val foregroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
     private val loadingAnimator: ValueAnimator
+    private val backRectF: RectF
 
     private var currentUsage: Float = 0f
     private var currentRight: Float = 0f
@@ -39,19 +43,23 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
             computeProgress(animation.getAnimatedValue() as Float)
             invalidate()
         }
-        loadingAnimator.duration = 600
+        loadingAnimator.duration = 1500
 
-        currentUsage = 400f
+        currentUsage = 800f
+
+        backRectF = RectF(110f, 200f, 1000f, 200f + 100)
+
     }
 
     private fun computeProgress(percentage: Float) {
         currentRight = percentage * currentUsage
+        currentUsage = 800f
     }
 
     //TODO
     override fun onDraw(canvas: Canvas) {
-        canvas.drawRoundRect(110f, 200f, 600f, 200f + 80, 10f,10f, backgroundPaint)
-        canvas.drawRoundRect(110f, 200f, currentRight, 200f + 80, 10f,10f, foregroundPaint)
+        canvas.drawRoundRect(backRectF, 20f,20f, backgroundPaint)
+        canvas.drawRoundRect(110f, 200f, currentRight, 200f + 100, 20f,20f, foregroundPaint)
     }
 
     override fun isRunning(): Boolean {
@@ -65,5 +73,24 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
     override fun stop() {
         loadingAnimator.cancel()
     }
+
+    //TODO increase touching sensitivity
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if ((event.action == MotionEvent.ACTION_DOWN) and (backRectF.contains(event.x, event.y))) {
+            val percentage: Float
+            if(event.x < backRectF.width()) {
+                percentage = event.x / backRectF.width()
+            } else {
+                percentage = 1f
+                currentUsage = backRectF.right
+            }
+            computeProgress(percentage)
+            invalidate()
+            return true
+        } else {
+            return super.onTouchEvent(event)
+        }
+    }
+
 
 }
