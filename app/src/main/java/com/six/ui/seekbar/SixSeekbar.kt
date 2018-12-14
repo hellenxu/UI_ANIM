@@ -19,14 +19,21 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
     private val foregroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+    private val textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
     private val loadingAnimator: ValueAnimator
     private val backRectF: RectF
     private val metrics = resources.displayMetrics
-    private val MIN_HEIGHT = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50f, metrics)
+    private val MIN_HEIGHT = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80f, metrics)
+    private val textBounds = Rect()
+    private val text2Bounds = Rect()
+    private val TEXT = "Used 75%"
+    private val TEXT2 = "HUHU"
 
     private var currentUsage: Float = 0f
     private var currentRight: Float = 0f
     private var roundCornerRadius = 0f
+    private var isLoadingFinished = false
+
 
     init {
         //paint init
@@ -36,10 +43,14 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
         foregroundPaint.color = Color.parseColor("#FFB6C1")
         foregroundPaint.style = Paint.Style.FILL
 
+        textPaint.color = Color.BLACK
+        textPaint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, metrics)
+
         //animation init
         loadingAnimator = ValueAnimator.ofFloat(0f, 1f)
         loadingAnimator.interpolator = LinearInterpolator()
         loadingAnimator.addUpdateListener { animation ->
+            isLoadingFinished = animation.animatedFraction == 1f
             computeProgress(animation.getAnimatedValue() as Float)
             invalidate()
         }
@@ -54,21 +65,26 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     private fun computeProgress(percentage: Float) {
         currentRight = percentage * currentUsage
-        currentUsage = 800f
     }
 
     //TODO
     override fun onDraw(canvas: Canvas) {
-//        canvas.save()
         canvas.drawRoundRect(backRectF, roundCornerRadius,roundCornerRadius, backgroundPaint)
-        canvas.clipRect(currentRight - roundCornerRadius, backRectF.top, currentRight, backRectF.bottom, Region.Op.DIFFERENCE)
-        canvas.drawRoundRect(backRectF.left, backRectF.top, currentRight, backRectF.bottom, roundCornerRadius,roundCornerRadius, foregroundPaint)
-//        canvas.restore()
+        canvas.clipRect(currentRight, backRectF.top, currentRight + roundCornerRadius, backRectF.bottom, Region.Op.DIFFERENCE)
+        canvas.drawRoundRect(backRectF.left, backRectF.top, currentRight + roundCornerRadius, backRectF.bottom, roundCornerRadius,roundCornerRadius, foregroundPaint)
+
+        if(isLoadingFinished) {
+            canvas.drawText(TEXT, currentRight - textBounds.width() / 2 , backRectF.top * 0.8f, textPaint)
+            canvas.drawText(TEXT2, backRectF.left , backRectF.bottom + text2Bounds.height() * 1.2f, textPaint)
+        }
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        backRectF.set((left + 30).toFloat(), (top + 30).toFloat(), (right - 30).toFloat() , (bottom - 30).toFloat())
+        textPaint.getTextBounds(TEXT, 0, TEXT.length, textBounds)
+        textPaint.getTextBounds(TEXT2, 0, TEXT2.length, text2Bounds)
+        backRectF.set((left + 30).toFloat(), (top + textBounds.height() * 2).toFloat(), (right - 30).toFloat() , (bottom - text2Bounds.height() * 2).toFloat())
+        currentUsage = backRectF.right * 0.75f
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
