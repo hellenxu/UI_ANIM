@@ -67,23 +67,36 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
         currentRight = percentage * currentUsage
     }
 
-    //TODO
+    private fun dp2px(dp: Float): Float {
+        return dp * metrics.density
+    }
+
     override fun onDraw(canvas: Canvas) {
+
         canvas.drawRoundRect(backRectF, roundCornerRadius,roundCornerRadius, backgroundPaint)
         canvas.clipRect(currentRight, backRectF.top, currentRight + roundCornerRadius, backRectF.bottom, Region.Op.DIFFERENCE)
         canvas.drawRoundRect(backRectF.left, backRectF.top, currentRight + roundCornerRadius, backRectF.bottom, roundCornerRadius,roundCornerRadius, foregroundPaint)
 
         if(isLoadingFinished) {
-            canvas.drawText(TEXT, currentRight - textBounds.width() / 2 , backRectF.top * 0.8f, textPaint)
-            canvas.drawText(TEXT2, backRectF.left , backRectF.bottom + text2Bounds.height() * 1.2f, textPaint)
+            canvas.drawText(TEXT, currentRight - textBounds.width() / 2 , backRectF.top  - dp2px(5f), textPaint)
+            canvas.drawText(TEXT2, backRectF.left , backRectF.bottom + text2Bounds.height() + dp2px(5f), textPaint)
         }
+
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         textPaint.getTextBounds(TEXT, 0, TEXT.length, textBounds)
         textPaint.getTextBounds(TEXT2, 0, TEXT2.length, text2Bounds)
-        backRectF.set((left + 30).toFloat(), (top + textBounds.height() * 2).toFloat(), (right - 30).toFloat() , (bottom - text2Bounds.height() * 2).toFloat())
+        val drawingRect = Rect()
+        getDrawingRect(drawingRect)
+//        backRectF.set(left + dp2px(10f), top + textBounds.height() + dp2px(10f), right - dp2px(10f) , bottom - text2Bounds.height() - dp2px(10f))
+        println("xxl-left:$left; rect-left: ${drawingRect.left}")
+        println("xxl-right:$right; rect-right: ${drawingRect.right}")
+        println("xxl-top:$top; rect-top: ${drawingRect.top}")
+        println("xxl-bottom:$bottom; rect-bottom: ${drawingRect.bottom}")
+
+        backRectF.set(drawingRect.left + dp2px(10f), drawingRect.top + textBounds.height() + dp2px(10f), drawingRect.right - dp2px(10f) , drawingRect.bottom - text2Bounds.height() - dp2px(10f))
         currentUsage = backRectF.right * 0.75f
     }
 
