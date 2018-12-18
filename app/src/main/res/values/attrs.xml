@@ -68,4 +68,10 @@
 		<attr name="hour_width" format="dimension"/>
 		<attr name="min_width" format="dimension"/>
 	</declare-styleable>
+
+	<declare-styleable name="SixSeekbar">
+        <attr name="bg_color" format="color|reference"/>
+        <attr name="fg_color" format="color|reference"/>
+        <attr name="txtSize" format="dimension"/>
+    </declare-styleable>
 </resources>

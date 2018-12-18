@@ -19,4 +19,5 @@
 	<dimen name="logo_right_height">48dp</dimen>
 
 	<dimen name="item_insets">5dp</dimen>
+	<dimen name="txt_size">16dp</dimen>
 </resources>

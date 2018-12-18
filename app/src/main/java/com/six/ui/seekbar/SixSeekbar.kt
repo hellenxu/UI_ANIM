@@ -9,6 +9,7 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import android.view.animation.LinearInterpolator
+import com.six.ui.R
 
 /**
  * @CopyRight six.ca
@@ -17,9 +18,9 @@ import android.view.animation.LinearInterpolator
 class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr), Animatable {
 
-    private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG)
-    private val foregroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
-    private val textPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+    private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
+    private val foregroundPaint: Paint = Paint(backgroundPaint)
+    private val textPaint: Paint = Paint(backgroundPaint)
     private val loadingAnimator: ValueAnimator
     private val backRectF: RectF
     private val metrics = resources.displayMetrics
@@ -36,15 +37,19 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
 
     init {
+
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.SixSeekbar)
         //paint init
-        backgroundPaint.color = Color.parseColor("#FFF0F5")
+        backgroundPaint.color = ta.getColor(R.styleable.SixSeekbar_bg_color, Color.parseColor("#FFF0F5"))
         backgroundPaint.style = Paint.Style.FILL
 
-        foregroundPaint.color = Color.parseColor("#FFB6C1")
+        foregroundPaint.color = ta.getColor(R.styleable.SixSeekbar_fg_color, Color.parseColor("#FFB6C1"))
         foregroundPaint.style = Paint.Style.FILL
 
         textPaint.color = Color.BLACK
-        textPaint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, metrics)
+        textPaint.textSize = ta.getDimension(R.styleable.SixSeekbar_txtSize, resources.getDimension(R.dimen.txt_size))
+
+        ta.recycle()
 
         //animation init
         loadingAnimator = ValueAnimator.ofFloat(0f, 1f)
@@ -86,6 +91,7 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+
         textPaint.getTextBounds(TEXT, 0, TEXT.length, textBounds)
         textPaint.getTextBounds(TEXT2, 0, TEXT2.length, text2Bounds)
         val drawingRect = Rect()
@@ -98,6 +104,7 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
         backRectF.set(drawingRect.left + dp2px(10f), drawingRect.top + textBounds.height() + dp2px(10f), drawingRect.right - dp2px(10f) , drawingRect.bottom - text2Bounds.height() - dp2px(10f))
         currentUsage = backRectF.right * 0.75f
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
