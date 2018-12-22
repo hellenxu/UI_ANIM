@@ -92,10 +92,8 @@ class SixSeekbarV2 @JvmOverloads constructor(context: Context, attrs: AttributeS
         } else {
             canvas.drawArc(arcRectF, 90f, 180f, false, foregroundPaint)
             fgRectF.right = currentRight
-//            fgRectF.left = backRectF.left + radius
             canvas.drawRect(fgRectF, foregroundPaint)
         }
-//        canvas.drawRoundRect(backRectF.left, backRectF.top, currentRight + roundCornerRadius, backRectF.bottom, roundCornerRadius,roundCornerRadius, foregroundPaint)
 
         if(isLoadingFinished) {
             canvas.drawText(TEXT, currentRight - textBounds.width() / 2 , backRectF.top  - dp2px(5f), textPaint)
