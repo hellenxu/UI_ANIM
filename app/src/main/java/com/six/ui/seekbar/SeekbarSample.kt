@@ -14,15 +14,19 @@ class SeekbarSample: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_seekbar)
+
+        bar2.setRatio(.08f)
     }
 
     override fun onResume() {
         super.onResume()
-        usage.start()
+//        usage.start()
+        bar2.start()
     }
 
     override fun onPause() {
         super.onPause()
-        usage.stop()
+//        usage.stop()
+        bar2.start()
     }
 }
