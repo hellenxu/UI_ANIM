@@ -15,7 +15,7 @@ import com.six.ui.R
  * @CopyRight six.ca
  * Created by Heavens on 2018-12-11.
  */
-class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+class SixProgressbar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr), Animatable {
 
     private val backgroundPaint: Paint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.DITHER_FLAG)
@@ -38,16 +38,16 @@ class SixSeekbar @JvmOverloads constructor(context: Context, attrs: AttributeSet
 
     init {
 
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.SixSeekbar)
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.SixProgressbar)
         //paint init
-        backgroundPaint.color = ta.getColor(R.styleable.SixSeekbar_bg_color, Color.parseColor("#FFF0F5"))
+        backgroundPaint.color = ta.getColor(R.styleable.SixProgressbar_bg_color, Color.parseColor("#FFF0F5"))
         backgroundPaint.style = Paint.Style.FILL
 
-        foregroundPaint.color = ta.getColor(R.styleable.SixSeekbar_fg_color, Color.parseColor("#FFB6C1"))
+        foregroundPaint.color = ta.getColor(R.styleable.SixProgressbar_fg_color, Color.parseColor("#FFB6C1"))
         foregroundPaint.style = Paint.Style.FILL
 
         textPaint.color = Color.BLACK
-        textPaint.textSize = ta.getDimension(R.styleable.SixSeekbar_txtSize, resources.getDimension(R.dimen.txt_size))
+        textPaint.textSize = ta.getDimension(R.styleable.SixProgressbar_txtSize, resources.getDimension(R.dimen.txt_size))
 
         ta.recycle()
 
