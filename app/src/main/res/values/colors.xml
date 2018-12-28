@@ -42,8 +42,8 @@
 
 	<color name="light_green">#afdfe4</color>
 
-	<color name="defBorderColor">#FFC0CB</color>
-    <color name="defLimitColor">#F5F5DC</color>
-    <color name="defUsedColor">#FFE5B4</color>
+	<color name="defBorderColor">#66cc00</color>
+    <color name="defLimitColor">#B2E57F</color>
+    <color name="defUsedColor">#66cc00</color>
     <color name="defTextColor">#808080</color>
 </resources>

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <!--<com.six.ui.seekbar.SixProgressbar android:layout_width="match_parent" android:layout_height="wrap_content"-->
         <!--android:layout_margin="40dp"-->
@@ -15,4 +16,12 @@
         android:id="@+id/slider"
         android:layout_width="match_parent" android:layout_height="wrap_content"
         android:layout_margin="15dp"/>
-</android.support.constraint.ConstraintLayout>
+
+    <com.six.ui.seekbar.SixSeekbar
+        android:id="@+id/slider2"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        app:bgColor="#6e3ba1"
+        app:limitColor="#e6ddef"
+        app:usedColor="#b69dd0"
+        android:layout_margin="15dp"/>
+</LinearLayout>

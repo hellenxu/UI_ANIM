@@ -7,7 +7,9 @@ import android.view.View
 import android.support.v4.content.ContextCompat
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.MotionEvent
 import com.six.ui.R
+import java.text.DecimalFormat
 
 /**
  * @CopyRight six.ca
@@ -17,12 +19,12 @@ import com.six.ui.R
 
 class SixSeekbar @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr){
+) : View(context, attrs, defStyleAttr) {
 
     companion object {
 
         //default text settings
-        const val DEFAULT_LIMIT = "8 GB"
+        const val DEFAULT_LIMIT = "%s GB"
 
         //default dimensions in dp
         const val HORIZONTAL_OFFSET = 10f
@@ -39,14 +41,22 @@ class SixSeekbar @JvmOverloads constructor(
     private val metrics: DisplayMetrics = resources.displayMetrics
     private val limitBounds = Rect()
     private val roundCorner: Float
+    private val decFormat = DecimalFormat("#.00")
 
 
     private var frameRectF = RectF(50f, 310f, 1350f, 310f + 120)
     private var usedRatio = 0.2f
     private var limitRatio = 0.6f
     private var usedRight = 0f
+    private var currentUsedRight = 0f
     private var limitRight = 0f
+    private var currentLimitRight = 0f
     private var limitText = DEFAULT_LIMIT
+    private var circleX = 0f
+    private var circleY = 0f
+    private var txtPosX = 0f
+    private var txtPosY = 0f
+    private var totalLimit = 8
 
     init {
         graphicInit(attrs)
@@ -55,20 +65,20 @@ class SixSeekbar @JvmOverloads constructor(
 
 
     private fun graphicInit(attrs: AttributeSet?) {
-        val ta = context.obtainStyledAttributes(attrs, R.styleable.SixSeeksbar)
+        val ta = context.obtainStyledAttributes(attrs, R.styleable.SixSeekbar)
 
-        framePaint.color = ta.getColor(R.styleable.SixSeeksbar_bgColor, ContextCompat.getColor(context, R.color.defBorderColor))
+        framePaint.color = ta.getColor(R.styleable.SixSeekbar_bgColor, ContextCompat.getColor(context, R.color.defBorderColor))
         framePaint.style = Paint.Style.STROKE
         framePaint.strokeWidth = dp2px(1f)
 
-        limitPaint.color = ta.getColor(R.styleable.SixSeeksbar_limitColor, ContextCompat.getColor(context, R.color.defLimitColor))
+        limitPaint.color = ta.getColor(R.styleable.SixSeekbar_limitColor, ContextCompat.getColor(context, R.color.defLimitColor))
         limitPaint.style = Paint.Style.FILL
 
-        usedPaint.color = ta.getColor(R.styleable.SixSeeksbar_usedColor, ContextCompat.getColor(context, R.color.defUsedColor))
+        usedPaint.color = ta.getColor(R.styleable.SixSeekbar_usedColor, ContextCompat.getColor(context, R.color.defUsedColor))
         usedPaint.style = Paint.Style.FILL
 
-        textPaint.color = ContextCompat.getColor(context,R.color.defTextColor)
-        textPaint.textSize = ta.getDimension(R.styleable.SixSeeksbar_textSize,
+        textPaint.color = ContextCompat.getColor(context, R.color.defTextColor)
+        textPaint.textSize = ta.getDimension(R.styleable.SixSeekbar_textSize,
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 14f, metrics))
 
         ta.recycle()
@@ -78,12 +88,10 @@ class SixSeekbar @JvmOverloads constructor(
 
     override fun onDraw(canvas: Canvas) {
         canvas.drawRoundRect(frameRectF, roundCorner, roundCorner, framePaint)
-
-        val offset = framePaint.strokeWidth
-//        canvas.drawRoundRect(frameRectF.left + offset , frameRectF.top + offset, limitRight, frameRectF.bottom - offset, roundCorner, roundCorner, limitPaint)
-//        canvas.drawRoundRect(frameRectF.left + offset, frameRectF.top + offset, usedRight, frameRectF.bottom - offset, roundCorner, roundCorner, usedPaint)
-        canvas.drawRoundRect(frameRectF.left  , frameRectF.top, limitRight, frameRectF.bottom, roundCorner, roundCorner, limitPaint)
-        canvas.drawRoundRect(frameRectF.left, frameRectF.top, usedRight, frameRectF.bottom, roundCorner, roundCorner, usedPaint)
+        canvas.drawRoundRect(frameRectF.left, frameRectF.top, currentLimitRight, frameRectF.bottom, roundCorner, roundCorner, limitPaint)
+        if(currentUsedRight <= currentLimitRight) {
+            canvas.drawRoundRect(frameRectF.left, frameRectF.top, currentUsedRight, frameRectF.bottom, roundCorner, roundCorner, usedPaint)
+        }
 
         drawText(canvas)
         drawIndicator(canvas)
@@ -120,6 +128,14 @@ class SixSeekbar @JvmOverloads constructor(
 
         limitRight = (limitRatio * frameRectF.right)
         usedRight = (usedRatio * limitRight)
+        currentLimitRight = limitRight
+        currentUsedRight = usedRight
+
+        circleX = limitRight
+        circleY = frameRectF.top + frameRectF.height() / 2
+
+        txtPosX = frameRectF.right + dp2px(HORIZONTAL_OFFSET)
+        txtPosY = frameRectF.top + frameRectF.height() / 2 + limitBounds.height() / 2
     }
 
     private fun dp2px(dp: Float): Float {
@@ -127,16 +143,14 @@ class SixSeekbar @JvmOverloads constructor(
     }
 
     private fun drawText(canvas: Canvas) {
-        val x = frameRectF.right + dp2px(HORIZONTAL_OFFSET)
-        val y = frameRectF.top + frameRectF.height() / 2 + limitBounds.height() / 2
-        canvas.drawText(limitText, x, y, textPaint)
+        val currentRatio = decFormat.format(currentLimitRight / (frameRectF.right - dp2px(INDICATOR_RADIUS)) * totalLimit)
+        limitText = String.format(DEFAULT_LIMIT, currentRatio)
+        canvas.drawText(limitText, txtPosX, txtPosY, textPaint)
     }
 
     private fun drawIndicator(canvas: Canvas) {
-        val cx = limitRight
-        val cy = frameRectF.top + frameRectF.height() / 2
-        canvas.drawCircle(cx, cy, dp2px(INDICATOR_RADIUS), framePaint)
-        canvas.drawCircle(cx, cy, dp2px(INDICATOR_RADIUS), limitPaint)
+        canvas.drawCircle(circleX, circleY, dp2px(INDICATOR_RADIUS), framePaint)
+        canvas.drawCircle(circleX, circleY, dp2px(INDICATOR_RADIUS), limitPaint)
     }
 
     fun setLimitColor(color: Int) {
@@ -154,5 +168,23 @@ class SixSeekbar @JvmOverloads constructor(
     fun setUsedRatio(ratio: Float) {
         usedRatio = ratio
     }
+
+    fun setTotalLimit(total: Int) {
+        totalLimit = total
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        when (event.action) {
+            MotionEvent.ACTION_MOVE -> {
+                val targetX = Math.max(Math.min(event.x, frameRectF.right - dp2px(INDICATOR_RADIUS)), frameRectF.left + dp2px(INDICATOR_RADIUS))
+                circleX = targetX
+                currentLimitRight = targetX
+                invalidate()
+            }
+        }
+        return true
+    }
+
+
 
 }

@@ -75,7 +75,7 @@
         <attr name="txtSize" format="dimension"/>
 	</declare-styleable>
 
-	<declare-styleable name="SixSeeksbar">
+	<declare-styleable name="SixSeekbar">
 		<attr name="bgColor" format="color|reference"/>
 		<attr name="limitColor" format="color|reference"/>
 		<attr name="usedColor" format="color|reference"/>
