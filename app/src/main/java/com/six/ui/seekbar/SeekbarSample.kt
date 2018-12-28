@@ -14,7 +14,7 @@ class SeekbarSample: Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_seekbar)
-
+        slider2.setUsedRatio(.6f)
     }
 
 //    override fun onResume() {

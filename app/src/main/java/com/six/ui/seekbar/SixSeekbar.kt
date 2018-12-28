@@ -24,7 +24,8 @@ class SixSeekbar @JvmOverloads constructor(
     companion object {
 
         //default text settings
-        const val DEFAULT_LIMIT = "%s GB"
+        const val DEFAULT_LIMIT = "8.00 GB"
+        const val LIMIT_FORMAT = "%s GB"
 
         //default dimensions in dp
         const val HORIZONTAL_OFFSET = 10f
@@ -144,7 +145,7 @@ class SixSeekbar @JvmOverloads constructor(
 
     private fun drawText(canvas: Canvas) {
         val currentRatio = decFormat.format(currentLimitRight / (frameRectF.right - dp2px(INDICATOR_RADIUS)) * totalLimit)
-        limitText = String.format(DEFAULT_LIMIT, currentRatio)
+        limitText = String.format(LIMIT_FORMAT, currentRatio)
         canvas.drawText(limitText, txtPosX, txtPosY, textPaint)
     }
 
