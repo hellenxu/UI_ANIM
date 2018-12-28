@@ -73,5 +73,12 @@
         <attr name="bg_color" format="color|reference"/>
         <attr name="fg_color" format="color|reference"/>
         <attr name="txtSize" format="dimension"/>
+	</declare-styleable>
+
+	<declare-styleable name="SixSeeksbar">
+		<attr name="bgColor" format="color|reference"/>
+		<attr name="limitColor" format="color|reference"/>
+		<attr name="usedColor" format="color|reference"/>
+		<attr name="textSize" format="dimension"/>
     </declare-styleable>
 </resources>

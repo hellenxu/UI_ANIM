@@ -15,18 +15,17 @@ class SeekbarSample: Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_seekbar)
 
-        bar2.setRatio(.08f)
     }
 
-    override fun onResume() {
-        super.onResume()
+//    override fun onResume() {
+//        super.onResume()
 //        usage.start()
-        bar2.start()
-    }
-
-    override fun onPause() {
-        super.onPause()
+////        bar2.start()
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
 //        usage.stop()
-        bar2.start()
-    }
+////        bar2.start()
+//    }
 }

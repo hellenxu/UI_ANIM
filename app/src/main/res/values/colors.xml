@@ -41,4 +41,9 @@
 	<color name="colorAccent">#FF4081</color>
 
 	<color name="light_green">#afdfe4</color>
+
+	<color name="defBorderColor">#FFC0CB</color>
+    <color name="defLimitColor">#F5F5DC</color>
+    <color name="defUsedColor">#FFE5B4</color>
+    <color name="defTextColor">#808080</color>
 </resources>
