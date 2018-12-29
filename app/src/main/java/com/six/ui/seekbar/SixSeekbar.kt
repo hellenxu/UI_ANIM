@@ -58,6 +58,7 @@ class SixSeekbar @JvmOverloads constructor(
     private var txtPosX = 0f
     private var txtPosY = 0f
     private var totalLimit = 8
+    private var isFinished = true
 
     init {
         graphicInit(attrs)
@@ -115,6 +116,8 @@ class SixSeekbar @JvmOverloads constructor(
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(realHeight, heightMode))
     }
 
+    private val touchRectF = RectF()
+
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
         val drawingRect = Rect()
@@ -137,6 +140,12 @@ class SixSeekbar @JvmOverloads constructor(
 
         txtPosX = frameRectF.right + dp2px(HORIZONTAL_OFFSET)
         txtPosY = frameRectF.top + frameRectF.height() / 2 + limitBounds.height() / 2
+
+        val touchLeft = frameLeft
+        val touchTop = frameTop - (dp2px(INDICATOR_RADIUS) - frameRectF.height() / 2)
+        val touchRight = frameRight
+        val touchBottom = frameBottom + (dp2px(INDICATOR_RADIUS) - frameRectF.height() / 2)
+        touchRectF.set(touchLeft, touchTop, touchRight, touchBottom)
     }
 
     private fun dp2px(dp: Float): Float {
@@ -175,17 +184,29 @@ class SixSeekbar @JvmOverloads constructor(
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        when (event.action) {
-            MotionEvent.ACTION_MOVE -> {
-                val targetX = Math.max(Math.min(event.x, frameRectF.right - dp2px(INDICATOR_RADIUS)), frameRectF.left + dp2px(INDICATOR_RADIUS))
-                circleX = targetX
-                currentLimitRight = targetX
-                invalidate()
+        if(!isFinished or touchRectF.contains(event.x, event.y)) {
+            parent.requestDisallowInterceptTouchEvent(true) //not allow parent to take care of touch event
+            when (event.action) {
+
+                MotionEvent.ACTION_DOWN -> {
+                    isFinished = false
+                }
+
+                MotionEvent.ACTION_MOVE -> {
+                    val targetX = Math.max(Math.min(event.x, frameRectF.right - dp2px(INDICATOR_RADIUS)), frameRectF.left + dp2px(INDICATOR_RADIUS))
+                    circleX = targetX
+                    currentLimitRight = targetX
+                    invalidate()
+                }
+
+                MotionEvent.ACTION_UP -> {
+                    isFinished = true
+                }
             }
+
+            return true
         }
-        return true
+        return super.onTouchEvent(event)
     }
-
-
 
 }
