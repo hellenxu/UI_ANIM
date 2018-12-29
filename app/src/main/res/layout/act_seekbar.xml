@@ -12,16 +12,29 @@
         <!--app:layout_constraintTop_toTopOf="parent"-->
         <!--android:id="@+id/usage"/>-->
 
-    <com.six.ui.seekbar.SixSeekbar
-        android:id="@+id/slider"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:layout_margin="15dp"/>
+    <!--<com.six.ui.seekbar.SixSeekbar-->
+        <!--android:id="@+id/slider"-->
+        <!--android:layout_width="match_parent" android:layout_height="wrap_content"-->
+        <!--android:layout_margin="15dp"/>-->
 
-    <com.six.ui.seekbar.SixSeekbar
-        android:id="@+id/slider2"
-        android:layout_width="match_parent" android:layout_height="wrap_content"
-        app:bgColor="#6e3ba1"
-        app:limitColor="#e6ddef"
-        app:usedColor="#b69dd0"
-        android:layout_margin="15dp"/>
+    <!--<com.six.ui.seekbar.SixSeekbar-->
+        <!--android:id="@+id/slider2"-->
+        <!--android:layout_width="match_parent" android:layout_height="wrap_content"-->
+        <!--app:bgColor="#6e3ba1"-->
+        <!--app:limitColor="#e6ddef"-->
+        <!--app:usedColor="#b69dd0"-->
+        <!--android:layout_margin="15dp"/>-->
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/blue_color"
+        app:tabIndicatorHeight="6dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorAccent" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </LinearLayout>

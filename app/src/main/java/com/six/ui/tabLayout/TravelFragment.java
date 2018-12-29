@@ -21,9 +21,11 @@ public class TravelFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        TextView titleTextView = new TextView(getActivity());
-        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-        titleTextView.setText(R.string.txt_travel);
-        return titleTextView;
+//        TextView titleTextView = new TextView(getActivity());
+//        titleTextView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+//        titleTextView.setText(R.string.txt_travel);
+//        return titleTextView;
+
+        return inflater.inflate(R.layout.frag_travel, container, false);
     }
 }
