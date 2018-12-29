@@ -127,8 +127,8 @@ class SixSeekbar @JvmOverloads constructor(
 
         frameRectF.set(frameLeft, frameTop, frameRight, frameBottom)
 
-        limitRight = (limitRatio * frameRectF.right)
-        usedRight = (usedRatio * limitRight)
+        limitRight = (limitRatio * frameRectF.width()) + frameLeft
+        usedRight = (usedRatio * limitRatio * frameRectF.width()) + frameLeft
         currentLimitRight = limitRight
         currentUsedRight = usedRight
 
