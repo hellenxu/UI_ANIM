@@ -16,9 +16,6 @@ class SeekbarSample: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.act_seekbar)
-//        slider2.setLimitRatio(.7f)
-//        slider2.setUsedRatio(.05f)
-//        slider2.setTotalLimit(12)
 
         tabs.addTab(tabs.newTab().setText(R.string.txt_index))
         tabs.addTab(tabs.newTab().setText(R.string.txt_travel))
@@ -39,17 +36,4 @@ class SeekbarSample: AppCompatActivity() {
             }
         })
     }
-
-//    override fun onResume() {
-//        super.onResume()
-//        usage.start()
-////        bar2.start()
-//    }
-//
-//    override fun onPause() {
-//        super.onPause()
-//        usage.stop()
-////        bar2.start()
-//    }
-
 }
