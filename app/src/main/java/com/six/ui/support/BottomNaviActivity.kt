@@ -5,6 +5,8 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import com.six.ui.R
 import com.six.ui.tabLayout.PageAdapter
 import kotlinx.android.synthetic.main.act_bottom_nav.*
@@ -60,6 +62,12 @@ class BottomNaviActivity: AppCompatActivity() {
 
         })
 
+        //remove swiping of viewpager
+        vp.setOnTouchListener(object : View.OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                return true
+            }
+        })
         navMenu.setOnNavigationItemSelectedListener(onNavItemSelectedListener)
 
     }
