@@ -21,7 +21,9 @@
 
         <activity android:name=".seekbar.SeekbarActivity" />
 
-        <activity android:name=".support.BottomNaviActivity">
+        <activity android:name=".support.BottomNaviActivity"/>
+
+        <activity android:name=".scroll.ScrollViewActivity">
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
