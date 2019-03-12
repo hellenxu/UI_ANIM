@@ -68,7 +68,6 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
 
         roundCornerRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, metrics)
 
-//        setOnClickListener(this)
     }
 
     private fun computeProgress(percentage: Float) {
@@ -144,16 +143,15 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         loadingAnimator.cancel()
     }
 
-//    override fun onClick(v: View) {
-//        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
-//    }
 
-//    override fun performClick(): Boolean {
-//        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
-//        return super.performClick()
-//    }
+    override fun performClick(): Boolean {
+        super.performClick()
+        return true
+    }
+
     //TODO increase touching sensitivity; ACTION_MOVE
     override fun onTouchEvent(event: MotionEvent): Boolean {
+        performClick()
 
         if ((event.action == MotionEvent.ACTION_DOWN) and (backRectF.contains(event.x, event.y))) {
             val percentage: Float
@@ -178,7 +176,6 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         when (type) {
             AccessibilityEvent.TYPE_VIEW_FOCUSED -> {
                 event.text.add("meter")
-
             }
 
             AccessibilityEvent.TYPE_VIEW_SELECTED -> {
