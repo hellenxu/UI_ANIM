@@ -19,8 +19,9 @@
 
 
         <activity android:name=".seekbar.SeekbarActivity" />
+        <activity android:name=".scroll.ScrollViewActivity"/>
 
-        <activity android:name=".support.BottomNaviActivity" />
+        <activity android:name=".support.BottomNaviActivity"/>
 
         <activity android:name=".seekbar.SeekbarSample">
             <intent-filter>
