@@ -17,12 +17,13 @@
 
         <activity android:name=".map.ActivityMap" />
 
-        <activity android:name=".seekbar.SeekbarSample"/>
 
         <activity android:name=".seekbar.SeekbarActivity" />
 
-        <activity android:name=".support.BottomNaviActivity">
-        <intent-filter>
+        <activity android:name=".support.BottomNaviActivity" />
+
+        <activity android:name=".seekbar.SeekbarSample">
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

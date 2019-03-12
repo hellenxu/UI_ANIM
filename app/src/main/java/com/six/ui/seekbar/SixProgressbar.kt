@@ -8,6 +8,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
 import android.view.animation.LinearInterpolator
 import com.six.ui.R
 
@@ -66,6 +67,8 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         backRectF = RectF(110f, 200f, 1000f, 200f + 100)
 
         roundCornerRadius = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 16f, metrics)
+
+//        setOnClickListener(this)
     }
 
     private fun computeProgress(percentage: Float) {
@@ -105,6 +108,8 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         backRectF.set(drawingRect.left + dp2px(10f), drawingRect.top + textBounds.height() + dp2px(10f), drawingRect.right - dp2px(10f) , drawingRect.bottom - text2Bounds.height() - dp2px(10f))
         currentUsage = backRectF.right * 0.75f
 
+        loadingAnimator.start()
+
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -139,8 +144,17 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         loadingAnimator.cancel()
     }
 
+//    override fun onClick(v: View) {
+//        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
+//    }
+
+//    override fun performClick(): Boolean {
+//        sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
+//        return super.performClick()
+//    }
     //TODO increase touching sensitivity; ACTION_MOVE
     override fun onTouchEvent(event: MotionEvent): Boolean {
+
         if ((event.action == MotionEvent.ACTION_DOWN) and (backRectF.contains(event.x, event.y))) {
             val percentage: Float
             if(event.x < backRectF.width()) {
@@ -157,5 +171,24 @@ class SixProgressbar @JvmOverloads constructor(context: Context, attrs: Attribut
         }
     }
 
+    override fun onPopulateAccessibilityEvent(event: AccessibilityEvent) {
+        super.onPopulateAccessibilityEvent(event)
+
+        val type = event.eventType
+        when (type) {
+            AccessibilityEvent.TYPE_VIEW_FOCUSED -> {
+                event.text.add("meter")
+
+            }
+
+            AccessibilityEvent.TYPE_VIEW_SELECTED -> {
+                event.text.add(TEXT)
+                event.text.add(TEXT2)
+            }
+            else -> {
+                event.text.add("others")
+            }
+        }
+    }
 
 }
