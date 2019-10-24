@@ -1,12 +1,12 @@
 package com.six.ui.tabLayout;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.viewpager.widget.ViewPager;
+import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 
+import com.google.android.material.tabs.TabLayout;
 import com.six.ui.R;
 
 /**
@@ -21,13 +21,13 @@ public class MainActivity extends AppCompatActivity implements Main.View{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_tab);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.addTab(tabLayout.newTab().setText(R.string.txt_index));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.txt_travel));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.txt_offers));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.txt_details));
 
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        final ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(new PageAdapter(getSupportFragmentManager(), tabLayout.getTabCount()));
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 

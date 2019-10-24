@@ -1,8 +1,8 @@
 package com.six.ui.sequencelayout
 
 import android.content.Context
-import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
+import androidx.constraintlayout.widget.ConstraintLayout
 
 /**
  * @CopyRight six.ca

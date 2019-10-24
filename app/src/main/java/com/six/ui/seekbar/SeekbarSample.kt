@@ -1,8 +1,8 @@
 package com.six.ui.seekbar
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.tabs.TabLayout
 import com.six.ui.R
 import com.six.ui.tabLayout.PageAdapter
 import kotlinx.android.synthetic.main.act_seekbar.*

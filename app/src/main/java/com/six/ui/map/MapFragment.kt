@@ -1,7 +1,7 @@
 package com.six.ui.map
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +35,7 @@ class MapFragment: Fragment(), OnMapReadyCallback, View.OnClickListener {
         onCheckBoxClick(v!!)
     }
 
-    private var mapFragment: SupportMapFragment? = null
+    private lateinit var mapFragment: SupportMapFragment
     private lateinit var map: GoogleMap
     private var currentLatLng: LatLng = LatLng(0.0, 0.0)
     val YORK = LatLng(43.6434476,-79.3831327)
@@ -44,16 +44,15 @@ class MapFragment: Fragment(), OnMapReadyCallback, View.OnClickListener {
     val ZOOM_LEVEL = 15f
 
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val itemView = inflater?.inflate(R.layout.frag_map, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val itemView = inflater.inflate(R.layout.frag_map, container, false)
 
-        if(mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance()
-            mapFragment!!.getMapAsync(this)
-        }
+        mapFragment = SupportMapFragment.newInstance()
+        mapFragment.getMapAsync(this)
 
-        childFragmentManager.beginTransaction().add(R.id.fagMap, mapFragment).commit()
+        childFragmentManager.beginTransaction().add(R.id.fagMap, mapFragment)
 
+//        add(R.id.fagMap, mapFragment).commit()
         return itemView
     }
 

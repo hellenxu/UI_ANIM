@@ -2,9 +2,10 @@ package com.six.ui.constraintlayout;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+
 import android.transition.TransitionManager;
 import android.view.View;
 import android.widget.Button;
@@ -28,7 +29,7 @@ public class ConstraintSample extends Activity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_constraint_code_sample);
-        ctlay = (ConstraintLayout) findViewById(R.id.ctlay);
+        ctlay = findViewById(R.id.ctlay);
         applySet.clone(ctlay); //clone is used to copy the original constraint set
         centerSet.clone(ctlay);
         resetSet.clone(ctlay);
@@ -71,7 +72,7 @@ public class ConstraintSample extends Activity {
         buttonASet.setVisibility(R.id.btn_b, ConstraintSet.GONE);
         buttonASet.setVisibility(R.id.btn_c, ConstraintSet.GONE);
 
-        Button btnApply = (Button) findViewById(R.id.btn_apply);
+        Button btnApply = findViewById(R.id.btn_apply);
 //        buttonASet.clear(R.id.btn_a);
         buttonASet.connect(R.id.btn_a, ConstraintSet.START, R.id.ctlay, ConstraintSet.START, 0);
         buttonASet.connect(R.id.btn_a, ConstraintSet.END, R.id.ctlay, ConstraintSet.END, 0);

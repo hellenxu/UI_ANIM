@@ -1,10 +1,11 @@
 package com.six.ui.recyclerview;
 
 import android.graphics.Color;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 
 import com.six.ui.R;
+
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 
 /**

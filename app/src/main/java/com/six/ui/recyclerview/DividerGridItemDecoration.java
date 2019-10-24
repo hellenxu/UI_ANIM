@@ -5,11 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 /**
  * @author hellenxu
@@ -35,7 +35,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
 
     private int getSpanCount(RecyclerView parent) {
         int spanCount = -1;
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             spanCount = ((GridLayoutManager) layoutManager).getSpanCount();
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
@@ -73,7 +73,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private boolean isLastColumn(RecyclerView parent, int pos, int spanCount, int childCount) {
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             if ((pos + 1) % spanCount == 0) {
                 return true;
@@ -97,7 +97,7 @@ public class DividerGridItemDecoration extends RecyclerView.ItemDecoration {
     }
 
     private boolean isLastRow(RecyclerView parent, int pos, int spanCount, int childCount) {
-        LayoutManager layoutManager = parent.getLayoutManager();
+        RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             childCount = childCount - childCount % spanCount;
             if (pos >= childCount) {

@@ -30,18 +30,6 @@
 		<attr name="quoteGapWidth" format="dimension"/>
 	</declare-styleable>
 
-	<!-- CreditCardView -->
-	<declare-styleable name="SixCC">
-		<attr name="card_cvv" format="integer"/>
-		<attr name="card_holder" format="string"/>
-		<attr name="card_expiry" format="string"/>
-		<attr name="number" format="string"/>
-		<attr name="side" format="enum">
-			<enum name="front" value="1"/>
-			<enum name="back" value="0"/>
-		</attr>
-	</declare-styleable>
-
 	<declare-styleable name="Polygon">
 		<attr name="radius" format="dimension|reference" />
 		<attr name="outerWidth" format="dimension|reference" />

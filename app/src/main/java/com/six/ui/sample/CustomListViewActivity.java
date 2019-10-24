@@ -3,7 +3,7 @@ package com.six.ui.sample;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.widget.ListView;
 
 import com.six.ui.customlistview.GridListViewAdapter;
