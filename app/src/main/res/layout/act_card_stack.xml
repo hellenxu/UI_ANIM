@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_container_mlay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/card_stack">
+    app:layoutDescription="@xml/card_stack_motion_scene">
 
     <RelativeLayout
-        android:id="@+id/bottomCard"
+        android:id="@+id/next_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="60dp"
         android:background="@color/design_default_color_secondary" />
 
     <RelativeLayout
-        android:id="@+id/topCard"
+        android:id="@+id/current_card"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="60dp"
         android:background="@color/blue_200" />
+
+    <ImageView
+        android:id="@+id/like_icon"
+        android:src="@drawable/ic_pets"
+        android:layout_width="0dp"
+        android:layout_height="0dp"/>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
