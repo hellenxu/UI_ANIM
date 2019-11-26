@@ -25,7 +25,9 @@
 
         <activity android:name=".seekbar.SeekbarSample" />
 
-        <activity android:name=".constraintlayout.CardStackSample">
+        <activity android:name=".constraintlayout.CardStackSample" />
+
+        <activity android:name=".seekbar.RubberSample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
