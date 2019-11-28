@@ -104,6 +104,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if (hitThumb(event?.x ?: 0f, event?.y ?: 0f)) {
+            println("xxl00")
             when (event?.action) {
                 MotionEvent.ACTION_DOWN -> {
                     draggingFinished = true
@@ -125,6 +126,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
                 }
             }
         }
+        println("xxl11")
 
         return super.onTouchEvent(event)
     }
@@ -132,8 +134,10 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
     private fun hitThumb(x: Float, y: Float): Boolean {
         val leftBound = currentStopX
         val rightBound = currentStopX + DEFAULT_THUMB_RADIUS * 2
-        val topBound = top + height / 2 - DEFAULT_THUMB_RADIUS
-        val bottomBound = top + height / 2 + DEFAULT_THUMB_RADIUS
+        val topBound = top + height / 2 - DEFAULT_THUMB_RADIUS * 1.1
+        val bottomBound = top + height / 2 + DEFAULT_THUMB_RADIUS * 1.1
+        println("xxl-x: $x; y: $y")
+        println("xxl-left: $leftBound; right: $rightBound; top: $topBound; bottom: $bottomBound")
         return x > leftBound && x < rightBound && y > topBound && y < bottomBound
     }
 
@@ -146,7 +150,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         private const val DEFAULT_PRIMARY_COLOR_ID = R.color.blue_500
         private const val SECONDARY_STROKE_WIDTH = 8F
         private const val PRIMARY_STROKE_WIDTH = 12F
-        private const val DEFAULT_THUMB_RADIUS = 12F
+        private const val DEFAULT_THUMB_RADIUS = 20F
     }
 
 }
