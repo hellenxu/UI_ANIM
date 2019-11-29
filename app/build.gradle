@@ -47,6 +47,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha02'
+
     testImplementation 'junit:junit:4.12'
     testImplementation 'org.mockito:mockito-all:1.10.19'
     testImplementation 'org.hamcrest:hamcrest-all:1.3'
