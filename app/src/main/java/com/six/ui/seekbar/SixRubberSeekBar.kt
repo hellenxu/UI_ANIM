@@ -32,8 +32,8 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
     }
     private val path = Path()
     private var springAnimation: SpringAnimation? = null
-    private var currentTrackX = 0f
-    private var currentTrackY = 0f
+    private var trackY = 0f
+    private var trackX = 0f
     private var thumbX = 0f
     private var thumbY = 0f
     private var currentPercentage = .6f
@@ -56,15 +56,15 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
         super.onLayout(changed, left, top, right, bottom)
-        currentTrackX = width * currentPercentage  + left
-        currentTrackY = (bottom - top) * 0.5f
-        thumbX = currentTrackX
-        thumbY = currentTrackY
+        trackX = width * currentPercentage  + left
+        trackY = (bottom - top) * 0.5f
+        thumbX = trackX
+        thumbY = trackY
     }
 
     override fun onDraw(canvas: Canvas?) {
         if (!draggingFinished) {
-            currentTrackX = left + width * currentPercentage
+            trackX = left + width * currentPercentage
 
             drawTrack(canvas)
             drawThumb(canvas)
@@ -74,12 +74,11 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
     private fun drawThumb(canvas: Canvas?) {
         paint.style = Paint.Style.FILL_AND_STROKE
         paint.color = ContextCompat.getColor(ctx, HIGHLIGHTED_TRACK_COLOR_ID)
-        canvas?.translate(thumbX, thumbY)
-        canvas?.drawCircle(0f, 0f, thumbRadius, paint)
+        canvas?.drawCircle(thumbX, thumbY, thumbRadius, paint)
     }
 
     private fun drawTrack(canvas: Canvas?) {
-        if (thumbY == currentTrackY) {
+        if (thumbY == trackY) {
             drawStaticState(canvas)
         } else {
             drawCubic(canvas)
@@ -99,18 +98,20 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         canvas?.drawLine(thumbX, y, right.toFloat(), y, paint)
     }
 
+    // correct coordinates
     private fun drawCubic(canvas: Canvas?) {
         // first part
         path.reset()
         paint.color = ContextCompat.getColor(ctx, HIGHLIGHTED_TRACK_COLOR_ID)
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = DEFAULT_HIGHLIGHTED_STROKE_WIDTH
-        val xOffSet = (currentTrackX - left) / 2
+        val xOffSet = (trackX - left) / 2
         val x1 = left + xOffSet
         val y1 = (top + height / 2).toFloat()
-        val x2 = x1
-        val y2 = thumbY
+        val x2 = (x1 + trackX) / 2
+        val y2 = y1 + height / 2
         println("xxl-first: x1 = $x1; y1 = $y1; x2 = $x2; y2 = $y2; thumbX = $thumbX; thumbY = $thumbY")
+        path.moveTo(left.toFloat(), trackY)
         path.cubicTo(x1, y1, x2, y2, thumbX, thumbY)
         canvas?.drawPath(path, paint)
 
@@ -119,8 +120,10 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         paint.color = ContextCompat.getColor(ctx, DEFAULT_TRACK_COLOR_ID)
         paint.strokeWidth = DEFAULT_NORMAL_STROKE_WIDTH
         println("xxl-second: x1 = $thumbX; y1 = $thumbY; x2 = ${thumbX + xOffSet}; y2 = $thumbY; thumbX = ${thumbX + xOffSet}; thumbY = $y1")
+        path.moveTo(thumbX, thumbY)
         path.cubicTo(thumbX, thumbY, thumbX + xOffSet, thumbY, thumbX + xOffSet, y1)
         canvas?.drawPath(path, paint)
+
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
@@ -128,8 +131,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     draggingFinished = false
-                    currentTrackX = event.x
-                    currentTrackY = event.y
+                    trackX = event.x
                     invalidate()
                     return true
                 }
@@ -144,10 +146,10 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
                 MotionEvent.ACTION_UP,
                 MotionEvent.ACTION_CANCEL -> {
                     draggingFinished = true
-                    springAnimation = SpringAnimation(FloatValueHolder(currentTrackY))
+                    springAnimation = SpringAnimation(FloatValueHolder(trackY))
                         .setStartValue(thumbY)
                         .setSpring(
-                            SpringForce(currentTrackY)
+                            SpringForce(trackY)
                                 .setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY)
                                 .setStiffness(SpringForce.STIFFNESS_LOW)
                         )
@@ -179,7 +181,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
     companion object {
         private const val DEFAULT_TRACK_COLOR_ID = R.color.grey_font
         private const val HIGHLIGHTED_TRACK_COLOR_ID = R.color.blue_200
-        private const val DEFAULT_THUMB_RADIUS = 20f
+        private const val DEFAULT_THUMB_RADIUS = 40f
         private const val DEFAULT_HIGHLIGHTED_STROKE_WIDTH = 15f
         private const val DEFAULT_NORMAL_STROKE_WIDTH = 10f
     }
