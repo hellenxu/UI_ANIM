@@ -90,8 +90,8 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         paint.style = Paint.Style.STROKE
         paint.strokeWidth = DEFAULT_HIGHLIGHTED_STROKE_WIDTH
         paint.color = ContextCompat.getColor(ctx, HIGHLIGHTED_TRACK_COLOR_ID)
-        val y = (bottom - top) * 0.5f
-        canvas?.drawLine(left.toFloat(), y, thumbX, y, paint)
+        val y = height * 0.5f
+        canvas?.drawLine(left.toFloat(), trackY, thumbX, trackY, paint)
         // second part
         paint.strokeWidth = DEFAULT_NORMAL_STROKE_WIDTH
         paint.color = ContextCompat.getColor(ctx, DEFAULT_TRACK_COLOR_ID)
@@ -120,8 +120,8 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         paint.color = ContextCompat.getColor(ctx, DEFAULT_TRACK_COLOR_ID)
         paint.strokeWidth = DEFAULT_NORMAL_STROKE_WIDTH
         println("xxl-second: x1 = $thumbX; y1 = $thumbY; x2 = ${thumbX + xOffSet}; y2 = $thumbY; thumbX = ${thumbX + xOffSet}; thumbY = $y1")
-        path.moveTo(thumbX, thumbY)
-        path.cubicTo(thumbX, thumbY, thumbX + xOffSet, thumbY, thumbX + xOffSet, y1)
+        path.moveTo(right.toFloat(), trackY)
+        path.cubicTo(right - xOffSet, y1, thumbX + xOffSet, y2, thumbX, thumbY)
         canvas?.drawPath(path, paint)
 
     }
@@ -181,7 +181,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
     companion object {
         private const val DEFAULT_TRACK_COLOR_ID = R.color.grey_font
         private const val HIGHLIGHTED_TRACK_COLOR_ID = R.color.blue_200
-        private const val DEFAULT_THUMB_RADIUS = 40f
+        private const val DEFAULT_THUMB_RADIUS = 60f
         private const val DEFAULT_HIGHLIGHTED_STROKE_WIDTH = 15f
         private const val DEFAULT_NORMAL_STROKE_WIDTH = 10f
     }
