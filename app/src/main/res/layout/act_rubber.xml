@@ -4,5 +4,5 @@
     android:padding="10dp" android:background="@color/chip_color">
     <com.six.ui.seekbar.SixRubberSeekBar
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="match_parent"/>
 </RelativeLayout>
