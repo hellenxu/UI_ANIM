@@ -9,7 +9,9 @@ import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.dynamicanimation.animation.FloatValueHolder
 import androidx.dynamicanimation.animation.SpringAnimation
+import androidx.dynamicanimation.animation.SpringForce
 import com.six.ui.R
 import kotlin.math.max
 
@@ -157,52 +159,27 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
             MotionEvent.ACTION_UP -> {
                 draggingFinished = true
                 invalidate()
+                springAnimation = SpringAnimation(FloatValueHolder(trackY))
+                    .setStartValue(thumbY)
+                    .setSpring(
+                        SpringForce(trackY)
+                            .setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY)
+                            .setStiffness(SpringForce.STIFFNESS_LOW)
+                    )
+                springAnimation?.start()
                 return true
             }
             else -> {
                 return super.onTouchEvent(event)
             }
         }
-
-//        if (event != null && hitThumb(event.x, event.y)) {
-//            when (event.action) {
-//                MotionEvent.ACTION_DOWN -> {
-//                    draggingFinished = false
-//                    trackX = event.x
-//                    invalidate()
-//                    return true
-//                }
-//                MotionEvent.ACTION_MOVE -> {
-//                    draggingFinished = false
-//                    springAnimation?.cancel()
-//                    thumbX = event.x
-//                    thumbY = event.y
-//                    invalidate()
-//                    return true
-//                }
-//                MotionEvent.ACTION_UP,
-//                MotionEvent.ACTION_CANCEL -> {
-//                    draggingFinished = true
-////                    springAnimation = SpringAnimation(FloatValueHolder(trackY))
-////                        .setStartValue(thumbY)
-////                        .setSpring(
-////                            SpringForce(trackY)
-////                                .setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY)
-////                                .setStiffness(SpringForce.STIFFNESS_LOW)
-////                        )
-////                    springAnimation?.start()
-//                    return true
-//                }
-//            }
-//        }
     }
 
     private fun hitThumb(x: Float, y: Float): Boolean {
-        val offset = 1.2
-        val leftBound = thumbX - thumbRadius * offset
-        val rightBound = thumbX + thumbRadius * offset
-        val topBound = thumbY - thumbRadius * offset
-        val bottomBound = thumbY + thumbRadius * offset
+        val leftBound = thumbX - thumbRadius * TOUCH_BUFFER
+        val rightBound = thumbX + thumbRadius * TOUCH_BUFFER
+        val topBound = thumbY - thumbRadius * TOUCH_BUFFER
+        val bottomBound = thumbY + thumbRadius * TOUCH_BUFFER
         return x > leftBound && x < rightBound && y > topBound && y < bottomBound
     }
 
@@ -220,6 +197,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         private const val DEFAULT_THUMB_RADIUS = 60f
         private const val DEFAULT_HIGHLIGHTED_STROKE_WIDTH = 15f
         private const val DEFAULT_NORMAL_STROKE_WIDTH = 10f
+        private const val TOUCH_BUFFER = 1.2
     }
 
 }
