@@ -110,7 +110,7 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         // second part
         paint.strokeWidth = DEFAULT_NORMAL_STROKE_WIDTH
         paint.color = ContextCompat.getColor(ctx, DEFAULT_TRACK_COLOR_ID)
-        canvas?.drawLine(thumbX, y, right.toFloat(), y, paint)
+        canvas?.drawLine(thumbX, y, right.toFloat() - thumbRadius, y, paint)
     }
 
     // correct coordinates
@@ -155,7 +155,6 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
             }
             MotionEvent.ACTION_UP -> {
                 draggingFinished = true
-                invalidate()
                 springAnimation = SpringAnimation(FloatValueHolder(trackY))
                     .setStartValue(thumbY)
                     .setSpring(
@@ -163,7 +162,16 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
                             .setDampingRatio(SpringForce.DAMPING_RATIO_LOW_BOUNCY)
                             .setStiffness(SpringForce.STIFFNESS_LOW)
                     )
+                    .addUpdateListener{_, value, _ ->
+                        thumbY = value
+                        invalidate()
+                    }
+                    .addEndListener { _, _, _, _ ->
+                        thumbY = trackY
+                        invalidate()
+                    }
                 springAnimation?.start()
+
                 return true
             }
             else -> {
