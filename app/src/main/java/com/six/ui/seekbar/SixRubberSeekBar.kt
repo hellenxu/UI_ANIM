@@ -20,6 +20,11 @@ import kotlin.math.max
  * @date 2019-11-25
  * Copyright 2019 Six. All rights reserved.
  */
+
+// TODO handle accessibility
+// TODO custom attrs
+// TODO make sure padding, margin and custom size are working well
+
 class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
                                                  val attrs: AttributeSet? = null,
                                                  val defStyleAttr: Int = 0) : View(ctx, attrs, defStyleAttr) {
@@ -47,12 +52,10 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         getCustomAttributes()
     }
 
-    // TODO
     private fun getCustomAttributes() {
 
     }
 
-    // TODO make sure padding, margin and custom size are working well
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val height = MeasureSpec.getSize(heightMeasureSpec)
         val heightMode = MeasureSpec.getMode(heightMeasureSpec)
