@@ -73,8 +73,8 @@ class SixRubberSeekBar @JvmOverloads constructor(private val ctx: Context,
         setMeasuredDimension(widthMeasureSpec, MeasureSpec.makeMeasureSpec(realHeight, heightMode))
     }
 
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        super.onLayout(changed, left, top, right, bottom)
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
         trackX = width * currentPercentage + left
         trackY = (bottom - top) * 0.5f
         thumbX = trackX
