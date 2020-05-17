@@ -24,6 +24,7 @@ class ViewPager2TabLayoutActivity: AppCompatActivity() {
 
         tabs = findViewById(R.id.tabs)
         vp = findViewById(R.id.vp2)
+        vp.isUserInputEnabled = false // disable swiping
         vp.adapter = ApproachAdapter(this)
 
 
