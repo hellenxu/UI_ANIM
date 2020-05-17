@@ -27,7 +27,9 @@
 
         <activity android:name=".constraintlayout.CardStackSample" />
 
-        <activity android:name=".seekbar.RubberSample">
+        <activity android:name=".seekbar.RubberSample" />
+
+        <activity android:name=".viewpager2.ViewPager2TabLayoutActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
