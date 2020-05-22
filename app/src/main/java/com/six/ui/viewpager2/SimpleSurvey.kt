@@ -3,6 +3,8 @@ package com.six.ui.viewpager2
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.NonNull
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.six.ui.R
@@ -19,6 +21,10 @@ class SimpleSurvey @JvmOverloads constructor(
 ): ConstraintLayout(ctx, attrs, defStyleAttr) {
 
     init {
-        View.inflate(ctx, R.layout.simple_survey, this)
+        val view = View.inflate(ctx, R.layout.simple_survey, this)
+
+        view.findViewById<ImageView>(R.id.icon).setOnClickListener {
+            view.findViewById<TextView>(R.id.cta).visibility = View.VISIBLE
+        }
     }
 }
