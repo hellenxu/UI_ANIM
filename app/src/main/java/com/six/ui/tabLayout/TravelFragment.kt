@@ -22,6 +22,8 @@ import com.six.ui.seekbar.SixProgressbar
 class TravelFragment : Fragment(), View.OnClickListener {
 //    private lateinit var usage: SixProgressbar
 //    private lateinit var logo: ImageView
+
+
 //    private lateinit var spinner: AppCompatSpinner
 //    private lateinit var rv: RecyclerView
 
