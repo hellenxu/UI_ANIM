@@ -34,6 +34,7 @@ class SimpleSurvey @JvmOverloads constructor(
                 view.visibility = View.GONE
             }
             println("szw after  height = ${view.height}")
+            view.requestFocus()
         }
     }
 }
