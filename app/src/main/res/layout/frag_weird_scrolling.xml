@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.six.ui.viewpager2.ManuallyScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -8,7 +9,10 @@
         android:id="@+id/loading_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="16dp">
+        android:paddingTop="16dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        >
 
         <View
             android:id="@+id/center_indicator"
@@ -162,25 +166,25 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <!--        <androidx.recyclerview.widget.RecyclerView-->
-        <!--            android:id="@+id/rv"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_below="@id/message_no_bank_selected"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:fadingEdge="none"-->
-        <!--            android:orientation="vertical"-->
-        <!--            android:overScrollMode="never"-->
-        <!--            android:scrollbars="none"-->
-        <!--            app:spanCount="3" />-->
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/message_no_bank_selected"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:fadingEdge="none"-->
+<!--            android:orientation="vertical"-->
+<!--            android:overScrollMode="never"-->
+<!--            android:scrollbars="none"-->
+<!--            app:spanCount="3" />-->
 
-        <!--        <androidx.appcompat.widget.AppCompatSpinner-->
-        <!--            android:id="@+id/spinner"-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="48dp"-->
-        <!--            android:layout_below="@id/rv"-->
-        <!--            android:layout_marginTop="16dp"-->
-        <!--            android:gravity="start|center_vertical" />-->
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_below="@id/rv"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:gravity="start|center_vertical" />-->
 
         <TextView
             android:id="@+id/rv"
@@ -188,9 +192,9 @@
             android:layout_height="350dp"
             android:layout_below="@id/message_no_bank_selected"
             android:layout_marginTop="10dp"
-            android:background="#f0f"
             android:padding="15dp"
             android:text="RecyclerView"
+            android:background="#f0f"
             tools:visibility="visible" />
 
         <TextView
@@ -199,9 +203,9 @@
             android:layout_height="150dp"
             android:layout_below="@id/rv"
             android:layout_marginTop="10dp"
-            android:background="#0ff"
             android:padding="15dp"
             android:text="Spinner"
+            android:background="#0ff"
             tools:visibility="visible" />
 
         <View
@@ -215,31 +219,25 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <RelativeLayout
-            android:id="@+id/temp"
+        <TextView
+            android:id="@+id/label_to_website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/spinner"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
-            android:focusableInTouchMode="true">
-            <TextView
-                android:id="@+id/label_to_website"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-
-                android:text="string/website" />
-        </RelativeLayout>
+            android:drawableEnd="@drawable/add_blue"
+            android:drawablePadding="8dp"
+            android:text="string/website" />
 
         <ImageView
             android:id="@+id/bg_wave"
+            android:scaleType="fitXY"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/temp"
+            android:layout_below="@id/label_to_website"
             android:layout_marginTop="16dp"
             android:contentDescription="string/cc"
-            android:scaleType="fitXY"
             android:src="@drawable/bg" />
 
         <com.six.ui.viewpager2.SimpleSurvey
@@ -254,9 +252,9 @@
             android:layout_height="350dp"
             android:layout_below="@id/survey"
             android:layout_marginTop="10dp"
-            android:background="#00f"
             android:padding="15dp"
             android:text="Bottom"
+            android:background="#00f"
             tools:visibility="visible" />
     </RelativeLayout>
-</com.six.ui.viewpager2.ManuallyScrollView>
+</androidx.core.widget.NestedScrollView>

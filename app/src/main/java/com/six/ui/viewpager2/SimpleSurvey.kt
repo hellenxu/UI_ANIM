@@ -33,14 +33,16 @@ class SimpleSurvey @JvmOverloads constructor(
                 view.visibility = View.GONE
             }
 
-            val rlayRoot = this.parent as ViewGroup
-            println("szw root = $rlayRoot")
-            println("szw root's focus  = ${rlayRoot.findFocus()}")
-            val count = rlayRoot.childCount
-            for (i in 0 until count) {
-                val child = rlayRoot.getChildAt(i)
-                println("szw focus lies in : (${child.hasFocus()}) - $child")
-            }
+//            val rlayRoot = this.parent as ViewGroup
+//            println("szw root = $rlayRoot")
+//            println("szw root's focus  = ${rlayRoot.findFocus()}")
+//            val count = rlayRoot.childCount
+//            for (i in 0 until count) {
+//                val child = rlayRoot.getChildAt(i)
+//                println("szw focus lies in : (${child.hasFocus()}) - $child")
+//            }
+
+            println("szw sv = ${this.parent.parent}")
         }
     }
 }
