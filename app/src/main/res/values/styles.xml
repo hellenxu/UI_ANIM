@@ -21,4 +21,8 @@
         <item name="android:windowEnterAnimation">@anim/action_sheet_enter</item>
         <item name="android:windowExitAnimation">@anim/action_sheet_exit</item>
     </style>
+
+    <style name="ExpandedToolbarTitle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColor">#fff</item>
+    </style>
 </resources>
