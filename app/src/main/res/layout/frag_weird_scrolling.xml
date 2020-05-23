@@ -10,8 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         >
 
         <View
@@ -166,25 +164,45 @@
             android:visibility="gone"
             tools:visibility="visible" />
 
-        <androidx.recyclerview.widget.RecyclerView
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_below="@id/message_no_bank_selected"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:fadingEdge="none"-->
+<!--            android:orientation="vertical"-->
+<!--            android:overScrollMode="never"-->
+<!--            android:scrollbars="none"-->
+<!--            app:spanCount="3" />-->
+
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_below="@id/rv"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:gravity="start|center_vertical" />-->
+
+        <TextView
             android:id="@+id/rv"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="350dp"
             android:layout_below="@id/message_no_bank_selected"
-            android:layout_marginTop="16dp"
-            android:fadingEdge="none"
-            android:orientation="vertical"
-            android:overScrollMode="never"
-            android:scrollbars="none"
-            app:spanCount="3" />
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:text="I'm place holder"
+            tools:visibility="visible" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
+        <TextView
             android:id="@+id/spinner"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="150dp"
             android:layout_below="@id/rv"
-            android:layout_marginTop="16dp"
-            android:gravity="start|center_vertical" />
+            android:layout_marginTop="10dp"
+            android:padding="15dp"
+            android:text="I'm place holder"
+            tools:visibility="visible" />
 
         <View
             android:id="@+id/no_item_selected_indicator"
