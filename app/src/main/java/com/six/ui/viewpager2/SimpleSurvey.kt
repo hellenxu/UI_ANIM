@@ -37,5 +37,8 @@ class SimpleSurvey @JvmOverloads constructor(
         }
     }
 
-
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_MOVE) this.parent.requestDisallowInterceptTouchEvent(true)
+        return super.onTouchEvent(event)
+    }
 }
