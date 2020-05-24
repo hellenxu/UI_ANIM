@@ -1,27 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/toolbar_round_corner_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:background="#fff"
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:fitsSystemWindows="true">
+        android:layout_height="200dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             app:collapsedTitleTextAppearance="@style/ExpandedToolbarTitle"
             app:expandedTitleTextAppearance="@style/ExpandedToolbarTitle"
+            app:expandedTitleMarginTop="10dp"
+            app:expandedTitleMarginStart="20dp"
             app:expandedTitleGravity="top|start"
             app:collapsedTitleGravity="center_horizontal"
             app:title="@string/menu_settings"
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -37,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="BB"
-                    android:textColor="@color/text_shadow_white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
 
                 <TextView
@@ -47,16 +48,23 @@
                     android:layout_marginEnd="30dp"
                     android:layout_alignBottom="@id/bb"
                     android:text="$123.00"
-                    android:textColor="@color/text_shadow_white"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
+
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
+                app:menu="@menu/menu_toolbar"
+                app:title="@string/menu_settings"
+                app:titleTextColor="@color/colorPrimary"
+                android:background="@null"
+                app:contentInsetStartWithNavigation="0dp"
+                app:contentInsetStart="0dp"
+                app:contentInsetLeft="0dp"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+                android:layout_height="?attr/actionBarSize"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 

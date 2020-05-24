@@ -23,6 +23,6 @@
     </style>
 
     <style name="ExpandedToolbarTitle" parent="Widget.AppCompat.Toolbar">
-        <item name="android:textColor">#fff</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 </resources>

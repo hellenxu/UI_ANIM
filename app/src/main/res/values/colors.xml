@@ -36,9 +36,10 @@
 	<color name="text_shadow">#7F000000</color>
 	<color name="text_shadow_white">#FFFFFF</color>
 
-	<color name="colorPrimary">#3F51B5</color>
-	<color name="colorPrimaryDark">#303F9F</color>
-	<color name="colorAccent">#FF4081</color>
+	<color name="colorPrimary">#009ad6</color>
+	<color name="colorPrimaryDark">#145b7d</color>
+	<color name="colorAccent">#90d7ec</color>
+
 
 	<color name="light_green">#afdfe4</color>
 
@@ -46,4 +47,5 @@
     <color name="defLimitColor">#B2E57F</color>
     <color name="defUsedColor">#66cc00</color>
     <color name="defTextColor">#808080</color>
+
 </resources>
