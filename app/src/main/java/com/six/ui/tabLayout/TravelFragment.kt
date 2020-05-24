@@ -22,8 +22,10 @@ import com.six.ui.seekbar.SixProgressbar
 class TravelFragment : Fragment(), View.OnClickListener {
 //    private lateinit var usage: SixProgressbar
 //    private lateinit var logo: ImageView
-    private lateinit var spinner: AppCompatSpinner
-    private lateinit var rv: RecyclerView
+
+
+//    private lateinit var spinner: AppCompatSpinner
+//    private lateinit var rv: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        TextView titleTextView = new TextView(getActivity());
@@ -41,12 +43,12 @@ class TravelFragment : Fragment(), View.OnClickListener {
 //        logo.setOnClickListener(this)
 
         val data = getData()
-        spinner = view.findViewById(R.id.spinner)
-        spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
+//        spinner = view.findViewById(R.id.spinner)
+//        spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
 
-        rv = view.findViewById(R.id.rv)
-        rv.adapter = RVAdapter(requireContext(), data.subList(0, 6))
-        rv.layoutManager = GridLayoutManager(requireContext(), 3)
+//        rv = view.findViewById(R.id.rv)
+//        rv.adapter = RVAdapter(requireContext(), data.subList(0, 6))
+//        rv.layoutManager = GridLayoutManager(requireContext(), 3)
     }
 
     private fun getData(): List<String> {
