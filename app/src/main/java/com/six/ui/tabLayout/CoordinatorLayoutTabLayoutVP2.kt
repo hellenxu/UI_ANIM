@@ -1,6 +1,7 @@
 package com.six.ui.tabLayout
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
@@ -50,7 +51,19 @@ class CoordinatorLayoutTabLayoutVP2: FragmentActivity() {
             }
         })
 
+        toolbar.setNavigationOnClickListener {
+            finish()
+        }
 
+        toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.cancel -> {
+                    finish()
+                    true
+                }
+                else -> { false }
+            }
+        }
     }
 
     private fun getData(): MutableList<TextView>{

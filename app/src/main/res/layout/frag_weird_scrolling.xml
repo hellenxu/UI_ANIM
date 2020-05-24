@@ -6,7 +6,6 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
-        android:id="@+id/loading_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingTop="16dp">
@@ -164,6 +163,7 @@
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
+
             android:id="@+id/rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
