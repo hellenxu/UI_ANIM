@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            tools:text="@string/how_to" />
+            android:text="@string/how_to" />
 
         <View
             android:id="@+id/bg"
@@ -218,8 +218,7 @@
         <com.six.ui.viewpager2.SimpleSurvey
             android:id="@+id/survey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/bg_wave"
-            android:layout_marginBottom="16dp" />
+            android:layout_height="100dp"
+            android:layout_below="@id/bg_wave" />
     </RelativeLayout>
 </androidx.core.widget.NestedScrollView>
