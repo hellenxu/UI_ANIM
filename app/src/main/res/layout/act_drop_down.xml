@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical" android:gravity="center">
+    <TextView
+        android:gravity="center_vertical"
+        android:text="Tap for more options"
+        android:id="@+id/tv_anchor"
+        android:layout_margin="20dp"
+        android:background="@drawable/spinner_unselected"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+</LinearLayout>
