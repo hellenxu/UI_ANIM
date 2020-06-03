@@ -4,16 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.accessibility.AccessibilityEvent
 import android.widget.ArrayAdapter
-import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.six.ui.R
 import com.six.ui.recyclerview.RVAdapter
-import com.six.ui.seekbar.SixProgressbar
+
 
 /**
  * @CopyRight six.ca
@@ -26,6 +26,7 @@ class TravelFragment : Fragment(), View.OnClickListener {
 
     private lateinit var spinner: AppCompatSpinner
     private lateinit var rv: RecyclerView
+    private lateinit var website: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        TextView titleTextView = new TextView(getActivity());
@@ -49,6 +50,16 @@ class TravelFragment : Fragment(), View.OnClickListener {
         rv = view.findViewById(R.id.rv)
         rv.adapter = RVAdapter(requireContext(), data.subList(0, 6))
         rv.layoutManager = GridLayoutManager(requireContext(), 3)
+
+        website = view.findViewById(R.id.label_to_website)
+        website.setOnClickListener(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        println("xxl-width: ${spinner.measuredWidth}; ${view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)}")
+        spinner.dropDownWidth = view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)
+
     }
 
     private fun getData(): List<String> {
@@ -64,6 +75,12 @@ class TravelFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
+            R.id.label_to_website -> {
+                val popup = PopupMenu(requireContext(), website)
+                popup.menuInflater.inflate(R.menu.menu_toolbar, popup.menu)
+                popup.show()
+            }
+
 //            R.id.usage -> usage.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
 
 //            R.id.logo -> println("xxl-click-logo")

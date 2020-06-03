@@ -176,6 +176,8 @@
             app:spanCount="3" />
 
         <androidx.appcompat.widget.AppCompatSpinner
+            android:overlapAnchor="false"
+            android:dropDownVerticalOffset="18dp"
             android:id="@+id/spinner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
