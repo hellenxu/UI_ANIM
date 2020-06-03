@@ -45,7 +45,12 @@ class TravelFragment : Fragment(), View.OnClickListener {
 
         val data = getData()
         spinner = view.findViewById(R.id.spinner)
-        spinner.adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data)
+        spinner.adapter = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, data) {
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                println("xxl-open")
+                return super.getDropDownView(position, convertView, parent)
+            }
+        }
 
         rv = view.findViewById(R.id.rv)
         rv.adapter = RVAdapter(requireContext(), data.subList(0, 6))
@@ -79,6 +84,10 @@ class TravelFragment : Fragment(), View.OnClickListener {
                 val popup = PopupMenu(requireContext(), website)
                 popup.menuInflater.inflate(R.menu.menu_toolbar, popup.menu)
                 popup.show()
+            }
+
+            R.id.spinner -> {
+                println("xxl-spinner-click")
             }
 
 //            R.id.usage -> usage.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
