@@ -31,10 +31,10 @@
 
         <activity android:name=".viewpager2.ViewPager2TabLayoutActivity"/>
 
-        <activity android:name=".tabLayout.CoordinatorLayoutTabLayoutVP2"/>
+        <activity android:name=".dropdown.MainActivity"/>
 
-        <activity android:name=".dropdown.MainActivity">
-            <intent-filter>
+        <activity android:name=".tabLayout.CoordinatorLayoutTabLayoutVP2">
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>

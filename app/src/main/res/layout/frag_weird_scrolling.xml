@@ -175,26 +175,37 @@
             android:scrollbars="none"
             app:spanCount="3" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:prompt="@string/app_name"
-            android:background="@drawable/spinner_unselected"
-            android:overlapAnchor="false"
-            android:dropDownVerticalOffset="15dp"
-            android:id="@+id/spinner"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
+<!--        <androidx.appcompat.widget.AppCompatSpinner-->
+<!--            android:prompt="@string/app_name"-->
+<!--            android:background="@drawable/spinner_unselected"-->
+<!--            android:overlapAnchor="false"-->
+<!--            android:dropDownVerticalOffset="15dp"-->
+<!--            android:id="@+id/spinner"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_below="@id/rv"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:gravity="start|center_vertical" />-->
+
+        <TextView
             android:layout_below="@id/rv"
+            android:text="@string/tap_for_more_options"
+            android:background="@drawable/spinner_unselected"
+            android:padding="5dp"
             android:layout_marginTop="16dp"
-            android:gravity="start|center_vertical" />
+            android:gravity="center_vertical"
+            android:id="@+id/spinner_anchor"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"/>
 
         <View
             android:id="@+id/no_item_selected_indicator"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_alignStart="@id/spinner"
-            android:layout_alignTop="@id/spinner"
-            android:layout_alignEnd="@id/spinner"
-            android:layout_alignBottom="@id/spinner"
+            android:layout_alignStart="@id/spinner_anchor"
+            android:layout_alignTop="@id/spinner_anchor"
+            android:layout_alignEnd="@id/spinner_anchor"
+            android:layout_alignBottom="@id/spinner_anchor"
             android:visibility="gone"
             tools:visibility="visible" />
 
@@ -202,7 +213,7 @@
             android:id="@+id/label_to_website"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/spinner"
+            android:layout_below="@id/spinner_anchor"
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp"
             android:drawableEnd="@drawable/add_blue"

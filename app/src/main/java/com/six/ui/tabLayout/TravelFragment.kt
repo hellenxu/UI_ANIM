@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatSpinner
+import androidx.appcompat.widget.ListPopupWindow
 import androidx.appcompat.widget.PopupMenu
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +31,9 @@ class TravelFragment : Fragment(), View.OnClickListener {
     private lateinit var spinner: AppCompatSpinner
     private lateinit var rv: RecyclerView
     private lateinit var website: TextView
+    private lateinit var popupAnchorTextView: TextView
+    private lateinit var popupWindow: ListPopupWindow
+    private var listOpen = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 //        TextView titleTextView = new TextView(getActivity());
@@ -44,13 +51,13 @@ class TravelFragment : Fragment(), View.OnClickListener {
 //        logo.setOnClickListener(this)
 
         val data = getData()
-        spinner = view.findViewById(R.id.spinner)
-        spinner.adapter = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, data) {
-            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-                println("xxl-open")
-                return super.getDropDownView(position, convertView, parent)
-            }
-        }
+//        spinner = view.findViewById(R.id.spinner)
+//        spinner.adapter = object: ArrayAdapter<String>(requireContext(), android.R.layout.simple_spinner_item, data) {
+//            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+//                println("xxl-open")
+//                return super.getDropDownView(position, convertView, parent)
+//            }
+//        }
 
         rv = view.findViewById(R.id.rv)
         rv.adapter = RVAdapter(requireContext(), data.subList(0, 6))
@@ -58,12 +65,32 @@ class TravelFragment : Fragment(), View.OnClickListener {
 
         website = view.findViewById(R.id.label_to_website)
         website.setOnClickListener(this)
+
+        popupAnchorTextView = view.findViewById(R.id.spinner_anchor)
+        popupAnchorTextView.setOnClickListener(this)
+
+        popupWindow = ListPopupWindow(requireContext())
+        popupWindow.setAdapter(ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, data))
+        popupWindow.anchorView = popupAnchorTextView
+        popupWindow.width = AbsListView.LayoutParams.WRAP_CONTENT
+        popupWindow.height = 200 * 3
+        println("xxl-anchor-height: ${popupAnchorTextView.height}")
+        popupWindow.verticalOffset = -(popupWindow.height + 40 * 3)
+        popupWindow.setOnItemClickListener { parent, itemView, position, id ->
+            println("xxl-item-click: $position")
+            val item = itemView.findViewById<TextView>(android.R.id.text1)
+            popupAnchorTextView.text = item.text
+            popupWindow.dismiss()
+            listOpen = false
+        }
+
     }
 
     override fun onResume() {
         super.onResume()
-        println("xxl-width: ${spinner.measuredWidth}; ${view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)}")
-        spinner.dropDownWidth = view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)
+//        solution: use spinner
+//        println("xxl-width: ${spinner.measuredWidth}; ${view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)}")
+//        spinner.dropDownWidth = view?.width?:0 - (view?.paddingStart ?: 0) - (view?.paddingEnd?:0)
 
     }
 
@@ -86,8 +113,18 @@ class TravelFragment : Fragment(), View.OnClickListener {
                 popup.show()
             }
 
-            R.id.spinner -> {
-                println("xxl-spinner-click")
+            R.id.spinner_anchor -> {
+
+                val bgResId = if (!listOpen) {
+                    popupWindow.show()
+                    R.drawable.spinner_selected
+                } else {
+                    popupWindow.dismiss()
+                    R.drawable.spinner_unselected
+                }
+
+                popupAnchorTextView.background = ContextCompat.getDrawable(requireContext(), bgResId)
+                listOpen = !listOpen
             }
 
 //            R.id.usage -> usage.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_SELECTED)
