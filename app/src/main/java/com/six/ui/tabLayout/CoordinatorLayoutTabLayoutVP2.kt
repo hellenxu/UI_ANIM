@@ -44,11 +44,11 @@ class CoordinatorLayoutTabLayoutVP2: FragmentActivity() {
         abl = findViewById(R.id.app_bar)
         abl.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val completedCollapsing = abs(verticalOffset) >= appBarLayout.totalScrollRange
-            if (completedCollapsing) {
-                toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_back_24dp)
-            } else {
-                toolbar.navigationIcon = null
-            }
+//            if (completedCollapsing) {
+//                toolbar.navigationIcon = getDrawable(R.drawable.ic_arrow_back_24dp)
+//            } else {
+//                toolbar.navigationIcon = null
+//            }
         })
 
         toolbar.setNavigationOnClickListener {

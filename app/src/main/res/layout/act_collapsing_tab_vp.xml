@@ -15,7 +15,7 @@
             app:collapsedTitleTextAppearance="@style/ExpandedToolbarTitle"
             app:expandedTitleTextAppearance="@style/ExpandedToolbarTitle"
             app:expandedTitleMarginTop="10dp"
-            app:expandedTitleMarginStart="20dp"
+            app:expandedTitleMarginStart="0dp"
             app:expandedTitleGravity="top|start"
             app:collapsedTitleGravity="center_horizontal"
             app:title="@string/menu_settings"
@@ -54,13 +54,13 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.Toolbar
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="-12dp"
+                android:gravity="center"
                 app:menu="@menu/menu_toolbar"
                 app:title="@string/menu_settings"
                 app:titleTextColor="@color/colorPrimary"
                 android:background="@null"
-                app:contentInsetStartWithNavigation="0dp"
-                app:contentInsetStart="0dp"
-                app:contentInsetLeft="0dp"
                 app:layout_collapseMode="pin"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"

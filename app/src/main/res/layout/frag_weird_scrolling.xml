@@ -136,12 +136,14 @@
             android:text="string: step3" />
 
         <TextView
+            style="@style/ExpandedToolbarTitle"
+            android:gravity="center_horizontal"
             android:id="@+id/label_select_bank"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/instruction_three"
             android:layout_marginTop="35dp"
-            android:text="label_select" />
+            android:text="@string/menu_settings" />
 
         <TextView
             android:id="@+id/label_redirect"
