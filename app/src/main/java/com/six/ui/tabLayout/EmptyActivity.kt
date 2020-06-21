@@ -21,7 +21,8 @@ class EmptyActivity: Activity() {
     }
 
     fun toSample(view: View) {
-        val transition = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.enter_from_bottom, 0).toBundle()
+        // exitResId =0 --> black background
+        val transition = ActivityOptionsCompat.makeCustomAnimation(this, R.anim.enter_from_bottom, R.anim.stay_still).toBundle()
 
         startActivity(Intent(this, CoordinatorLayoutTabLayoutVP2::class.java), transition)
     }
