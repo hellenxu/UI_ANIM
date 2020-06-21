@@ -33,7 +33,9 @@
 
         <activity android:name=".dropdown.MainActivity"/>
 
-        <activity android:name=".tabLayout.CoordinatorLayoutTabLayoutVP2">
+        <activity android:name=".tabLayout.CoordinatorLayoutTabLayoutVP2" />
+
+        <activity android:name=".tabLayout.EmptyActivity">
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
