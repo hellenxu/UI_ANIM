@@ -64,4 +64,7 @@ Additionally, articles are not normally used:</string>
 	<string name="how_to">How to pay through online banking</string>
 	<string name="tap_for_more_options">Tap for more options</string>
     <string name="to_sample">To Sample</string>
+	<string name="home">Home</string>
+	<string name="pets">Pets</string>
+
 </resources>
