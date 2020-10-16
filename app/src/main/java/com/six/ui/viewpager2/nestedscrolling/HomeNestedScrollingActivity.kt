@@ -23,6 +23,7 @@ class HomeNestedScrollingActivity : AppCompatActivity(R.layout.act_home_nested_s
         super.onCreate(savedInstanceState)
 
         contentPager = findViewById(R.id.content_container)
+        contentPager.isUserInputEnabled = false
         contentPager.adapter = ContentStateAdapter(this)
 
         bottomNav = findViewById(R.id.bottom_nav)
