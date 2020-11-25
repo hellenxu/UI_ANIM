@@ -67,4 +67,7 @@ Additionally, articles are not normally used:</string>
 	<string name="home">Home</string>
 	<string name="pets">Pets</string>
 
+	<string name="text_focused">Focused</string>
+	<string name="text_other">Other</string>
+
 </resources>
