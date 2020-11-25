@@ -35,11 +35,11 @@ class MaskAnimatedView @JvmOverloads constructor(
     private var roundY = DEFAULT_ROUND
     private var bgLeft = 0f
     private var bgTop = 0f
-    private var bgRight = 500f
+    private var bgRight = DEFAULT_WIDTH
     private var bgBottom = DEFAULT_HEIGHT
     private var fgLeft = 0f
     private var fgTop = 0f
-    private var fgRight = 200f
+    private var fgRight = DEFAULT_WIDTH / 2
     private var fgBottom = DEFAULT_HEIGHT
 
 
@@ -74,6 +74,7 @@ class MaskAnimatedView @JvmOverloads constructor(
         private const val DEFAULT_TEXT_OTHER_RES_ID = R.string.text_other
         private const val DEFAULT_ROUND = 50f
         private const val DEFAULT_HEIGHT = 100f
+        private const val DEFAULT_WIDTH = 400f
     }
 
 }
