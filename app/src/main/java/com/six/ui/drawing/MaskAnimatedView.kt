@@ -13,7 +13,6 @@ import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import com.six.ui.R
-import kotlin.math.abs
 import kotlin.math.max
 
 /**
@@ -35,7 +34,7 @@ class MaskAnimatedView @JvmOverloads constructor(
 
     private var tabBackgroundColor = ContextCompat.getColor(context, R.color.colorPrimary)
     private var tabForegroundColor = ContextCompat.getColor(context, R.color.semi_white)
-    private var textColor = Color.parseColor("#d04c84")
+    private var textColor = Color.parseColor("#ffffff")
     private var tabTitles = listOf<String>(
         context.getString(DEFAULT_TEXT_FOCUSED_RES_ID),
         context.getString(DEFAULT_TEXT_OTHER_RES_ID)
@@ -88,13 +87,23 @@ class MaskAnimatedView @JvmOverloads constructor(
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
+
+        textSpace = dp2px(DEFAULT_TEXT_SPACE)
         textBaseline = measuredHeight / 2f
-        bgRight = dp2px(DEFAULT_WIDTH)
         bgBottom = dp2px(DEFAULT_HEIGHT)
-        fgRight = bgRight / 2
         fgBottom = bgBottom
         roundX = dp2px(DEFAULT_ROUND)
         roundY = roundX
+
+        // adjust width
+        var textLength = textSpace
+        tabTitles.forEach {
+            textLength += textPaint.measureText(it) + textSpace
+        }
+        bgRight = max(bgRight, textLength - textSpace)
+        fgRight = max(textPaint.measureText(tabTitles[0]) + textSpace, bgRight / 2)
+
+        println("xxl-onSizeChanged: $bgRight; $fgRight")
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
@@ -123,12 +132,11 @@ class MaskAnimatedView @JvmOverloads constructor(
             it.drawRoundRect(fgLeft, fgTop, fgRight, fgBottom, roundX, roundY, fgPaint)
 
             // step 3: draw text
-            currentTextStart = 0f
+            currentTextStart = textSpace / 2
             tabTitles.forEach {title ->
                 textPaint.getTextBounds(title, 0, title.length, textBounds)
-                it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 4, textPaint)
-                println("xxl-baseline: $textBaseline")
-                currentTextStart += textBounds.width()
+                it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+                currentTextStart += textBounds.width() + textSpace
             }
         }
     }
@@ -150,6 +158,7 @@ class MaskAnimatedView @JvmOverloads constructor(
         private const val DEFAULT_HEIGHT = 50f //dp
         private const val DEFAULT_WIDTH = 100f // dp
         private const val DEFAULT_TEXT_SIZE = 16f //sp
+        private const val DEFAULT_TEXT_SPACE = 8f //dp
     }
 
 }
