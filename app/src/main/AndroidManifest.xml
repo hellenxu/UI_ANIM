@@ -37,7 +37,9 @@
 
         <activity android:name=".tabLayout.EmptyActivity" />
 
-        <activity android:name=".viewpager2.nestedscrolling.HomeNestedScrollingActivity">
+        <activity android:name=".viewpager2.nestedscrolling.HomeNestedScrollingActivity" />
+
+        <activity android:name=".drawing.SampleActivity">
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

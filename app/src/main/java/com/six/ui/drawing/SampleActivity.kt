@@ -1,4 +1,4 @@
-package com.six.ui.xmode
+package com.six.ui.drawing
 
 import androidx.appcompat.app.AppCompatActivity
 import com.six.ui.R
