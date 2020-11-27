@@ -128,12 +128,17 @@ class MaskAnimatedView @JvmOverloads constructor(
             // step 1: draw background
             it.drawRoundRect(bgLeft, bgTop, bgRight, bgBottom, roundX, roundY, bgPaint)
 
-//            // step 2: draw foreground
+            // step 2: draw foreground
             it.drawRoundRect(fgLeft, fgTop, fgRight, fgBottom, roundX, roundY, fgPaint)
 
             // step 3: draw text
             currentTextStart = textSpace / 2
             tabTitles.forEach {title ->
+                if (currentTextStart < fgRight) {
+                    textPaint.color = tabBackgroundColor
+                } else {
+                    textPaint.color = tabForegroundColor
+                }
                 textPaint.getTextBounds(title, 0, title.length, textBounds)
                 it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
                 currentTextStart += textBounds.width() + textSpace
