@@ -1,19 +1,18 @@
 package com.six.ui.drawing
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Rect
+import android.graphics.*
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import com.six.ui.R
 import kotlin.math.max
+import kotlin.math.min
 
 /**
  * @author hellenxu
@@ -56,6 +55,8 @@ class MaskAnimatedView @JvmOverloads constructor(
     private var maxTextWidth = 0f
 
     private val textBounds = Rect()
+    private val touchBounds = RectF()
+    private var downX = 0f
 
     private val metrics: DisplayMetrics by lazy {
         val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -105,6 +106,8 @@ class MaskAnimatedView @JvmOverloads constructor(
         bgRight = max(bgRight, maxTextWidth * tabTitles.size)
         fgRight = bgRight / tabTitles.size
 
+        touchBounds.set(fgLeft, fgTop, fgRight, fgBottom)
+
         println("xxl-onSizeChanged: $bgRight; $fgRight")
     }
 
@@ -131,7 +134,10 @@ class MaskAnimatedView @JvmOverloads constructor(
             it.drawRoundRect(bgLeft, bgTop, bgRight, bgBottom, roundX, roundY, bgPaint)
 
             // step 2: draw foreground
+            fgLeft = fgLeft.coerceAtLeast(bgLeft).coerceAtMost(bgRight - maxTextWidth)
+            fgRight = fgRight.coerceAtLeast(bgLeft + maxTextWidth).coerceAtMost(bgRight)
             it.drawRoundRect(fgLeft, fgTop, fgRight, fgBottom, roundX, roundY, fgPaint)
+            touchBounds.set(fgLeft, fgTop, fgRight, fgBottom)
 
             // step 3: draw text
             currentTextStart = 0f
@@ -147,6 +153,34 @@ class MaskAnimatedView @JvmOverloads constructor(
                 currentTextStart += textBounds.width() + textSpace
             }
         }
+    }
+
+    // TODO
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        performClick()
+
+        if (event != null && touchBounds.contains(event.x, event.y)) {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    downX = event.x
+                }
+                MotionEvent.ACTION_MOVE, MotionEvent.ACTION_UP -> {
+                    val offset = event.x - downX
+                    fgLeft += offset
+                    fgRight += offset
+
+                    invalidate()
+                }
+            }
+            return true
+        }
+
+        return super.onTouchEvent(event)
+    }
+
+    // TODO
+    override fun performClick(): Boolean {
+        return super.performClick()
     }
 
     // region helper functions
