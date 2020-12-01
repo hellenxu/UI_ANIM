@@ -9,7 +9,6 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
-import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
@@ -38,7 +37,8 @@ class MaskAnimatedView @JvmOverloads constructor(
     private var textColor = Color.parseColor("#ffffff")
     private var tabTitles = listOf<String>(
         context.getString(DEFAULT_TEXT_FOCUSED_RES_ID),
-        context.getString(DEFAULT_TEXT_OTHER_RES_ID)
+        context.getString(DEFAULT_TEXT_OTHER_RES_ID),
+        context.getString(R.string.home)
     )
     private var roundX = DEFAULT_ROUND
     private var roundY = DEFAULT_ROUND
@@ -53,6 +53,7 @@ class MaskAnimatedView @JvmOverloads constructor(
     private var currentTextStart = 0f
     private var textBaseline = 0f
     private var textSpace = 0f
+    private var maxTextWidth = 0f
 
     private val textBounds = Rect()
 
@@ -97,11 +98,11 @@ class MaskAnimatedView @JvmOverloads constructor(
         roundY = roundX
 
         // adjust width
-        var maxTextLength = textSpace
+        maxTextWidth = textSpace
         tabTitles.forEach {
-            maxTextLength = max(textPaint.measureText(it) + textSpace, maxTextLength)
+            maxTextWidth = max(textPaint.measureText(it) + textSpace, maxTextWidth)
         }
-        bgRight = max(bgRight, maxTextLength * tabTitles.size)
+        bgRight = max(bgRight, maxTextWidth * tabTitles.size)
         fgRight = bgRight / tabTitles.size
 
         println("xxl-onSizeChanged: $bgRight; $fgRight")
@@ -133,7 +134,7 @@ class MaskAnimatedView @JvmOverloads constructor(
             it.drawRoundRect(fgLeft, fgTop, fgRight, fgBottom, roundX, roundY, fgPaint)
 
             // step 3: draw text
-            currentTextStart = textSpace / 2
+            currentTextStart = 0f
             tabTitles.forEach {title ->
                 if (currentTextStart < fgRight) {
                     textPaint.color = tabBackgroundColor
@@ -141,6 +142,7 @@ class MaskAnimatedView @JvmOverloads constructor(
                     textPaint.color = tabForegroundColor
                 }
                 textPaint.getTextBounds(title, 0, title.length, textBounds)
+                currentTextStart += (maxTextWidth - textBounds.width()) / 2
                 it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
                 currentTextStart += textBounds.width() + textSpace
             }
