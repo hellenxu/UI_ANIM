@@ -9,6 +9,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.DisplayMetrics
 import android.util.TypedValue
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import androidx.core.content.ContextCompat
@@ -96,12 +97,12 @@ class MaskAnimatedView @JvmOverloads constructor(
         roundY = roundX
 
         // adjust width
-        var textLength = textSpace
+        var maxTextLength = textSpace
         tabTitles.forEach {
-            textLength += textPaint.measureText(it) + textSpace
+            maxTextLength = max(textPaint.measureText(it) + textSpace, maxTextLength)
         }
-        bgRight = max(bgRight, textLength - textSpace)
-        fgRight = max(textPaint.measureText(tabTitles[0]) + textSpace, bgRight / 2)
+        bgRight = max(bgRight, maxTextLength * tabTitles.size)
+        fgRight = bgRight / tabTitles.size
 
         println("xxl-onSizeChanged: $bgRight; $fgRight")
     }
