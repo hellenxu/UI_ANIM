@@ -142,7 +142,7 @@ class MaskAnimatedView @JvmOverloads constructor(
             // step 3: draw text
             currentTextStart = 0f
             tabTitles.forEach {title ->
-                if (currentTextStart < fgRight) {
+                if (currentTextStart <= fgLeft) {
                     textPaint.color = tabBackgroundColor
                 } else {
                     textPaint.color = tabForegroundColor
@@ -150,6 +150,15 @@ class MaskAnimatedView @JvmOverloads constructor(
                 textPaint.getTextBounds(title, 0, title.length, textBounds)
                 currentTextStart += (maxTextWidth - textBounds.width()) / 2
                 it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+
+                if (fgLeft > currentTextStart) {
+                    canvas.save()
+                    canvas.clipRect(touchBounds)
+                    textPaint.color = tabBackgroundColor
+                    canvas.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+                    canvas.restore()
+                }
+
                 currentTextStart += textBounds.width() + textSpace
             }
         }
