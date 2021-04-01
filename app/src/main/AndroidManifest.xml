@@ -39,7 +39,9 @@
 
         <activity android:name=".viewpager2.nestedscrolling.HomeNestedScrollingActivity" />
 
-        <activity android:name=".drawing.SampleActivity">
+        <activity android:name=".drawing.SampleActivity" />
+
+        <activity android:name=".softkeyboard.MainActivity">
         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

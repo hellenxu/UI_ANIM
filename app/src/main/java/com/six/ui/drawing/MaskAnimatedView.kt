@@ -12,7 +12,6 @@ import android.view.WindowManager
 import androidx.core.content.ContextCompat
 import com.six.ui.R
 import kotlin.math.max
-import kotlin.math.min
 
 /**
  * @author hellenxu
@@ -34,11 +33,21 @@ class MaskAnimatedView @JvmOverloads constructor(
     private var tabBackgroundColor = ContextCompat.getColor(context, R.color.colorPrimary)
     private var tabForegroundColor = ContextCompat.getColor(context, R.color.semi_white)
     private var textColor = Color.parseColor("#ffffff")
-    private var tabTitles = listOf<String>(
+
+    private val tabTitles = listOf<String>(
         context.getString(DEFAULT_TEXT_FOCUSED_RES_ID),
         context.getString(DEFAULT_TEXT_OTHER_RES_ID),
         context.getString(R.string.home)
     )
+    private val measuredTabTitles: MutableList<String> by lazy {
+        val tmp = mutableListOf<String>()
+        for (item in tabTitles) {
+            tmp.addAll(sliceString(item))
+            tmp.add(SEPARATOR)
+        }
+        tmp
+    }
+
     private var roundX = DEFAULT_ROUND
     private var roundY = DEFAULT_ROUND
     private var bgLeft = 0f
@@ -141,25 +150,34 @@ class MaskAnimatedView @JvmOverloads constructor(
 
             // step 3: draw text
             currentTextStart = 0f
-            tabTitles.forEach {title ->
-                if (currentTextStart <= fgLeft) {
-                    textPaint.color = tabBackgroundColor
-                } else {
-                    textPaint.color = tabForegroundColor
-                }
-                textPaint.getTextBounds(title, 0, title.length, textBounds)
-                currentTextStart += (maxTextWidth - textBounds.width()) / 2
-                it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+            measuredTabTitles.forEach { title ->
 
-                if (fgLeft > currentTextStart) {
-                    canvas.save()
-                    canvas.clipRect(touchBounds)
-                    textPaint.color = tabBackgroundColor
-                    canvas.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
-                    canvas.restore()
-                }
+                when (title) {
+                    SEPARATOR -> {
+                        currentTextStart += textBounds.width() + textSpace
+                    }
 
-                currentTextStart += textBounds.width() + textSpace
+                    else -> {
+                        if (currentTextStart <= fgLeft) {
+                            textPaint.color = tabBackgroundColor
+                        } else {
+                            textPaint.color = tabForegroundColor
+                        }
+                        textPaint.getTextBounds(title, 0, title.length, textBounds)
+//                        currentTextStart += (maxTextWidth - textBounds.width()) / 2
+                        it.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+
+                        if (fgLeft > currentTextStart) {
+                            canvas.save()
+                            canvas.clipRect(touchBounds)
+                            textPaint.color = tabBackgroundColor
+                            canvas.drawText(title, currentTextStart, textBaseline + textBounds.height() / 3, textPaint)
+                            canvas.restore()
+                        }
+
+                        currentTextStart += textBounds.width()
+                    }
+                }
             }
         }
     }
@@ -200,6 +218,15 @@ class MaskAnimatedView @JvmOverloads constructor(
     private fun sp2px(sp: Float): Float {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, metrics)
     }
+
+    private fun sliceString(input: String): List<String> {
+        val result = mutableListOf<String>()
+        for (char in input) {
+            result.add(char.toString())
+        }
+
+        return result
+    }
     // endregion
 
     companion object {
@@ -210,6 +237,7 @@ class MaskAnimatedView @JvmOverloads constructor(
         private const val DEFAULT_WIDTH = 100f // dp
         private const val DEFAULT_TEXT_SIZE = 16f //sp
         private const val DEFAULT_TEXT_SPACE = 8f //dp
+        private const val SEPARATOR = " "
     }
 
 }
